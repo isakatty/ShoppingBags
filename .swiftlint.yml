@@ -1,0 +1,40 @@
+disabled_rules: # 제외하고 싶은 룰
+    - trailing_whitespace
+    - type_name # 타입명에 _가 들어가면 경고
+    - trailing_comma # 배열 마지막 아이템에 ,가 붙으면 경고
+    - nesting # 중첩타입
+    - force_cast # 강제 캐스팅
+opt_in_rules:
+    - empty_string
+    - empty_count # isEmpty 사용
+    - switch_case_on_newline # case문은 새로운 줄에서 시작
+    - force_unwrapping
+included: # 린트 검사에 포함할 파일 경로
+    - ShoppingBags
+excluded: # 린트 과정에서 무시할 파일 경로. `included`보다 우선순위 높음
+    - ShoppingBags/AppDelegate.swift
+    - ShoppingBags/SceneDelegate.swift
+    - XCConfig
+    
+identifier_name:
+    min_length:
+        warning: 2
+        error: 3
+    excluded: # 제외할 문자열 목록
+        - vc
+        - id
+        - URL
+function_body_length:
+    warning: 150
+    error: 300
+type_body_length: # 클래스, 구조체, 열거형의 본문 길이 제한
+    warning: 400
+    error: 500
+file_length:
+    warning: 600
+    error: 1400
+line_length: # 코드 길이 제한
+    warning: 80
+    error: 400
+    ignores_comments: true
+    ignores_urls: true

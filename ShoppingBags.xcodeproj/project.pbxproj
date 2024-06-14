@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		C901E2792C1B494B00F1FD44 /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = C901E2782C1B494B00F1FD44 /* .swiftlint.yml */; };
+		C93B76102C1BE13C0059223A /* Constant.swift in Sources */ = {isa = PBXBuildFile; fileRef = C93B760F2C1BE13C0059223A /* Constant.swift */; };
 		C96663342C1B1D53009E48F6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C96663332C1B1D53009E48F6 /* AppDelegate.swift */; };
 		C96663362C1B1D53009E48F6 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C96663352C1B1D53009E48F6 /* SceneDelegate.swift */; };
 		C96663382C1B1D53009E48F6 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C96663372C1B1D53009E48F6 /* ViewController.swift */; };
@@ -17,6 +18,7 @@
 
 /* Begin PBXFileReference section */
 		C901E2782C1B494B00F1FD44 /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
+		C93B760F2C1BE13C0059223A /* Constant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constant.swift; sourceTree = "<group>"; };
 		C96663302C1B1D53009E48F6 /* ShoppingBags.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ShoppingBags.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C96663332C1B1D53009E48F6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C96663352C1B1D53009E48F6 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -37,6 +39,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		C93B76112C1BE1490059223A /* Constant */ = {
+			isa = PBXGroup;
+			children = (
+				C93B760F2C1BE13C0059223A /* Constant.swift */,
+			);
+			path = Constant;
+			sourceTree = "<group>";
+		};
 		C96663272C1B1D53009E48F6 = {
 			isa = PBXGroup;
 			children = (
@@ -57,6 +67,7 @@
 		C96663322C1B1D53009E48F6 /* ShoppingBags */ = {
 			isa = PBXGroup;
 			children = (
+				C93B76112C1BE1490059223A /* Constant */,
 				C96663332C1B1D53009E48F6 /* AppDelegate.swift */,
 				C96663352C1B1D53009E48F6 /* SceneDelegate.swift */,
 				C96663372C1B1D53009E48F6 /* ViewController.swift */,
@@ -164,6 +175,7 @@
 				C96663382C1B1D53009E48F6 /* ViewController.swift in Sources */,
 				C96663342C1B1D53009E48F6 /* AppDelegate.swift in Sources */,
 				C96663362C1B1D53009E48F6 /* SceneDelegate.swift in Sources */,
+				C93B76102C1BE13C0059223A /* Constant.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

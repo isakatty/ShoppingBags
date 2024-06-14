@@ -15,6 +15,8 @@
 		C93B761C2C1BF1B40059223A /* ProfileSettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C93B761B2C1BF1B40059223A /* ProfileSettingViewController.swift */; };
 		C93B76222C1C06090059223A /* CircledProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C93B76212C1C06090059223A /* CircledProfileView.swift */; };
 		C93B762E2C1C1BB10059223A /* CircledCameraView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C93B762D2C1C1BB10059223A /* CircledCameraView.swift */; };
+		C93B76322C1C2C470059223A /* NameTextFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C93B76312C1C2C470059223A /* NameTextFieldView.swift */; };
+		C93B76352C1C32920059223A /* TextFieldStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = C93B76342C1C32920059223A /* TextFieldStatus.swift */; };
 		C96663342C1B1D53009E48F6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C96663332C1B1D53009E48F6 /* AppDelegate.swift */; };
 		C96663362C1B1D53009E48F6 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C96663352C1B1D53009E48F6 /* SceneDelegate.swift */; };
 		C96663382C1B1D53009E48F6 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C96663372C1B1D53009E48F6 /* ViewController.swift */; };
@@ -30,6 +32,8 @@
 		C93B761B2C1BF1B40059223A /* ProfileSettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileSettingViewController.swift; sourceTree = "<group>"; };
 		C93B76212C1C06090059223A /* CircledProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircledProfileView.swift; sourceTree = "<group>"; };
 		C93B762D2C1C1BB10059223A /* CircledCameraView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircledCameraView.swift; sourceTree = "<group>"; };
+		C93B76312C1C2C470059223A /* NameTextFieldView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NameTextFieldView.swift; sourceTree = "<group>"; };
+		C93B76342C1C32920059223A /* TextFieldStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldStatus.swift; sourceTree = "<group>"; };
 		C96663302C1B1D53009E48F6 /* ShoppingBags.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ShoppingBags.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C96663332C1B1D53009E48F6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C96663352C1B1D53009E48F6 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -81,8 +85,17 @@
 				C93B76162C1BEA000059223A /* RoundedButton.swift */,
 				C93B76212C1C06090059223A /* CircledProfileView.swift */,
 				C93B762D2C1C1BB10059223A /* CircledCameraView.swift */,
+				C93B76312C1C2C470059223A /* NameTextFieldView.swift */,
 			);
 			path = CustomView;
+			sourceTree = "<group>";
+		};
+		C93B76332C1C326E0059223A /* Entity */ = {
+			isa = PBXGroup;
+			children = (
+				C93B76342C1C32920059223A /* TextFieldStatus.swift */,
+			);
+			path = Entity;
 			sourceTree = "<group>";
 		};
 		C96663272C1B1D53009E48F6 = {
@@ -105,6 +118,7 @@
 		C96663322C1B1D53009E48F6 /* ShoppingBags */ = {
 			isa = PBXGroup;
 			children = (
+				C93B76332C1C326E0059223A /* Entity */,
 				C93B761F2C1BF70F0059223A /* CustomView */,
 				C93B76132C1BE6C00059223A /* Search */,
 				C93B76122C1BE6B40059223A /* Onboarding */,
@@ -224,9 +238,11 @@
 				C96663342C1B1D53009E48F6 /* AppDelegate.swift in Sources */,
 				C93B76152C1BE7730059223A /* OnboardingViewController.swift in Sources */,
 				C93B762E2C1C1BB10059223A /* CircledCameraView.swift in Sources */,
+				C93B76352C1C32920059223A /* TextFieldStatus.swift in Sources */,
 				C96663362C1B1D53009E48F6 /* SceneDelegate.swift in Sources */,
 				C93B76222C1C06090059223A /* CircledProfileView.swift in Sources */,
 				C93B76102C1BE13C0059223A /* Constant.swift in Sources */,
+				C93B76322C1C2C470059223A /* NameTextFieldView.swift in Sources */,
 				C93B761C2C1BF1B40059223A /* ProfileSettingViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

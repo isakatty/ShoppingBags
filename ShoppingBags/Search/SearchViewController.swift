@@ -76,6 +76,7 @@ public final class SearchViewController: UIViewController {
     private func fetchData() {
         searchedResult = UserDefaultsManager.shared
             .getValue(forKey: .searchedText) ?? []
+        print(#function, searchedResult)
         if !searchedResult.isEmpty {
             isRecentSearched = true
         }
@@ -93,6 +94,12 @@ extension SearchViewController: UISearchBarDelegate {
             UserDefaultsManager.shared.saveValue(
                 searchedResult,
                 forKey: .searchedText
+            )
+            let resultVC = SearchResultViewController()
+            resultVC.searchedText = text
+            navigationController?.pushViewController(
+                resultVC,
+                animated: true
             )
         }
     }

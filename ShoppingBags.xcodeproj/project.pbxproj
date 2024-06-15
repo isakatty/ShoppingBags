@@ -27,6 +27,7 @@
 		C93B764A2C1D81080059223A /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = C93B76492C1D81080059223A /* Alamofire */; };
 		C93B764E2C1D8B990059223A /* UserDefaultsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C93B764D2C1D8B990059223A /* UserDefaultsManager.swift */; };
 		C93B76502C1D8CB30059223A /* SaveData.swift in Sources */ = {isa = PBXBuildFile; fileRef = C93B764F2C1D8CB30059223A /* SaveData.swift */; };
+		C93B76542C1D995B0059223A /* SearchResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C93B76532C1D995B0059223A /* SearchResultViewController.swift */; };
 		C96663342C1B1D53009E48F6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C96663332C1B1D53009E48F6 /* AppDelegate.swift */; };
 		C96663362C1B1D53009E48F6 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C96663352C1B1D53009E48F6 /* SceneDelegate.swift */; };
 		C96663382C1B1D53009E48F6 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C96663372C1B1D53009E48F6 /* ViewController.swift */; };
@@ -54,6 +55,7 @@
 		C93B764C2C1D81C70059223A /* Config.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Config.xcconfig; sourceTree = "<group>"; };
 		C93B764D2C1D8B990059223A /* UserDefaultsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsManager.swift; sourceTree = "<group>"; };
 		C93B764F2C1D8CB30059223A /* SaveData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveData.swift; sourceTree = "<group>"; };
+		C93B76532C1D995B0059223A /* SearchResultViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultViewController.swift; sourceTree = "<group>"; };
 		C96663302C1B1D53009E48F6 /* ShoppingBags.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ShoppingBags.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C96663332C1B1D53009E48F6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C96663352C1B1D53009E48F6 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -96,6 +98,7 @@
 		C93B76132C1BE6C00059223A /* Search */ = {
 			isa = PBXGroup;
 			children = (
+				C93B76522C1D99410059223A /* SearchResult */,
 				C93B76362C1C3DD00059223A /* SearchResultEmptyView.swift */,
 				C93B76382C1D4B170059223A /* SearchViewController.swift */,
 				C93B76422C1D58650059223A /* RecentSearchedView.swift */,
@@ -146,6 +149,14 @@
 				C93B76462C1D59A00059223A /* UITableViewCell+.swift */,
 			);
 			path = "Extension+";
+			sourceTree = "<group>";
+		};
+		C93B76522C1D99410059223A /* SearchResult */ = {
+			isa = PBXGroup;
+			children = (
+				C93B76532C1D995B0059223A /* SearchResultViewController.swift */,
+			);
+			path = SearchResult;
 			sourceTree = "<group>";
 		};
 		C96663272C1B1D53009E48F6 = {
@@ -291,6 +302,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C96663382C1B1D53009E48F6 /* ViewController.swift in Sources */,
+				C93B76542C1D995B0059223A /* SearchResultViewController.swift in Sources */,
 				C93B76372C1C3DD00059223A /* SearchResultEmptyView.swift in Sources */,
 				C93B76172C1BEA000059223A /* RoundedButton.swift in Sources */,
 				C96663342C1B1D53009E48F6 /* AppDelegate.swift in Sources */,

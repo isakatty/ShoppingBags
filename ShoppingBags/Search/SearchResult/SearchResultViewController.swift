@@ -12,6 +12,16 @@ import Alamofire
 public final class SearchResultViewController: UIViewController {
     public var searchedText: String?
     private var page: Int = 1
+    private var sorting: SortedItem = .accuracy
+    private let totalItemLabel: UILabel = {
+        let label = UILabel()
+        label.font = Constant.Font.bold15
+        label.textColor = Constant.Colors.orange
+        // dummy Text
+        label.text = "235,499개의 검색결과"
+        return label
+    }()
+    
     public override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -20,16 +30,25 @@ public final class SearchResultViewController: UIViewController {
         configureNavigationBar()
         configureHierarchy()
         configureLayout()
-        callRequest(searchText: searchedText, startPage: page)
+        callRequest(
+            searchText: searchedText,
+            startPage: page,
+            sorting: sorting
+        )
     }
     
     private func configureHierarchy() {
-        
+        [totalItemLabel]
+            .forEach { view.addSubview($0) }
     }
     private func configureLayout() {
         view.backgroundColor = .systemBackground
         let safeArea = view.safeAreaLayoutGuide
-        
+        totalItemLabel.snp.makeConstraints { make in
+            make.top.trailing.equalTo(safeArea)
+            make.leading.equalTo(safeArea).inset(12)
+            make.height.equalTo(20)
+        }
     }
     private func configureNavigationBar() {
         navigationItem.title = searchedText
@@ -45,11 +64,13 @@ public final class SearchResultViewController: UIViewController {
     }
     private func callRequest(
         searchText: String,
-        startPage: Int
+        startPage: Int,
+        sorting: SortedItem
     ) {
         let url = makeURL(
             with: searchText,
-            with: startPage
+            with: startPage,
+            sorting: sorting
         )
         let header = makeHeader()
         
@@ -68,16 +89,17 @@ public final class SearchResultViewController: UIViewController {
             }
         }
     }
-    
     private func makeURL(
         with searchText: String,
-        with startPage: Int
+        with startPage: Int,
+        sorting: SortedItem
     ) -> String {
         let baseURLString = Constant.Endpoint.baseURL
         let queryParams: [String: String] = [
             "query" : searchText,
             "display" : String(30),
-            "start" : String(startPage)
+            "start" : String(startPage),
+            "sort" : sorting.query
         ]
         let query = queryParams.map { "\($0.key)=\($0.value)" }
             .joined(separator: "&")

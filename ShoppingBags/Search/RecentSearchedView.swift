@@ -8,8 +8,11 @@
 import UIKit
 
 public final class RecentSearchedView: UIView {
-    // 데이터 받을 공간
-    public var searchedArray: [String]?
+    public var searchedArray = [String]() {
+        didSet {
+            searchedTableView.reloadData()
+        }
+    }
     private lazy var searchedTableView: UITableView = {
         let table = UITableView()
         table.delegate = self
@@ -92,9 +95,7 @@ extension RecentSearchedView: UITableViewDelegate, UITableViewDataSource {
         _ tableView: UITableView,
         numberOfRowsInSection section: Int
     ) -> Int {
-        // 검색 결과 데이터.count
-        guard let array = searchedArray else { return 0 }
-        return array.count
+        return searchedArray.count
     }
     
     public func tableView(
@@ -104,10 +105,9 @@ extension RecentSearchedView: UITableViewDelegate, UITableViewDataSource {
         guard let cell = tableView.dequeueReusableCell(
             withIdentifier: RecentSearchTableViewCell.identifier,
             for: indexPath
-        ) as? RecentSearchTableViewCell,
-        let array = searchedArray else { return UITableViewCell() }
-        
-        cell.configureUI(recentSearched: array[indexPath.row])
+        ) as? RecentSearchTableViewCell
+        else { return UITableViewCell() }
+        cell.configureUI(recentSearched: searchedArray[indexPath.row])
         return cell
     }
 }

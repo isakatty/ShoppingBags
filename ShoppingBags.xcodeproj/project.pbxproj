@@ -21,9 +21,12 @@
 		C93B76392C1D4B170059223A /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C93B76382C1D4B170059223A /* SearchViewController.swift */; };
 		C93B763C2C1D4B840059223A /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C93B763B2C1D4B840059223A /* SettingViewController.swift */; };
 		C93B763F2C1D4BBC0059223A /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C93B763E2C1D4BBC0059223A /* TabBarController.swift */; };
-		C93B76432C1D58650059223A /* RecentSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C93B76422C1D58650059223A /* RecentSearchViewController.swift */; };
+		C93B76432C1D58650059223A /* RecentSearchedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C93B76422C1D58650059223A /* RecentSearchedView.swift */; };
 		C93B76452C1D59590059223A /* RecentSearchTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C93B76442C1D59590059223A /* RecentSearchTableViewCell.swift */; };
 		C93B76472C1D59A00059223A /* UITableViewCell+.swift in Sources */ = {isa = PBXBuildFile; fileRef = C93B76462C1D59A00059223A /* UITableViewCell+.swift */; };
+		C93B764A2C1D81080059223A /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = C93B76492C1D81080059223A /* Alamofire */; };
+		C93B764E2C1D8B990059223A /* UserDefaultsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C93B764D2C1D8B990059223A /* UserDefaultsManager.swift */; };
+		C93B76502C1D8CB30059223A /* SaveData.swift in Sources */ = {isa = PBXBuildFile; fileRef = C93B764F2C1D8CB30059223A /* SaveData.swift */; };
 		C96663342C1B1D53009E48F6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C96663332C1B1D53009E48F6 /* AppDelegate.swift */; };
 		C96663362C1B1D53009E48F6 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C96663352C1B1D53009E48F6 /* SceneDelegate.swift */; };
 		C96663382C1B1D53009E48F6 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C96663372C1B1D53009E48F6 /* ViewController.swift */; };
@@ -45,9 +48,12 @@
 		C93B76382C1D4B170059223A /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		C93B763B2C1D4B840059223A /* SettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
 		C93B763E2C1D4BBC0059223A /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
-		C93B76422C1D58650059223A /* RecentSearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentSearchViewController.swift; sourceTree = "<group>"; };
+		C93B76422C1D58650059223A /* RecentSearchedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentSearchedView.swift; sourceTree = "<group>"; };
 		C93B76442C1D59590059223A /* RecentSearchTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentSearchTableViewCell.swift; sourceTree = "<group>"; };
 		C93B76462C1D59A00059223A /* UITableViewCell+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableViewCell+.swift"; sourceTree = "<group>"; };
+		C93B764C2C1D81C70059223A /* Config.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Config.xcconfig; sourceTree = "<group>"; };
+		C93B764D2C1D8B990059223A /* UserDefaultsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsManager.swift; sourceTree = "<group>"; };
+		C93B764F2C1D8CB30059223A /* SaveData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveData.swift; sourceTree = "<group>"; };
 		C96663302C1B1D53009E48F6 /* ShoppingBags.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ShoppingBags.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C96663332C1B1D53009E48F6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C96663352C1B1D53009E48F6 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -63,6 +69,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C93B761A2C1BEC610059223A /* SnapKit in Frameworks */,
+				C93B764A2C1D81080059223A /* Alamofire in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -91,7 +98,7 @@
 			children = (
 				C93B76362C1C3DD00059223A /* SearchResultEmptyView.swift */,
 				C93B76382C1D4B170059223A /* SearchViewController.swift */,
-				C93B76422C1D58650059223A /* RecentSearchViewController.swift */,
+				C93B76422C1D58650059223A /* RecentSearchedView.swift */,
 				C93B76442C1D59590059223A /* RecentSearchTableViewCell.swift */,
 			);
 			path = Search;
@@ -112,6 +119,7 @@
 			isa = PBXGroup;
 			children = (
 				C93B76342C1C32920059223A /* TextFieldStatus.swift */,
+				C93B764F2C1D8CB30059223A /* SaveData.swift */,
 			);
 			path = Entity;
 			sourceTree = "<group>";
@@ -130,6 +138,14 @@
 				C93B763E2C1D4BBC0059223A /* TabBarController.swift */,
 			);
 			path = Tabbar;
+			sourceTree = "<group>";
+		};
+		C93B764B2C1D81830059223A /* Extension+ */ = {
+			isa = PBXGroup;
+			children = (
+				C93B76462C1D59A00059223A /* UITableViewCell+.swift */,
+			);
+			path = "Extension+";
 			sourceTree = "<group>";
 		};
 		C96663272C1B1D53009E48F6 = {
@@ -152,6 +168,7 @@
 		C96663322C1B1D53009E48F6 /* ShoppingBags */ = {
 			isa = PBXGroup;
 			children = (
+				C93B764B2C1D81830059223A /* Extension+ */,
 				C93B76112C1BE1490059223A /* Constant */,
 				C93B763D2C1D4BB10059223A /* Tabbar */,
 				C93B76132C1BE6C00059223A /* Search */,
@@ -165,7 +182,8 @@
 				C966633C2C1B1D54009E48F6 /* Assets.xcassets */,
 				C966633E2C1B1D54009E48F6 /* LaunchScreen.storyboard */,
 				C96663412C1B1D54009E48F6 /* Info.plist */,
-				C93B76462C1D59A00059223A /* UITableViewCell+.swift */,
+				C93B764C2C1D81C70059223A /* Config.xcconfig */,
+				C93B764D2C1D8B990059223A /* UserDefaultsManager.swift */,
 			);
 			path = ShoppingBags;
 			sourceTree = "<group>";
@@ -189,6 +207,7 @@
 			name = ShoppingBags;
 			packageProductDependencies = (
 				C93B76192C1BEC610059223A /* SnapKit */,
+				C93B76492C1D81080059223A /* Alamofire */,
 			);
 			productName = ShoppingBags;
 			productReference = C96663302C1B1D53009E48F6 /* ShoppingBags.app */;
@@ -220,6 +239,7 @@
 			mainGroup = C96663272C1B1D53009E48F6;
 			packageReferences = (
 				C93B76182C1BEC610059223A /* XCRemoteSwiftPackageReference "SnapKit" */,
+				C93B76482C1D81080059223A /* XCRemoteSwiftPackageReference "Alamofire" */,
 			);
 			productRefGroup = C96663312C1B1D53009E48F6 /* Products */;
 			projectDirPath = "";
@@ -275,6 +295,7 @@
 				C93B76172C1BEA000059223A /* RoundedButton.swift in Sources */,
 				C96663342C1B1D53009E48F6 /* AppDelegate.swift in Sources */,
 				C93B76152C1BE7730059223A /* OnboardingViewController.swift in Sources */,
+				C93B764E2C1D8B990059223A /* UserDefaultsManager.swift in Sources */,
 				C93B763C2C1D4B840059223A /* SettingViewController.swift in Sources */,
 				C93B76472C1D59A00059223A /* UITableViewCell+.swift in Sources */,
 				C93B762E2C1C1BB10059223A /* CircledCameraView.swift in Sources */,
@@ -283,10 +304,11 @@
 				C93B76452C1D59590059223A /* RecentSearchTableViewCell.swift in Sources */,
 				C93B763F2C1D4BBC0059223A /* TabBarController.swift in Sources */,
 				C93B76392C1D4B170059223A /* SearchViewController.swift in Sources */,
+				C93B76502C1D8CB30059223A /* SaveData.swift in Sources */,
 				C93B76222C1C06090059223A /* CircledProfileView.swift in Sources */,
 				C93B76102C1BE13C0059223A /* Constant.swift in Sources */,
 				C93B76322C1C2C470059223A /* NameTextFieldView.swift in Sources */,
-				C93B76432C1D58650059223A /* RecentSearchViewController.swift in Sources */,
+				C93B76432C1D58650059223A /* RecentSearchedView.swift in Sources */,
 				C93B761C2C1BF1B40059223A /* ProfileSettingViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -438,6 +460,7 @@
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -470,6 +493,7 @@
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -520,6 +544,14 @@
 				minimumVersion = 5.7.1;
 			};
 		};
+		C93B76482C1D81080059223A /* XCRemoteSwiftPackageReference "Alamofire" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Alamofire/Alamofire.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.9.1;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -527,6 +559,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = C93B76182C1BEC610059223A /* XCRemoteSwiftPackageReference "SnapKit" */;
 			productName = SnapKit;
+		};
+		C93B76492C1D81080059223A /* Alamofire */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = C93B76482C1D81080059223A /* XCRemoteSwiftPackageReference "Alamofire" */;
+			productName = Alamofire;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

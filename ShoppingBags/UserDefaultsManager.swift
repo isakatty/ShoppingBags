@@ -13,23 +13,11 @@ public final class UserDefaultsManager {
     private init() {
         
     }
-    public func saveValueArray(
-        _ value: [String],
+    public func saveValue<T>(
+        _ value: T,
         forKey key: SaveData
     ) {
-        UserDefaults.standard.setValue(
-            value,
-            forKey: key.rawValue
-        )
-    }
-    public func saveValue(
-        _ value: Any,
-        forKey key: SaveData
-    ) {
-        UserDefaults.standard.setValue(
-            value,
-            forKey: key.rawValue
-        )
+        UserDefaults.standard.setValue(value, forKey: key.rawValue)
     }
     public func getValue<T>(forKey key: SaveData) -> T? {
         return UserDefaults.standard.value(forKey: key.rawValue) as? T

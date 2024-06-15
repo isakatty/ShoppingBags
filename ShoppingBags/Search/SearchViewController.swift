@@ -65,12 +65,11 @@ public final class SearchViewController: UIViewController {
         )
     }
     @objc private func eraseBtnTapped() {
-        print(#function)
+        // Alert 띄우기
+        UserDefaultsManager.shared.removeValue(forKey: .searchedText)
         isRecentSearched = false
-        
         searchedView.removeFromSuperview()
         emptyView.removeFromSuperview()
-        
         configureHierarchy()
         configureLayout()
     }
@@ -80,8 +79,6 @@ public final class SearchViewController: UIViewController {
         if !searchedResult.isEmpty {
             isRecentSearched = true
         }
-        print(searchedResult)
-        
     }
 }
 
@@ -93,7 +90,7 @@ extension SearchViewController: UISearchBarDelegate {
         if !searchText.isEmpty {
             // UserDefaults에 검색어 저장, VC 이동, text 전달해주기
             searchedResult.insert(text, at: 0)
-            UserDefaultsManager.shared.saveValueArray(
+            UserDefaultsManager.shared.saveValue(
                 searchedResult,
                 forKey: .searchedText
             )

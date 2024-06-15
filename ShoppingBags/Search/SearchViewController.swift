@@ -25,9 +25,12 @@ public final class SearchViewController: UIViewController {
         
         fetchData()
         configureNavigationBar()
-        configureHierarchy()
-        configureLayout()
         configureBtns()
+    }
+    public override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(false)
+        
+        fetchData()
     }
     private func configureHierarchy() {
         if isRecentSearched {
@@ -45,6 +48,7 @@ public final class SearchViewController: UIViewController {
             searchedView.snp.makeConstraints { make in
                 make.edges.equalTo(safeArea)
             }
+            searchedView.searchedArray = searchedResult
         } else {
             emptyView.snp.makeConstraints { make in
                 make.edges.equalTo(safeArea)
@@ -66,20 +70,25 @@ public final class SearchViewController: UIViewController {
     }
     @objc private func eraseBtnTapped() {
         // Alert 띄우기
-        UserDefaultsManager.shared.removeValue(forKey: .searchedText)
-        isRecentSearched = false
-        searchedView.removeFromSuperview()
-        emptyView.removeFromSuperview()
-        configureHierarchy()
-        configureLayout()
+        let erasedArray: [String] = []
+        // MARK: remove가 잘 안되는 이유를 찾을 것.
+        UserDefaultsManager.shared.saveValue(
+            erasedArray,
+            forKey: .searchedText
+        )
+        fetchData()
+        view.setNeedsLayout()
+        view.layoutIfNeeded()
     }
     private func fetchData() {
         searchedResult = UserDefaultsManager.shared
             .getValue(forKey: .searchedText) ?? []
         print(#function, searchedResult)
-        if !searchedResult.isEmpty {
-            isRecentSearched = true
-        }
+        isRecentSearched = !searchedResult.isEmpty ? true : false
+        searchedView.removeFromSuperview()
+        emptyView.removeFromSuperview()
+        configureHierarchy()
+        configureLayout()
     }
 }
 
@@ -90,6 +99,7 @@ extension SearchViewController: UISearchBarDelegate {
         let searchText = text.trimmingCharacters(in: .whitespaces)
         if !searchText.isEmpty {
             // UserDefaults에 검색어 저장, VC 이동, text 전달해주기
+            searchBar.text = nil
             searchedResult.insert(text, at: 0)
             UserDefaultsManager.shared.saveValue(
                 searchedResult,

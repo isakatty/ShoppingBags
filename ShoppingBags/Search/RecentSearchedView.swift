@@ -9,7 +9,8 @@ import UIKit
 
 public final class RecentSearchedView: UIView {
     // 데이터 받을 공간
-    private lazy var tableView: UITableView = {
+    public var searchedArray: [String]?
+    private lazy var searchedTableView: UITableView = {
         let table = UITableView()
         table.delegate = self
         table.dataSource = self
@@ -55,7 +56,7 @@ public final class RecentSearchedView: UIView {
     }
     
     private func configureHierarchy() {
-        [tableView, recentView]
+        [searchedTableView, recentView]
             .forEach { addSubview($0) }
         [recentLabel, eraseBtn]
             .forEach { recentView.addSubview($0) }
@@ -65,7 +66,7 @@ public final class RecentSearchedView: UIView {
             make.top.leading.trailing.centerX.equalToSuperview()
             make.height.equalTo(50)
         }
-        tableView.snp.makeConstraints { make in
+        searchedTableView.snp.makeConstraints { make in
             make.top.equalTo(recentView.snp.bottom)
             make.leading.trailing.bottom.equalToSuperview()
         }
@@ -92,7 +93,8 @@ extension RecentSearchedView: UITableViewDelegate, UITableViewDataSource {
         numberOfRowsInSection section: Int
     ) -> Int {
         // 검색 결과 데이터.count
-        return 1
+        guard let array = searchedArray else { return 0 }
+        return array.count
     }
     
     public func tableView(
@@ -102,9 +104,10 @@ extension RecentSearchedView: UITableViewDelegate, UITableViewDataSource {
         guard let cell = tableView.dequeueReusableCell(
             withIdentifier: RecentSearchTableViewCell.identifier,
             for: indexPath
-        ) as? RecentSearchTableViewCell else { return UITableViewCell() }
+        ) as? RecentSearchTableViewCell,
+        let array = searchedArray else { return UITableViewCell() }
         
-        cell.configureUI(recentSearched: "대략적인 UI 작업")
+        cell.configureUI(recentSearched: array[indexPath.row])
         return cell
     }
 }

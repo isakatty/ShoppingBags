@@ -58,12 +58,13 @@ public final class SearchResultViewController: UIViewController {
             headers: header
         )
         .validate(statusCode: 200..<300)
-        .responseString { response in
+        .responseDecodable(of: Search.self) { response in
             switch response.result {
             case .success(let value):
                 print(value)
-            case .failure(let err):
-                print(err)
+            case .failure(let error):
+                // 재검색 유도
+                print(error)
             }
         }
     }

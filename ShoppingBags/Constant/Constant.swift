@@ -8,6 +8,10 @@
 import UIKit
 
 enum Constant {
+    enum Endpoint {
+        static let baseURL = "https://openapi.naver.com/v1/search/shop.json?"
+    }
+    
     enum Colors {
         static let orange = UIColor(named: "AccentColor")
         static let black = UIColor(named: "BasicBlack")

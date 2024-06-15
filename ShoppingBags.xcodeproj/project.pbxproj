@@ -28,6 +28,7 @@
 		C93B764E2C1D8B990059223A /* UserDefaultsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C93B764D2C1D8B990059223A /* UserDefaultsManager.swift */; };
 		C93B76502C1D8CB30059223A /* SaveData.swift in Sources */ = {isa = PBXBuildFile; fileRef = C93B764F2C1D8CB30059223A /* SaveData.swift */; };
 		C93B76542C1D995B0059223A /* SearchResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C93B76532C1D995B0059223A /* SearchResultViewController.swift */; };
+		C93B76562C1DA9680059223A /* PrivateKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = C93B76552C1DA9680059223A /* PrivateKey.swift */; };
 		C96663342C1B1D53009E48F6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C96663332C1B1D53009E48F6 /* AppDelegate.swift */; };
 		C96663362C1B1D53009E48F6 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C96663352C1B1D53009E48F6 /* SceneDelegate.swift */; };
 		C96663382C1B1D53009E48F6 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C96663372C1B1D53009E48F6 /* ViewController.swift */; };
@@ -56,6 +57,7 @@
 		C93B764D2C1D8B990059223A /* UserDefaultsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsManager.swift; sourceTree = "<group>"; };
 		C93B764F2C1D8CB30059223A /* SaveData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveData.swift; sourceTree = "<group>"; };
 		C93B76532C1D995B0059223A /* SearchResultViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultViewController.swift; sourceTree = "<group>"; };
+		C93B76552C1DA9680059223A /* PrivateKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivateKey.swift; sourceTree = "<group>"; };
 		C96663302C1B1D53009E48F6 /* ShoppingBags.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ShoppingBags.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C96663332C1B1D53009E48F6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C96663352C1B1D53009E48F6 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -195,6 +197,7 @@
 				C96663412C1B1D54009E48F6 /* Info.plist */,
 				C93B764C2C1D81C70059223A /* Config.xcconfig */,
 				C93B764D2C1D8B990059223A /* UserDefaultsManager.swift */,
+				C93B76552C1DA9680059223A /* PrivateKey.swift */,
 			);
 			path = ShoppingBags;
 			sourceTree = "<group>";
@@ -308,6 +311,7 @@
 				C96663342C1B1D53009E48F6 /* AppDelegate.swift in Sources */,
 				C93B76152C1BE7730059223A /* OnboardingViewController.swift in Sources */,
 				C93B764E2C1D8B990059223A /* UserDefaultsManager.swift in Sources */,
+				C93B76562C1DA9680059223A /* PrivateKey.swift in Sources */,
 				C93B763C2C1D4B840059223A /* SettingViewController.swift in Sources */,
 				C93B76472C1D59A00059223A /* UITableViewCell+.swift in Sources */,
 				C93B762E2C1C1BB10059223A /* CircledCameraView.swift in Sources */,
@@ -341,6 +345,7 @@
 /* Begin XCBuildConfiguration section */
 		C96663422C1B1D54009E48F6 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = C93B764C2C1D81C70059223A /* Config.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
@@ -404,6 +409,7 @@
 		};
 		C96663432C1B1D54009E48F6 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = C93B764C2C1D81C70059223A /* Config.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
@@ -460,6 +466,7 @@
 		};
 		C96663452C1B1D54009E48F6 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = C93B764C2C1D81C70059223A /* Config.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;

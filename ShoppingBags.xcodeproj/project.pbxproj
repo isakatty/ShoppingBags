@@ -17,6 +17,10 @@
 		C93B762E2C1C1BB10059223A /* CircledCameraView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C93B762D2C1C1BB10059223A /* CircledCameraView.swift */; };
 		C93B76322C1C2C470059223A /* NameTextFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C93B76312C1C2C470059223A /* NameTextFieldView.swift */; };
 		C93B76352C1C32920059223A /* TextFieldStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = C93B76342C1C32920059223A /* TextFieldStatus.swift */; };
+		C93B76372C1C3DD00059223A /* SearchResultEmptyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C93B76362C1C3DD00059223A /* SearchResultEmptyView.swift */; };
+		C93B76392C1D4B170059223A /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C93B76382C1D4B170059223A /* SearchViewController.swift */; };
+		C93B763C2C1D4B840059223A /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C93B763B2C1D4B840059223A /* SettingViewController.swift */; };
+		C93B763F2C1D4BBC0059223A /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C93B763E2C1D4BBC0059223A /* TabBarController.swift */; };
 		C96663342C1B1D53009E48F6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C96663332C1B1D53009E48F6 /* AppDelegate.swift */; };
 		C96663362C1B1D53009E48F6 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C96663352C1B1D53009E48F6 /* SceneDelegate.swift */; };
 		C96663382C1B1D53009E48F6 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C96663372C1B1D53009E48F6 /* ViewController.swift */; };
@@ -34,6 +38,10 @@
 		C93B762D2C1C1BB10059223A /* CircledCameraView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircledCameraView.swift; sourceTree = "<group>"; };
 		C93B76312C1C2C470059223A /* NameTextFieldView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NameTextFieldView.swift; sourceTree = "<group>"; };
 		C93B76342C1C32920059223A /* TextFieldStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldStatus.swift; sourceTree = "<group>"; };
+		C93B76362C1C3DD00059223A /* SearchResultEmptyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultEmptyView.swift; sourceTree = "<group>"; };
+		C93B76382C1D4B170059223A /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
+		C93B763B2C1D4B840059223A /* SettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
+		C93B763E2C1D4BBC0059223A /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		C96663302C1B1D53009E48F6 /* ShoppingBags.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ShoppingBags.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C96663332C1B1D53009E48F6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C96663352C1B1D53009E48F6 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -75,6 +83,8 @@
 		C93B76132C1BE6C00059223A /* Search */ = {
 			isa = PBXGroup;
 			children = (
+				C93B76362C1C3DD00059223A /* SearchResultEmptyView.swift */,
+				C93B76382C1D4B170059223A /* SearchViewController.swift */,
 			);
 			path = Search;
 			sourceTree = "<group>";
@@ -98,6 +108,22 @@
 			path = Entity;
 			sourceTree = "<group>";
 		};
+		C93B763A2C1D4B770059223A /* Setting */ = {
+			isa = PBXGroup;
+			children = (
+				C93B763B2C1D4B840059223A /* SettingViewController.swift */,
+			);
+			path = Setting;
+			sourceTree = "<group>";
+		};
+		C93B763D2C1D4BB10059223A /* Tabbar */ = {
+			isa = PBXGroup;
+			children = (
+				C93B763E2C1D4BBC0059223A /* TabBarController.swift */,
+			);
+			path = Tabbar;
+			sourceTree = "<group>";
+		};
 		C96663272C1B1D53009E48F6 = {
 			isa = PBXGroup;
 			children = (
@@ -118,11 +144,13 @@
 		C96663322C1B1D53009E48F6 /* ShoppingBags */ = {
 			isa = PBXGroup;
 			children = (
+				C93B76112C1BE1490059223A /* Constant */,
+				C93B763D2C1D4BB10059223A /* Tabbar */,
+				C93B763A2C1D4B770059223A /* Setting */,
 				C93B76332C1C326E0059223A /* Entity */,
 				C93B761F2C1BF70F0059223A /* CustomView */,
 				C93B76132C1BE6C00059223A /* Search */,
 				C93B76122C1BE6B40059223A /* Onboarding */,
-				C93B76112C1BE1490059223A /* Constant */,
 				C96663332C1B1D53009E48F6 /* AppDelegate.swift */,
 				C96663352C1B1D53009E48F6 /* SceneDelegate.swift */,
 				C96663372C1B1D53009E48F6 /* ViewController.swift */,
@@ -234,12 +262,16 @@
 			buildActionMask = 2147483647;
 			files = (
 				C96663382C1B1D53009E48F6 /* ViewController.swift in Sources */,
+				C93B76372C1C3DD00059223A /* SearchResultEmptyView.swift in Sources */,
 				C93B76172C1BEA000059223A /* RoundedButton.swift in Sources */,
 				C96663342C1B1D53009E48F6 /* AppDelegate.swift in Sources */,
 				C93B76152C1BE7730059223A /* OnboardingViewController.swift in Sources */,
+				C93B763C2C1D4B840059223A /* SettingViewController.swift in Sources */,
 				C93B762E2C1C1BB10059223A /* CircledCameraView.swift in Sources */,
 				C93B76352C1C32920059223A /* TextFieldStatus.swift in Sources */,
 				C96663362C1B1D53009E48F6 /* SceneDelegate.swift in Sources */,
+				C93B763F2C1D4BBC0059223A /* TabBarController.swift in Sources */,
+				C93B76392C1D4B170059223A /* SearchViewController.swift in Sources */,
 				C93B76222C1C06090059223A /* CircledProfileView.swift in Sources */,
 				C93B76102C1BE13C0059223A /* Constant.swift in Sources */,
 				C93B76322C1C2C470059223A /* NameTextFieldView.swift in Sources */,

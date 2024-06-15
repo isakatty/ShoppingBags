@@ -1,5 +1,5 @@
 //
-//  RecentSearchViewController.swift
+//  RecentSearchedView.swift
 //  ShoppingBags
 //
 //  Created by Jisoo Ham on 6/15/24.
@@ -8,6 +8,7 @@
 import UIKit
 
 public final class RecentSearchedView: UIView {
+    // 데이터 받을 공간
     private lazy var tableView: UITableView = {
         let table = UITableView()
         table.delegate = self
@@ -90,6 +91,7 @@ extension RecentSearchedView: UITableViewDelegate, UITableViewDataSource {
         _ tableView: UITableView,
         numberOfRowsInSection section: Int
     ) -> Int {
+        // 검색 결과 데이터.count
         return 1
     }
     

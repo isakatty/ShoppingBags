@@ -12,6 +12,7 @@ public final class SettingViewController: UIViewController {
     public override func viewDidLoad() {
         super.viewDidLoad()
         
+        configureNavigationBar()
         configureHierarchy()
         configureLayout()
     }
@@ -21,5 +22,9 @@ public final class SettingViewController: UIViewController {
     }
     private func configureLayout() {
         view.backgroundColor = .systemBackground
+    }
+    private func configureNavigationBar() {
+        navigationItem.title = "SETTING"
+        navigationController?.navigationBar.tintColor = Constant.Colors.black
     }
 }

@@ -34,4 +34,10 @@ enum Constant {
         static let glass = UIImage(systemName: "magnifyingglass")
     }
     
+    enum Font {
+        static let bold15 = UIFont.boldSystemFont(ofSize: 15)
+        static let regular15 = UIFont.systemFont(ofSize: 15)
+        static let regular14 = UIFont.systemFont(ofSize: 14)
+    }
+    
 }

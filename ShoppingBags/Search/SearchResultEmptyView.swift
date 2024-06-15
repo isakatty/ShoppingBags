@@ -40,7 +40,8 @@ public final class SearchResultEmptyView: UIView {
     }
     private func configureLayout() {
         emptyImageView.snp.makeConstraints { make in
-            make.center.equalToSuperview()
+            make.centerX.equalToSuperview()
+            make.centerY.equalToSuperview().offset(-50)
             make.leading.trailing.equalToSuperview().inset(40)
             make.height.equalTo(emptyImageView.snp.width)
         }

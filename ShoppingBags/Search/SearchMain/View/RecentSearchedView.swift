@@ -66,15 +66,4 @@ public final class RecentSearchedView: UIView {
             make.centerY.equalToSuperview()
         }
     }
-//    private func fetchData(searchedData: [String]) -> [String] {
-//        UserDefaultsManager.shared.saveValue(
-//            searchedData,
-//            forKey: SaveData.searchedText
-//        )
-//        let returnData: [String] = UserDefaultsManager.shared.getValue(
-//            forKey: SaveData.searchedText
-//        ) ?? []
-//        print(returnData)
-//        return returnData
-//    }
 }

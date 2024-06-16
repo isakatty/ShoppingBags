@@ -14,7 +14,7 @@ public final class SearchResultViewController: UIViewController {
     private var isLastPage: Bool = false
     private var page: Int = 1
     private var sorting: SortedItem = .accuracy
-    private lazy var searchedResult: Search = Search(
+    private var searchedResult: Search = Search(
         total: 0,
         start: 0,
         display: 0,
@@ -164,7 +164,6 @@ public final class SearchResultViewController: UIViewController {
         let query = queryParams.map { "\($0.key)=\($0.value)" }
             .joined(separator: "&")
         
-        print(query)
         return baseURLString + query
     }
     private func makeHeader() -> HTTPHeaders {
@@ -209,7 +208,6 @@ public final class SearchResultViewController: UIViewController {
         
         return UICollectionViewCompositionalLayout(section: section)
     }
-    
     @objc private func customBackBtnTapped() {
         navigationController?.popViewController(animated: true)
     }
@@ -230,7 +228,32 @@ public final class SearchResultViewController: UIViewController {
             startPage: 1,
             sorting: sender.sortCondition
         )
-        
+    }
+    @objc private func shoppingBagBtnTapped(sender: UIButton) {
+        var favItems: [String] = UserDefaultsManager.shared
+            .getValue(forKey: .shoppingBags) ?? []
+        print(favItems)
+        if favItems.contains(searchedResult.items[sender.tag].productId) {
+            favItems.removeAll {
+                $0 == searchedResult.items[sender.tag].productId
+            }
+            UserDefaultsManager.shared.saveValue(
+                favItems,
+                forKey: .shoppingBags
+            )
+        } else {
+            favItems.append(searchedResult.items[sender.tag].productId)
+            UserDefaultsManager.shared.saveValue(
+                favItems,
+                forKey: .shoppingBags
+            )
+        }
+        itemCollectionView.reloadItems(
+            at: [IndexPath(
+                item: sender.tag,
+                section: 0
+            )]
+        )
     }
 }
 
@@ -253,15 +276,21 @@ extension SearchResultViewController
             for: indexPath
         ) as? SearchedItemCollectionViewCell
         else { return UICollectionViewCell() }
-        cell.configureUI(item: searchedResult.items[indexPath.item])
+        cell.shoppingBtn.addTarget(
+            self,
+            action: #selector(shoppingBagBtnTapped),
+            for: .touchUpInside
+        )
+        cell.configureUI(
+            item: searchedResult.items[indexPath.item],
+            tag: indexPath.item
+        )
         return cell
     }
     public func collectionView(
         _ collectionView: UICollectionView,
         prefetchItemsAt indexPaths: [IndexPath]
     ) {
-        print(#function, indexPaths)
-        
         for path in indexPaths {
             if searchedResult.items.count - 10 == path.item 
                 && isLastPage == false {
@@ -283,7 +312,9 @@ extension SearchResultViewController
         itemCollectionView.reloadData()
         let vc = ItemDetailWebViewController()
         vc.itemInfo = searchedResult.items[indexPath.item]
-        navigationController?.pushViewController(vc, animated: true)
+        navigationController?.pushViewController(
+            vc,
+            animated: true
+        )
     }
-    
 }

@@ -33,7 +33,7 @@ public final class SearchedItemCollectionViewCell: UICollectionViewCell {
         color: Constant.Colors.black,
         lines: 1
     )
-    public let shoppingBtn: UIButton = {
+    public lazy var shoppingBtn: UIButton = {
         var config = UIButton.Configuration.plain()
         config.image = Constant.Images.likeUnselected
         config.contentInsets = NSDirectionalEdgeInsets(
@@ -99,7 +99,6 @@ public final class SearchedItemCollectionViewCell: UICollectionViewCell {
             make.bottom.lessThanOrEqualToSuperview()
         }
     }
-    
     private func makeLabel(
         font: UIFont,
         color: UIColor?,
@@ -111,7 +110,9 @@ public final class SearchedItemCollectionViewCell: UICollectionViewCell {
         label.numberOfLines = lines
         return label
     }
-    public func configureUI(item: Item) {
+    public func configureUI(item: Item, tag: Int) {
+        shoppingBtn.tag = tag
+        fetchFavItems(itemID: item.productId)
         mallNameLabel.text = item.mallName
         itemNameLabel.text = item.formattedItemName
         itemPriceLabel.text = item.formattedPrice
@@ -119,9 +120,33 @@ public final class SearchedItemCollectionViewCell: UICollectionViewCell {
         guard let url = URL(string: item.itemImage) else { return }
         itemImgView.kf.setImage(with: url)
     }
+    
+    private func fetchFavItems(itemID: String) {
+        var favItems: [String] = UserDefaultsManager.shared
+            .getValue(forKey: .shoppingBags) ?? []
+        configureBtnUI(isContained: favItems.contains(itemID))
+    }
+    /// Btn UI
+    public func configureBtnUI(isContained: Bool) {
+        var config = UIButton.Configuration.plain()
+        config.image = isContained
+        ? Constant.Images.likeSelected
+        : Constant.Images.likeUnselected
+        shoppingBtn.configuration = config
+        shoppingBtn.backgroundColor = isContained
+        ? Constant.Colors.white
+        : Constant.Colors.lightGray
+        shoppingBtn.layer.opacity = isContained ? 1.0 : 0.5
+    }
     public override func prepareForReuse() {
         super.prepareForReuse()
         
         itemImgView.image = nil
+        [
+            mallNameLabel,
+            itemNameLabel,
+            itemPriceLabel
+        ]
+            .forEach { $0.text = nil }
     }
 }

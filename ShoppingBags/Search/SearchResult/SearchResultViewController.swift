@@ -13,6 +13,8 @@ public final class SearchResultViewController: UIViewController {
     public var searchedText: String?
     private var isLastPage: Bool = false
     private var page: Int = 1
+    private var favItems: [String] = UserDefaultsManager.shared
+        .getValue(forKey: .shoppingBags) ?? []
     private var sorting: SortedItem = .accuracy
     private var searchedResult: Search = Search(
         total: 0,
@@ -57,6 +59,11 @@ public final class SearchResultViewController: UIViewController {
             startPage: page,
             sorting: sorting
         )
+    }
+    public override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        itemCollectionView.reloadData()
     }
     private func configureNavigationBar() {
         navigationItem.title = searchedText
@@ -230,9 +237,6 @@ public final class SearchResultViewController: UIViewController {
         )
     }
     @objc private func shoppingBagBtnTapped(sender: UIButton) {
-        var favItems: [String] = UserDefaultsManager.shared
-            .getValue(forKey: .shoppingBags) ?? []
-        print(favItems)
         if favItems.contains(searchedResult.items[sender.tag].productId) {
             favItems.removeAll {
                 $0 == searchedResult.items[sender.tag].productId

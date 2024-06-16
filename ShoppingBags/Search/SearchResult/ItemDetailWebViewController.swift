@@ -10,7 +10,10 @@ import WebKit
 
 public final class ItemDetailWebViewController: UIViewController {
     public var itemInfo: Item?
+    private var isContainedItem: Bool?
     private let webView = WKWebView()
+    private var favItems: [String] = UserDefaultsManager.shared
+        .getValue(forKey: .shoppingBags) ?? []
     
     public override func viewDidLoad() {
         super.viewDidLoad()
@@ -46,7 +49,8 @@ public final class ItemDetailWebViewController: UIViewController {
             action: #selector(customBackBtnTapped)
         )
         navigationItem.rightBarButtonItem = UIBarButtonItem(
-            image: Constant.Images.likeSelected,
+            image: configureBagsUI(item: item)?
+                .withRenderingMode(.alwaysOriginal),
             style: .plain,
             target: self,
             action: #selector(shoppingBagsTapped)
@@ -55,10 +59,33 @@ public final class ItemDetailWebViewController: UIViewController {
             .interactivePopGestureRecognizer?.delegate = nil
         navigationController?.navigationBar.tintColor = Constant.Colors.black
     }
+    private func configureBagsUI(item: Item?) -> UIImage? {
+        isContainedItem = favItems.contains(item?.productId ?? "")
+        guard let isContainedItem else { return Constant.Images.likeUnselected }
+        return isContainedItem
+        ? Constant.Images.likeSelected
+        : Constant.Images.likeUnselected
+    }
     @objc private func customBackBtnTapped() {
         navigationController?.popViewController(animated: true)
     }
-    @objc private func shoppingBagsTapped() {
-        print("장바구니 버튼 눌린거 fetch 되어야함.")
+    @objc private func shoppingBagsTapped(sender: UIBarButtonItem) {
+        print("눌림")
+        guard let itemInfo else { return }
+        if favItems.contains(itemInfo.productId) {
+            favItems.removeAll { $0 == itemInfo.productId }
+            UserDefaultsManager.shared.saveValue(
+                favItems,
+                forKey: .shoppingBags
+            )
+        } else {
+            favItems.append(itemInfo.productId)
+            UserDefaultsManager.shared.saveValue(
+                favItems,
+                forKey: .shoppingBags
+            )
+        }
+        navigationItem.rightBarButtonItem?.image = configureBagsUI(
+            item: itemInfo)?.withRenderingMode(.alwaysOriginal)
     }
 }

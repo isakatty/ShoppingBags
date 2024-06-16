@@ -1,13 +1,13 @@
 //
-//  UITableViewCell+.swift
+//  UICollectionViewCell+.swift
 //  ShoppingBags
 //
-//  Created by Jisoo Ham on 6/15/24.
+//  Created by Jisoo Ham on 6/16/24.
 //
 
 import UIKit
 
-extension UITableViewCell: ReuseIdentifier {
+extension UICollectionViewCell: ReuseIdentifier {
     static var identifier: String {
         return String(describing: self)
     }

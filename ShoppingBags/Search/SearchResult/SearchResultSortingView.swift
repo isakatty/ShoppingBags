@@ -21,7 +21,7 @@ public final class SearchResultSortingView: UIView {
         tag: 2
     )
     public lazy var lowestBtn = SortingButton(
-        titleForButton: SortedItem.highestPrice,
+        titleForButton: SortedItem.lowestPrice,
         tag: 3
     )
     

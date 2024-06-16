@@ -24,8 +24,6 @@ public final class SearchResultViewController: UIViewController {
         let label = UILabel()
         label.font = Constant.Font.bold15
         label.textColor = Constant.Colors.orange
-        // dummy Text
-        label.text = "235,499개의 검색결과"
         return label
     }()
     private lazy var itemCollectionView: UICollectionView = {
@@ -53,11 +51,24 @@ public final class SearchResultViewController: UIViewController {
         configureNavigationBar()
         configureHierarchy()
         configureLayout()
+        configureBtn()
         callRequest(
             searchText: searchedText,
             startPage: page,
             sorting: sorting
         )
+    }
+    private func configureNavigationBar() {
+        navigationItem.title = searchedText
+        navigationItem.leftBarButtonItem = UIBarButtonItem(
+            image: Constant.SystemImages.leftChevron,
+            style: .plain,
+            target: self,
+            action: #selector(customBackBtnTapped)
+        )
+        navigationController?
+            .interactivePopGestureRecognizer?.delegate = nil
+        navigationController?.navigationBar.tintColor = Constant.Colors.black
     }
     private func configureHierarchy() {
         [totalItemLabel, sortingView, itemCollectionView]
@@ -81,18 +92,22 @@ public final class SearchResultViewController: UIViewController {
             make.leading.trailing.bottom.equalTo(safeArea)
         }
     }
-    private func configureNavigationBar() {
-        navigationItem.title = searchedText
-        navigationItem.leftBarButtonItem = UIBarButtonItem(
-            image: Constant.SystemImages.leftChevron,
-            style: .plain,
-            target: self,
-            action: #selector(customBackBtnTapped)
-        )
-        navigationController?
-            .interactivePopGestureRecognizer?.delegate = nil
-        navigationController?.navigationBar.tintColor = Constant.Colors.black
+    private func configureBtn() {
+        [
+            sortingView.accuracyBtn,
+            sortingView.highestBtn,
+            sortingView.latestBtn,
+            sortingView.lowestBtn
+        ]
+            .forEach { btn in
+                btn.addTarget(
+                    self,
+                    action: #selector(sortingBtnTapped),
+                    for: .touchUpInside
+                )
+            }
     }
+    
     private func callRequest(
         searchText: String,
         startPage: Int,
@@ -120,6 +135,7 @@ public final class SearchResultViewController: UIViewController {
                 
                 if self.page == 1 {
                     self.searchedResult = value
+                    self.itemCollectionView.scrollsToTop = true
                 } else {
                     self.searchedResult.items.append(contentsOf: value.items)
                 }
@@ -164,9 +180,6 @@ public final class SearchResultViewController: UIViewController {
         ]
         return header
     }
-    @objc private func customBackBtnTapped() {
-        navigationController?.popViewController(animated: true)
-    }
     private func collectionViewLayout() -> UICollectionViewLayout {
         let itemSize = NSCollectionLayoutSize(
             widthDimension: .fractionalWidth(0.5),
@@ -197,6 +210,28 @@ public final class SearchResultViewController: UIViewController {
         return UICollectionViewCompositionalLayout(section: section)
     }
     
+    @objc private func customBackBtnTapped() {
+        navigationController?.popViewController(animated: true)
+    }
+    @objc private func sortingBtnTapped(sender: SortingButton) {
+        let btns = [
+            sortingView.accuracyBtn,
+            sortingView.highestBtn,
+            sortingView.latestBtn,
+            sortingView.lowestBtn
+        ]
+        
+        btns.forEach { $0.configureUI() }
+        sender.configureUISelected()
+        
+        guard let searchedText else { return }
+        callRequest(
+            searchText: searchedText,
+            startPage: 1,
+            sorting: sender.sortCondition
+        )
+        
+    }
 }
 
 extension SearchResultViewController

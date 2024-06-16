@@ -9,7 +9,11 @@ import UIKit
 
 public final class SearchViewController: UIViewController {
     private var isRecentSearched: Bool = false
-    private var searchedResult: [String] = []
+    private var searchedResult: [String] = [] {
+        didSet {
+            searchedTableView.reloadData()
+        }
+    }
     private lazy var searchController: UISearchController = {
         let search = UISearchController(searchResultsController: nil)
         search.searchBar.placeholder = "브랜드, 상품 등을 입력하세요."
@@ -18,7 +22,19 @@ public final class SearchViewController: UIViewController {
         return search
     }()
     private let emptyView = SearchResultEmptyView()
-    private let searchedView = RecentSearchedView()
+    private lazy var searchedView = RecentSearchedView()
+    private lazy var searchedTableView: UITableView = {
+        let table = UITableView()
+        table.delegate = self
+        table.dataSource = self
+        table.register(
+            RecentSearchTableViewCell.self,
+            forCellReuseIdentifier: RecentSearchTableViewCell.identifier
+        )
+        table.rowHeight = 40
+        table.separatorStyle = .none
+        return table
+    }()
     
     public override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,7 +50,7 @@ public final class SearchViewController: UIViewController {
     }
     private func configureHierarchy() {
         if isRecentSearched {
-            [searchedView]
+            [searchedView, searchedTableView]
                 .forEach { view.addSubview($0) }
         } else {
             [emptyView]
@@ -46,9 +62,13 @@ public final class SearchViewController: UIViewController {
         view.backgroundColor = .systemBackground
         if isRecentSearched {
             searchedView.snp.makeConstraints { make in
-                make.edges.equalTo(safeArea)
+                make.top.leading.trailing.equalTo(safeArea)
+                make.height.equalTo(40)
             }
-            searchedView.searchedArray = searchedResult
+            searchedTableView.snp.makeConstraints { make in
+                make.top.equalTo(searchedView.snp.bottom)
+                make.leading.trailing.bottom.equalTo(safeArea)
+            }
         } else {
             emptyView.snp.makeConstraints { make in
                 make.edges.equalTo(safeArea)
@@ -90,6 +110,20 @@ public final class SearchViewController: UIViewController {
         configureHierarchy()
         configureLayout()
     }
+    @objc private func deleteBtnTapped(sender: UIButton) {
+        var copySearched = searchedResult
+        // TODO: 저장할 때 같은 값 저장되는거 지워야함
+        for searched in copySearched
+        where searchedResult[sender.tag] == searched {
+                copySearched.remove(at: sender.tag)
+        }
+        print(copySearched)
+        UserDefaultsManager.shared.saveValue(
+            copySearched,
+            forKey: .searchedText
+        )
+        fetchData()
+    }
 }
 
 extension SearchViewController: UISearchBarDelegate {
@@ -112,5 +146,34 @@ extension SearchViewController: UISearchBarDelegate {
                 animated: true
             )
         }
+    }
+}
+extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
+    public func tableView(
+        _ tableView: UITableView,
+        numberOfRowsInSection section: Int
+    ) -> Int {
+        return searchedResult.count
+    }
+    
+    public func tableView(
+        _ tableView: UITableView,
+        cellForRowAt indexPath: IndexPath
+    ) -> UITableViewCell {
+        guard let cell = tableView.dequeueReusableCell(
+            withIdentifier: RecentSearchTableViewCell.identifier,
+            for: indexPath
+        ) as? RecentSearchTableViewCell
+        else { return UITableViewCell() }
+        cell.configureUI(
+            recentSearched: searchedResult[indexPath.row],
+            tag: indexPath.row
+        )
+        cell.xmarkBtn.addTarget(
+            self,
+            action: #selector(deleteBtnTapped),
+            for: .touchUpInside
+        )
+        return cell
     }
 }

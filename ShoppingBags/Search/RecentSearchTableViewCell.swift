@@ -24,7 +24,7 @@ public final class RecentSearchTableViewCell: UITableViewCell {
         label.textColor = Constant.Colors.black
         return label
     }()
-    private let xmarkBtn: UIButton = {
+    public var xmarkBtn: UIButton = {
         let btn = UIButton()
         btn.setImage(
             Constant.SystemImages.xmark,
@@ -74,7 +74,8 @@ public final class RecentSearchTableViewCell: UITableViewCell {
             make.centerY.equalToSuperview()
         }
     }
-    public func configureUI(recentSearched: String) {
+    public func configureUI(recentSearched: String, tag: Int) {
         searchedLabel.text = recentSearched
+        xmarkBtn.tag = tag
     }
 }

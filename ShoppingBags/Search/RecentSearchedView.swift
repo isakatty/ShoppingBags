@@ -8,23 +8,6 @@
 import UIKit
 
 public final class RecentSearchedView: UIView {
-    public var searchedArray = [String]() {
-        didSet {
-            searchedTableView.reloadData()
-        }
-    }
-    private lazy var searchedTableView: UITableView = {
-        let table = UITableView()
-        table.delegate = self
-        table.dataSource = self
-        table.register(
-            RecentSearchTableViewCell.self,
-            forCellReuseIdentifier: RecentSearchTableViewCell.identifier
-        )
-        table.rowHeight = 40
-        table.separatorStyle = .none
-        return table
-    }()
     private let recentLabel: UILabel = {
         let label = UILabel()
         label.font = Constant.Font.bold15
@@ -59,19 +42,14 @@ public final class RecentSearchedView: UIView {
     }
     
     private func configureHierarchy() {
-        [searchedTableView, recentView]
+        [recentView]
             .forEach { addSubview($0) }
         [recentLabel, eraseBtn]
             .forEach { recentView.addSubview($0) }
     }
     private func configureLayout() {
         recentView.snp.makeConstraints { make in
-            make.top.leading.trailing.centerX.equalToSuperview()
-            make.height.equalTo(50)
-        }
-        searchedTableView.snp.makeConstraints { make in
-            make.top.equalTo(recentView.snp.bottom)
-            make.leading.trailing.bottom.equalToSuperview()
+            make.edges.equalToSuperview()
         }
     }
     private func configureRecentView() {
@@ -88,26 +66,15 @@ public final class RecentSearchedView: UIView {
             make.centerY.equalToSuperview()
         }
     }
-}
-
-extension RecentSearchedView: UITableViewDelegate, UITableViewDataSource {
-    public func tableView(
-        _ tableView: UITableView,
-        numberOfRowsInSection section: Int
-    ) -> Int {
-        return searchedArray.count
-    }
-    
-    public func tableView(
-        _ tableView: UITableView,
-        cellForRowAt indexPath: IndexPath
-    ) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(
-            withIdentifier: RecentSearchTableViewCell.identifier,
-            for: indexPath
-        ) as? RecentSearchTableViewCell
-        else { return UITableViewCell() }
-        cell.configureUI(recentSearched: searchedArray[indexPath.row])
-        return cell
-    }
+//    private func fetchData(searchedData: [String]) -> [String] {
+//        UserDefaultsManager.shared.saveValue(
+//            searchedData,
+//            forKey: SaveData.searchedText
+//        )
+//        let returnData: [String] = UserDefaultsManager.shared.getValue(
+//            forKey: SaveData.searchedText
+//        ) ?? []
+//        print(returnData)
+//        return returnData
+//    }
 }

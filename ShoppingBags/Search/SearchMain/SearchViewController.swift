@@ -47,6 +47,7 @@ public final class SearchViewController: UIViewController {
         super.viewWillAppear(false)
         
         fetchData()
+        navigationItem.hidesSearchBarWhenScrolling = false
     }
     private func configureHierarchy() {
         if isRecentSearched {
@@ -80,6 +81,7 @@ public final class SearchViewController: UIViewController {
         navigationItem.searchController 
         = searchController
         navigationController?.navigationBar.tintColor = Constant.Colors.black
+        navigationItem.hidesSearchBarWhenScrolling = false
     }
     private func configureBtns() {
         searchedView.eraseBtn.addTarget(

@@ -43,6 +43,17 @@ enum Constant {
         static let bold13 = UIFont.boldSystemFont(ofSize: 13)
         static let regular15 = UIFont.systemFont(ofSize: 15)
         static let regular14 = UIFont.systemFont(ofSize: 14)
+        static let regular13 = UIFont.systemFont(ofSize: 13)
+        static let light13 = UIFont.systemFont(ofSize: 13, weight: .light)
+    }
+    
+    enum CornerRadius: CGFloat {
+        case collectionViewImg = 10
+        case shoppingBagBg = 4
+    }
+    
+    enum CollectionCell: CGFloat {
+        case spacing = 16
     }
     
 }

@@ -7,15 +7,19 @@
 
 import Foundation
 
-struct Search: Codable {
+public struct Search: Codable {
     let total: Int
     var start: Int
     let display: Int
     let items: [Item]
+    
+    var totalItems: String {
+        return total.formatted(.number)
+    }
 }
 
-struct Item: Codable {
-    let title: String
+public struct Item: Codable {
+    let itemName: String
     let itemImage: String
     let storeLink: String
     let mallName: String
@@ -23,8 +27,18 @@ struct Item: Codable {
     let lprice: String
     
     enum CodingKeys: String, CodingKey {
-        case title, mallName, productId, lprice
+        case mallName, productId, lprice
+        case itemName = "title"
         case itemImage = "image"
         case storeLink = "link"
+    }
+    
+    var formattedPrice: String {
+        guard let changedToInt = Int(lprice) else { return "" }
+        return changedToInt.formatted(.number) + "원"
+    }
+    
+    var formattedItemName: String {
+        return itemName.htmlEscaped
     }
 }

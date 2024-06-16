@@ -11,10 +11,19 @@ public struct Search: Codable {
     let total: Int
     var start: Int
     let display: Int
-    let items: [Item]
+    var items: [Item]
     
     var totalItems: String {
         return total.formatted(.number)
+    }
+    
+    /// Pagenation을 위한 마지막 페이지를 구하는 연산 프로퍼티
+    var totalPages: Int {
+        if total % display == 0 {
+            return total / display
+        } else {
+            return total / display + 1
+        }
     }
 }
 

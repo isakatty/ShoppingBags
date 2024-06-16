@@ -11,14 +11,15 @@ import Alamofire
 
 public final class SearchResultViewController: UIViewController {
     public var searchedText: String?
+    private var isLastPage: Bool = false
+    private var page: Int = 1
+    private var sorting: SortedItem = .accuracy
     private lazy var searchedResult: Search = Search(
         total: 0,
         start: 0,
         display: 0,
         items: []
     )
-    private var page: Int = 1
-    private var sorting: SortedItem = .accuracy
     private let totalItemLabel: UILabel = {
         let label = UILabel()
         label.font = Constant.Font.bold15
@@ -38,7 +39,8 @@ public final class SearchResultViewController: UIViewController {
             SearchedItemCollectionViewCell.self,
             forCellWithReuseIdentifier: SearchedItemCollectionViewCell.identifier
         )
-        collection.autoresizingMask = [.flexibleHeight, .flexibleWidth]
+        collection.autoresizingMask = [.flexibleHeight]
+        collection.prefetchDataSource = self
         return collection
     }()
     
@@ -106,8 +108,17 @@ public final class SearchResultViewController: UIViewController {
             guard let self else { return }
             switch response.result {
             case .success(let value):
-                self.searchedResult = value
-                self.totalItemLabel.text = 
+                if value.start == value.totalPages {
+                    isLastPage = true
+                }
+                
+                if self.page == 1 {
+                    self.searchedResult = value
+                } else {
+                    self.searchedResult.items.append(contentsOf: value.items)
+                }
+                
+                self.totalItemLabel.text =
                 "\(self.searchedResult.totalItems)개의 검색 결과"
                 self.itemCollectionView.reloadData()
             case .failure(let error):
@@ -183,7 +194,8 @@ public final class SearchResultViewController: UIViewController {
 }
 
 extension SearchResultViewController
-: UICollectionViewDelegate, UICollectionViewDataSource {
+: UICollectionViewDelegate, UICollectionViewDataSource
+, UICollectionViewDataSourcePrefetching {
     
     public func collectionView(
         _ collectionView: UICollectionView,
@@ -202,6 +214,27 @@ extension SearchResultViewController
         else { return UICollectionViewCell() }
         cell.configureUI(item: searchedResult.items[indexPath.item])
         return cell
+    }
+    
+    public func collectionView(
+        _ collectionView: UICollectionView,
+        prefetchItemsAt indexPaths: [IndexPath]
+    ) {
+        print(#function, indexPaths)
+        
+        for path in indexPaths {
+            if searchedResult.items.count - 10 == path.item 
+                && isLastPage == false {
+                page += 1
+                guard let searchedText else { return }
+                callRequest(
+                    searchText: searchedText,
+                    startPage: page,
+                    sorting: sorting
+                )
+                
+            }
+        }
     }
     
 }

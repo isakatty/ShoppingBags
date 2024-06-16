@@ -256,7 +256,6 @@ extension SearchResultViewController
         cell.configureUI(item: searchedResult.items[indexPath.item])
         return cell
     }
-    
     public func collectionView(
         _ collectionView: UICollectionView,
         prefetchItemsAt indexPaths: [IndexPath]
@@ -276,6 +275,15 @@ extension SearchResultViewController
                 
             }
         }
+    }
+    public func collectionView(
+        _ collectionView: UICollectionView,
+        didSelectItemAt indexPath: IndexPath
+    ) {
+        itemCollectionView.reloadData()
+        let vc = ItemDetailWebViewController()
+        vc.itemInfo = searchedResult.items[indexPath.item]
+        navigationController?.pushViewController(vc, animated: true)
     }
     
 }

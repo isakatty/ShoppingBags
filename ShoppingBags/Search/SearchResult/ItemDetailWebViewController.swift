@@ -1,5 +1,5 @@
 //
-//  ItemDetailWebView.swift
+//  ItemDetailWebViewController.swift
 //  ShoppingBags
 //
 //  Created by Jisoo Ham on 6/16/24.

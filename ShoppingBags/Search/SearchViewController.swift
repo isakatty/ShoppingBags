@@ -112,7 +112,6 @@ public final class SearchViewController: UIViewController {
     }
     @objc private func deleteBtnTapped(sender: UIButton) {
         var copySearched = searchedResult
-        // TODO: 저장할 때 같은 값 저장되는거 지워야함
         for searched in copySearched
         where searchedResult[sender.tag] == searched {
                 copySearched.remove(at: sender.tag)
@@ -131,8 +130,8 @@ extension SearchViewController: UISearchBarDelegate {
         searchBar.resignFirstResponder()
         guard let text = searchBar.text else { return }
         let searchText = text.trimmingCharacters(in: .whitespaces)
-        if !searchText.isEmpty {
-            // UserDefaults에 검색어 저장, VC 이동, text 전달해주기
+        
+        if !searchText.isEmpty && findWords(search: searchText) {
             searchBar.text = nil
             searchedResult.insert(text, at: 0)
             UserDefaultsManager.shared.saveValue(
@@ -146,6 +145,16 @@ extension SearchViewController: UISearchBarDelegate {
                 animated: true
             )
         }
+    }
+    private func findWords(search: String) -> Bool {
+        var copiedResult = searchedResult
+        
+        for (index, result) in copiedResult.enumerated()
+        where result == search {
+            copiedResult.remove(at: index)
+        }
+        searchedResult = copiedResult
+        return true
     }
 }
 extension SearchViewController: UITableViewDelegate, UITableViewDataSource {

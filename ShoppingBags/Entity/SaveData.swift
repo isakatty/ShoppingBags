@@ -7,7 +7,7 @@
 
 import Foundation
 
-public enum SaveData: String {
+public enum SaveData: String, CaseIterable {
     case signupDate
     case nickname
     case profileImgTitle

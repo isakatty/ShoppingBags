@@ -43,6 +43,20 @@ public final class SettingViewController: UIViewController {
         navigationItem.title = "SETTING"
         navigationController?.navigationBar.tintColor = Constant.Colors.black
     }
+    private func resetData() {
+        SaveData.allCases
+            .forEach { UserDefaultsManager.shared.removeValue(forKey: $0) }
+    }
+    private func returnOnboarding() {
+        let windowScene = UIApplication.shared.connectedScenes.first 
+        as? UIWindowScene
+        let sceneDelegate = windowScene?.delegate as? SceneDelegate
+        let navigationController = UINavigationController(
+            rootViewController: OnboardingViewController()
+        )
+        sceneDelegate?.window?.rootViewController = navigationController
+        sceneDelegate?.window?.makeKeyAndVisible()
+    }
 }
 
 extension SettingViewController: UITableViewDelegate, UITableViewDataSource {
@@ -75,7 +89,26 @@ extension SettingViewController: UITableViewDelegate, UITableViewDataSource {
         _ tableView: UITableView,
         didSelectRowAt indexPath: IndexPath
     ) {
-        print(indexPath.row)
-        tableView.reloadRows(at: [indexPath], with: .none)
+        let alert = UIAlertController(
+            title: "탈퇴하기",
+            message: "탈퇴를 하면 데이터가 모두 초기화 됩니다. 탈퇴하시겠습니까?",
+            preferredStyle: .alert
+        )
+        let alertAction = UIAlertAction(
+            title: "확인",
+            style: .cancel) { [weak self] _ in
+                // TODO: 데이터 삭제 함수 호출
+                self?.returnOnboarding()
+            }
+        let cancelAction = UIAlertAction(
+            title: "취소",
+            style: .destructive
+        )
+        alert.addAction(alertAction)
+        alert.addAction(cancelAction)
+        present(
+            alert,
+            animated: true
+        )
     }
 }

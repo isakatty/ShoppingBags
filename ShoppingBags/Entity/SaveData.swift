@@ -12,4 +12,5 @@ public enum SaveData: String {
     case nickname
     case profileImgTitle
     case searchedText
+    case shoppingBags
 }

@@ -43,6 +43,7 @@ public final class SearchResultViewController: UIViewController {
         collection.prefetchDataSource = self
         return collection
     }()
+    private let sortingView = SearchResultSortingView()
     
     public override func viewDidLoad() {
         super.viewDidLoad()
@@ -59,7 +60,7 @@ public final class SearchResultViewController: UIViewController {
         )
     }
     private func configureHierarchy() {
-        [totalItemLabel, itemCollectionView]
+        [totalItemLabel, sortingView, itemCollectionView]
             .forEach { view.addSubview($0) }
     }
     private func configureLayout() {
@@ -70,9 +71,14 @@ public final class SearchResultViewController: UIViewController {
             make.leading.equalTo(safeArea).inset(12)
             make.height.equalTo(20)
         }
+        sortingView.snp.makeConstraints { make in
+            make.top.equalTo(totalItemLabel.snp.bottom).offset(10)
+            make.leading.trailing.equalTo(safeArea)
+            make.height.equalTo(30)
+        }
         itemCollectionView.snp.makeConstraints { make in
+            make.top.equalTo(sortingView.snp.bottom).offset(10)
             make.leading.trailing.bottom.equalTo(safeArea)
-            make.top.equalTo(totalItemLabel.snp.bottom)
         }
     }
     private func configureNavigationBar() {

@@ -35,6 +35,8 @@
 		C93B76612C1EC1240059223A /* String+.swift in Sources */ = {isa = PBXBuildFile; fileRef = C93B76602C1EC1240059223A /* String+.swift */; };
 		C93B76632C1EC2F50059223A /* UICollectionViewCell+.swift in Sources */ = {isa = PBXBuildFile; fileRef = C93B76622C1EC2F50059223A /* UICollectionViewCell+.swift */; };
 		C93B76652C1EC3130059223A /* ReuseIdentifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = C93B76642C1EC3130059223A /* ReuseIdentifier.swift */; };
+		C93B76672C1ECC080059223A /* SortingButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = C93B76662C1ECC080059223A /* SortingButton.swift */; };
+		C93B76692C1EDB7D0059223A /* SearchResultSortingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C93B76682C1EDB7D0059223A /* SearchResultSortingView.swift */; };
 		C96663342C1B1D53009E48F6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C96663332C1B1D53009E48F6 /* AppDelegate.swift */; };
 		C96663362C1B1D53009E48F6 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C96663352C1B1D53009E48F6 /* SceneDelegate.swift */; };
 		C96663382C1B1D53009E48F6 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C96663372C1B1D53009E48F6 /* ViewController.swift */; };
@@ -69,6 +71,8 @@
 		C93B76602C1EC1240059223A /* String+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+.swift"; sourceTree = "<group>"; };
 		C93B76622C1EC2F50059223A /* UICollectionViewCell+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionViewCell+.swift"; sourceTree = "<group>"; };
 		C93B76642C1EC3130059223A /* ReuseIdentifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReuseIdentifier.swift; sourceTree = "<group>"; };
+		C93B76662C1ECC080059223A /* SortingButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortingButton.swift; sourceTree = "<group>"; };
+		C93B76682C1EDB7D0059223A /* SearchResultSortingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultSortingView.swift; sourceTree = "<group>"; };
 		C96663302C1B1D53009E48F6 /* ShoppingBags.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ShoppingBags.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C96663332C1B1D53009E48F6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C96663352C1B1D53009E48F6 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -124,6 +128,7 @@
 		C93B761F2C1BF70F0059223A /* CustomView */ = {
 			isa = PBXGroup;
 			children = (
+				C93B76662C1ECC080059223A /* SortingButton.swift */,
 				C93B76162C1BEA000059223A /* RoundedButton.swift */,
 				C93B76212C1C06090059223A /* CircledProfileView.swift */,
 				C93B762D2C1C1BB10059223A /* CircledCameraView.swift */,
@@ -175,6 +180,7 @@
 			children = (
 				C93B76532C1D995B0059223A /* SearchResultViewController.swift */,
 				C93B765B2C1E866D0059223A /* SearchedItemCollectionViewCell.swift */,
+				C93B76682C1EDB7D0059223A /* SearchResultSortingView.swift */,
 			);
 			path = SearchResult;
 			sourceTree = "<group>";
@@ -343,6 +349,7 @@
 				C93B76582C1DBC3E0059223A /* Search.swift in Sources */,
 				C93B76392C1D4B170059223A /* SearchViewController.swift in Sources */,
 				C93B76502C1D8CB30059223A /* SaveData.swift in Sources */,
+				C93B76672C1ECC080059223A /* SortingButton.swift in Sources */,
 				C93B76222C1C06090059223A /* CircledProfileView.swift in Sources */,
 				C93B76102C1BE13C0059223A /* Constant.swift in Sources */,
 				C93B765C2C1E866D0059223A /* SearchedItemCollectionViewCell.swift in Sources */,
@@ -350,6 +357,7 @@
 				C93B76322C1C2C470059223A /* NameTextFieldView.swift in Sources */,
 				C93B76432C1D58650059223A /* RecentSearchedView.swift in Sources */,
 				C93B761C2C1BF1B40059223A /* ProfileSettingViewController.swift in Sources */,
+				C93B76692C1EDB7D0059223A /* SearchResultSortingView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

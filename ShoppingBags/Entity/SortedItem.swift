@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum SortedItem: String, CaseIterable {
+public enum SortedItem: String, CaseIterable {
     case accuracy = "정확도"
     case latestDate = "날짜순"
     case highestPrice = "가격높은순"

@@ -28,9 +28,13 @@
 		C93B764E2C1D8B990059223A /* UserDefaultsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C93B764D2C1D8B990059223A /* UserDefaultsManager.swift */; };
 		C93B76502C1D8CB30059223A /* SaveData.swift in Sources */ = {isa = PBXBuildFile; fileRef = C93B764F2C1D8CB30059223A /* SaveData.swift */; };
 		C93B76542C1D995B0059223A /* SearchResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C93B76532C1D995B0059223A /* SearchResultViewController.swift */; };
-		C93B76562C1DA9680059223A /* PrivateKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = C93B76552C1DA9680059223A /* PrivateKey.swift */; };
 		C93B76582C1DBC3E0059223A /* Search.swift in Sources */ = {isa = PBXBuildFile; fileRef = C93B76572C1DBC3E0059223A /* Search.swift */; };
 		C93B765A2C1DC17A0059223A /* SortedItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = C93B76592C1DC17A0059223A /* SortedItem.swift */; };
+		C93B765C2C1E866D0059223A /* SearchedItemCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C93B765B2C1E866D0059223A /* SearchedItemCollectionViewCell.swift */; };
+		C93B765F2C1E9CD00059223A /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = C93B765E2C1E9CD00059223A /* Kingfisher */; };
+		C93B76612C1EC1240059223A /* String+.swift in Sources */ = {isa = PBXBuildFile; fileRef = C93B76602C1EC1240059223A /* String+.swift */; };
+		C93B76632C1EC2F50059223A /* UICollectionViewCell+.swift in Sources */ = {isa = PBXBuildFile; fileRef = C93B76622C1EC2F50059223A /* UICollectionViewCell+.swift */; };
+		C93B76652C1EC3130059223A /* ReuseIdentifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = C93B76642C1EC3130059223A /* ReuseIdentifier.swift */; };
 		C96663342C1B1D53009E48F6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C96663332C1B1D53009E48F6 /* AppDelegate.swift */; };
 		C96663362C1B1D53009E48F6 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C96663352C1B1D53009E48F6 /* SceneDelegate.swift */; };
 		C96663382C1B1D53009E48F6 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C96663372C1B1D53009E48F6 /* ViewController.swift */; };
@@ -59,9 +63,12 @@
 		C93B764D2C1D8B990059223A /* UserDefaultsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsManager.swift; sourceTree = "<group>"; };
 		C93B764F2C1D8CB30059223A /* SaveData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveData.swift; sourceTree = "<group>"; };
 		C93B76532C1D995B0059223A /* SearchResultViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultViewController.swift; sourceTree = "<group>"; };
-		C93B76552C1DA9680059223A /* PrivateKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivateKey.swift; sourceTree = "<group>"; };
 		C93B76572C1DBC3E0059223A /* Search.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Search.swift; sourceTree = "<group>"; };
 		C93B76592C1DC17A0059223A /* SortedItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortedItem.swift; sourceTree = "<group>"; };
+		C93B765B2C1E866D0059223A /* SearchedItemCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchedItemCollectionViewCell.swift; sourceTree = "<group>"; };
+		C93B76602C1EC1240059223A /* String+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+.swift"; sourceTree = "<group>"; };
+		C93B76622C1EC2F50059223A /* UICollectionViewCell+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionViewCell+.swift"; sourceTree = "<group>"; };
+		C93B76642C1EC3130059223A /* ReuseIdentifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReuseIdentifier.swift; sourceTree = "<group>"; };
 		C96663302C1B1D53009E48F6 /* ShoppingBags.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ShoppingBags.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C96663332C1B1D53009E48F6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C96663352C1B1D53009E48F6 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -76,6 +83,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C93B765F2C1E9CD00059223A /* Kingfisher in Frameworks */,
 				C93B761A2C1BEC610059223A /* SnapKit in Frameworks */,
 				C93B764A2C1D81080059223A /* Alamofire in Frameworks */,
 			);
@@ -155,6 +163,9 @@
 			isa = PBXGroup;
 			children = (
 				C93B76462C1D59A00059223A /* UITableViewCell+.swift */,
+				C93B76602C1EC1240059223A /* String+.swift */,
+				C93B76622C1EC2F50059223A /* UICollectionViewCell+.swift */,
+				C93B76642C1EC3130059223A /* ReuseIdentifier.swift */,
 			);
 			path = "Extension+";
 			sourceTree = "<group>";
@@ -163,6 +174,7 @@
 			isa = PBXGroup;
 			children = (
 				C93B76532C1D995B0059223A /* SearchResultViewController.swift */,
+				C93B765B2C1E866D0059223A /* SearchedItemCollectionViewCell.swift */,
 			);
 			path = SearchResult;
 			sourceTree = "<group>";
@@ -203,7 +215,6 @@
 				C96663412C1B1D54009E48F6 /* Info.plist */,
 				C93B764C2C1D81C70059223A /* Config.xcconfig */,
 				C93B764D2C1D8B990059223A /* UserDefaultsManager.swift */,
-				C93B76552C1DA9680059223A /* PrivateKey.swift */,
 			);
 			path = ShoppingBags;
 			sourceTree = "<group>";
@@ -228,6 +239,7 @@
 			packageProductDependencies = (
 				C93B76192C1BEC610059223A /* SnapKit */,
 				C93B76492C1D81080059223A /* Alamofire */,
+				C93B765E2C1E9CD00059223A /* Kingfisher */,
 			);
 			productName = ShoppingBags;
 			productReference = C96663302C1B1D53009E48F6 /* ShoppingBags.app */;
@@ -260,6 +272,7 @@
 			packageReferences = (
 				C93B76182C1BEC610059223A /* XCRemoteSwiftPackageReference "SnapKit" */,
 				C93B76482C1D81080059223A /* XCRemoteSwiftPackageReference "Alamofire" */,
+				C93B765D2C1E9CD00059223A /* XCRemoteSwiftPackageReference "Kingfisher" */,
 			);
 			productRefGroup = C96663312C1B1D53009E48F6 /* Products */;
 			projectDirPath = "";
@@ -316,13 +329,14 @@
 				C93B76172C1BEA000059223A /* RoundedButton.swift in Sources */,
 				C96663342C1B1D53009E48F6 /* AppDelegate.swift in Sources */,
 				C93B76152C1BE7730059223A /* OnboardingViewController.swift in Sources */,
+				C93B76652C1EC3130059223A /* ReuseIdentifier.swift in Sources */,
 				C93B764E2C1D8B990059223A /* UserDefaultsManager.swift in Sources */,
-				C93B76562C1DA9680059223A /* PrivateKey.swift in Sources */,
 				C93B763C2C1D4B840059223A /* SettingViewController.swift in Sources */,
 				C93B76472C1D59A00059223A /* UITableViewCell+.swift in Sources */,
 				C93B762E2C1C1BB10059223A /* CircledCameraView.swift in Sources */,
 				C93B765A2C1DC17A0059223A /* SortedItem.swift in Sources */,
 				C93B76352C1C32920059223A /* TextFieldStatus.swift in Sources */,
+				C93B76612C1EC1240059223A /* String+.swift in Sources */,
 				C96663362C1B1D53009E48F6 /* SceneDelegate.swift in Sources */,
 				C93B76452C1D59590059223A /* RecentSearchTableViewCell.swift in Sources */,
 				C93B763F2C1D4BBC0059223A /* TabBarController.swift in Sources */,
@@ -331,6 +345,8 @@
 				C93B76502C1D8CB30059223A /* SaveData.swift in Sources */,
 				C93B76222C1C06090059223A /* CircledProfileView.swift in Sources */,
 				C93B76102C1BE13C0059223A /* Constant.swift in Sources */,
+				C93B765C2C1E866D0059223A /* SearchedItemCollectionViewCell.swift in Sources */,
+				C93B76632C1EC2F50059223A /* UICollectionViewCell+.swift in Sources */,
 				C93B76322C1C2C470059223A /* NameTextFieldView.swift in Sources */,
 				C93B76432C1D58650059223A /* RecentSearchedView.swift in Sources */,
 				C93B761C2C1BF1B40059223A /* ProfileSettingViewController.swift in Sources */,
@@ -579,6 +595,14 @@
 				minimumVersion = 5.9.1;
 			};
 		};
+		C93B765D2C1E9CD00059223A /* XCRemoteSwiftPackageReference "Kingfisher" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/onevcat/Kingfisher.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 7.12.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -591,6 +615,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = C93B76482C1D81080059223A /* XCRemoteSwiftPackageReference "Alamofire" */;
 			productName = Alamofire;
+		};
+		C93B765E2C1E9CD00059223A /* Kingfisher */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = C93B765D2C1E9CD00059223A /* XCRemoteSwiftPackageReference "Kingfisher" */;
+			productName = Kingfisher;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

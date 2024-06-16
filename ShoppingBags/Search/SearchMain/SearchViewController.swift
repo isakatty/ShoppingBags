@@ -22,7 +22,7 @@ public final class SearchViewController: UIViewController {
         return search
     }()
     private let emptyView = SearchResultEmptyView()
-    private lazy var searchedView = RecentSearchedView()
+    private let searchedView = RecentSearchedView()
     private lazy var searchedTableView: UITableView = {
         let table = UITableView()
         table.delegate = self
@@ -44,7 +44,7 @@ public final class SearchViewController: UIViewController {
         configureBtns()
     }
     public override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(false)
+        super.viewWillAppear(animated)
         
         fetchData()
         navigationItem.hidesSearchBarWhenScrolling = false
@@ -91,7 +91,6 @@ public final class SearchViewController: UIViewController {
         )
     }
     @objc private func eraseBtnTapped() {
-        // Alert 띄우기
         let erasedArray: [String] = []
         // MARK: remove가 잘 안되는 이유를 찾을 것.
         UserDefaultsManager.shared.saveValue(
@@ -99,13 +98,10 @@ public final class SearchViewController: UIViewController {
             forKey: .searchedText
         )
         fetchData()
-        view.setNeedsLayout()
-        view.layoutIfNeeded()
     }
     private func fetchData() {
         searchedResult = UserDefaultsManager.shared
             .getValue(forKey: .searchedText) ?? []
-        print(#function, searchedResult)
         isRecentSearched = !searchedResult.isEmpty ? true : false
         searchedView.removeFromSuperview()
         emptyView.removeFromSuperview()
@@ -113,14 +109,9 @@ public final class SearchViewController: UIViewController {
         configureLayout()
     }
     @objc private func deleteBtnTapped(sender: UIButton) {
-        var copySearched = searchedResult
-        for searched in copySearched
-        where searchedResult[sender.tag] == searched {
-                copySearched.remove(at: sender.tag)
-        }
-        print(copySearched)
+        searchedResult.remove(at: sender.tag)
         UserDefaultsManager.shared.saveValue(
-            copySearched,
+            searchedResult,
             forKey: .searchedText
         )
         fetchData()
@@ -130,16 +121,11 @@ public final class SearchViewController: UIViewController {
 extension SearchViewController: UISearchBarDelegate {
     public func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         searchBar.resignFirstResponder()
-        guard let text = searchBar.text else { return }
-        let searchText = text.trimmingCharacters(in: .whitespaces)
+        guard let text = searchBar.text?.trimmingCharacters(in: .whitespaces),
+        !text.isEmpty else { return }
         
-        if !searchText.isEmpty && findWords(search: searchText) {
+        if findWords(search: text) {
             searchBar.text = nil
-            searchedResult.insert(text, at: 0)
-            UserDefaultsManager.shared.saveValue(
-                searchedResult,
-                forKey: .searchedText
-            )
             let resultVC = SearchResultViewController()
             resultVC.searchedText = text
             navigationController?.pushViewController(
@@ -149,13 +135,14 @@ extension SearchViewController: UISearchBarDelegate {
         }
     }
     private func findWords(search: String) -> Bool {
-        var copiedResult = searchedResult
         
-        for (index, result) in copiedResult.enumerated()
-        where result == search {
-            copiedResult.remove(at: index)
-        }
-        searchedResult = copiedResult
+        var checkDuplication = Array(Set(searchedResult))
+        checkDuplication.removeAll { $0 == search}
+        checkDuplication.insert(search, at: 0)
+        UserDefaultsManager.shared.saveValue(
+            checkDuplication,
+            forKey: .searchedText
+        )
         return true
     }
 }

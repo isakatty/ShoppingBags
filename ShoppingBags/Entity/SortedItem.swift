@@ -20,9 +20,9 @@ public enum SortedItem: String, CaseIterable {
         case .latestDate:
             "date"
         case .highestPrice:
-            "asc"
-        case .lowestPrice:
             "dsc"
+        case .lowestPrice:
+            "asc"
         }
     }
 }

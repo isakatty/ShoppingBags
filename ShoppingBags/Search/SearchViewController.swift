@@ -176,4 +176,18 @@ extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
         )
         return cell
     }
+    public func tableView(
+        _ tableView: UITableView,
+        didSelectRowAt indexPath: IndexPath
+    ) {
+        searchedTableView.reloadData()
+        
+        let vc = SearchResultViewController()
+        vc.searchedText = searchedResult[indexPath.row]
+        navigationController?.pushViewController(
+            vc,
+            animated: true
+        )
+        
+    }
 }

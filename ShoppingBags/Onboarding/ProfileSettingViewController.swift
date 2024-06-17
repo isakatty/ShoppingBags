@@ -8,7 +8,10 @@
 import UIKit
 
 public final class ProfileSettingViewController: UIViewController {
-    private var profileImgStr: String = ""
+    private lazy var profileImgStr: String = UserDefaultsManager.shared
+        .getValue(forKey: .profileImgTitle) 
+    ?? "profile_" + "\(Int.random(in: 0...11))"
+    
     private lazy var profileImg: CircledProfileViewBtn = {
         let profileView = CircledProfileViewBtn()
         profileView.clearButton.addTarget(
@@ -45,6 +48,8 @@ public final class ProfileSettingViewController: UIViewController {
         super.viewWillAppear(animated)
         
         // TODO: UserDefaults fetch -> Img 변경해줘야함.
+        fetchData()
+        configureUI()
     }
     private func configureHierarchy() {
         [profileImg, cameraView, nameTextField, checkButton]

@@ -12,7 +12,7 @@ public final class CircledCameraView: UIView {
         let imageView = UIImageView()
         imageView.clipsToBounds = true
         imageView.image = UIImage(systemName: "camera.fill")?
-            .withRenderingMode(.alwaysOriginal)
+            .withRenderingMode(.alwaysTemplate)
         imageView.tintColor = Constant.Colors.white
         imageView.contentMode = .scaleAspectFit
         return imageView

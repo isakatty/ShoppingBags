@@ -96,6 +96,8 @@ public final class SettingViewController: UIViewController {
             .getValue(forKey: .signupDate) ?? ""
         profileImgTitle = UserDefaultsManager.shared
             .getValue(forKey: .profileImgTitle) ?? ""
+        
+        settingTableView.reloadData()
     }
     /// profile 선택시 화면 전환
     @objc private func clearBtnTapped() {

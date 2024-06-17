@@ -10,6 +10,7 @@ import UIKit
 public final class EditingProfileImgViewController: UIViewController {
     public var selectedImgName: String?
     public var viewFlow: ViewFlow = .onboarding
+    private let cameraView = CircledCameraView()
     private lazy var mainCircledImg = CircledProfileView()
     private lazy var imgCollectionView: UICollectionView = {
         let collection = UICollectionView(
@@ -37,7 +38,7 @@ public final class EditingProfileImgViewController: UIViewController {
     }
     
     private func configureHierarchy() {
-        [mainCircledImg, imgCollectionView]
+        [mainCircledImg, cameraView, imgCollectionView]
             .forEach { view.addSubview($0) }
     }
     private func configureLayout() {
@@ -48,6 +49,12 @@ public final class EditingProfileImgViewController: UIViewController {
             make.top.equalTo(safeArea).inset(16)
             make.leading.trailing.equalTo(safeArea).inset(140)
             make.height.equalTo(mainCircledImg.snp.width)
+        }
+        cameraView.snp.makeConstraints { make in
+            make.bottom.equalTo(mainCircledImg.snp.bottom)
+            make.trailing.equalTo(mainCircledImg.snp.trailing)
+            make.width.height.equalTo(mainCircledImg.snp.width)
+                .multipliedBy(0.25)
         }
         imgCollectionView.snp.makeConstraints { make in
             make.top.equalTo(mainCircledImg.snp.bottom)

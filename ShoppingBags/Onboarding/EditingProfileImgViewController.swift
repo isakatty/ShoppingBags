@@ -8,8 +8,8 @@
 import UIKit
 
 public final class EditingProfileImgViewController: UIViewController {
-    // profile img 전달 받아야함.
     public var selectedImgName: String?
+    public var viewFlow: ViewFlow = .onboarding
     private lazy var mainCircledImg = CircledProfileView()
     private lazy var imgCollectionView: UICollectionView = {
         let collection = UICollectionView(
@@ -28,8 +28,7 @@ public final class EditingProfileImgViewController: UIViewController {
     public override func viewDidLoad() {
         super.viewDidLoad()
         
-        configureNaviTitle(title: ViewTitle.profile.rawValue)
-        configureNavigationBar()
+        configureNavigation()
         configureHierarchy()
         configureLayout()
         
@@ -56,6 +55,15 @@ public final class EditingProfileImgViewController: UIViewController {
             make.height.equalTo(imgCollectionView.snp.width)
             make.centerX.equalTo(safeArea)
         }
+    }
+    private func configureNavigation() {
+        switch viewFlow {
+        case .onboarding:
+            configureNaviTitle(title: ViewTitle.profile.rawValue)
+        case .setting:
+            configureNaviTitle(title: ViewTitle.editSetting.rawValue)
+        }
+        configureNavigationBar()
     }
     private func configureUI(img: UIImage?) {
         mainCircledImg.configureUI(img: img, isSelected: true)

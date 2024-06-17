@@ -42,6 +42,12 @@ public final class SettingViewController: UIViewController {
         configureUI()
     }
     
+    public override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        //  데이터 fetch
+    }
+    
     private func configureHierarchy() {
         [profileView, settingTableView]
             .forEach { view.addSubview($0) }

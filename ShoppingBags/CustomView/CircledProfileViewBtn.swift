@@ -1,14 +1,20 @@
 //
-//  CircledProfileView.swift
+//  CircledProfileViewBtn.swift
 //  ShoppingBags
 //
-//  Created by Jisoo Ham on 6/14/24.
+//  Created by Jisoo Ham on 6/17/24.
 //
 
 import UIKit
 
-public final class CircledProfileView: UIView {
+public final class CircledProfileViewBtn: UIView {
     private var profileImg = UIImageView()
+    public var clearButton: UIButton = {
+        let btn = UIButton()
+        btn.setTitle("", for: .normal)
+        btn.tintColor = .clear
+        return btn
+    }()
     
     public init(
         img: UIImage?,
@@ -36,11 +42,14 @@ public final class CircledProfileView: UIView {
         return imgView
     }
     private func configureHierarchy() {
-        [profileImg]
+        [profileImg, clearButton]
             .forEach { addSubview($0) }
     }
     private func configureLayout() {
         profileImg.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
+        }
+        clearButton.snp.makeConstraints { make in
             make.edges.equalToSuperview()
         }
     }
@@ -57,6 +66,6 @@ public final class CircledProfileView: UIView {
     public override func layoutSubviews() {
         super.layoutSubviews()
         
-        layer.cornerRadius = bounds.height / 2
+        layer.cornerRadius = bounds.width / 2
     }
 }

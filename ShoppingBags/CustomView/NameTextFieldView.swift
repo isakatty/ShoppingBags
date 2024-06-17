@@ -8,6 +8,7 @@
 import UIKit
 
 public final class NameTextFieldView: UIView {
+    public var viewFlow: ViewFlow = .onboarding
     public var textFieldStatus: TextFieldStatus = .includeIcons
     public lazy var nameTextField: UITextField = {
         let textField = UITextField()
@@ -68,7 +69,7 @@ public final class NameTextFieldView: UIView {
             make.bottom.greaterThanOrEqualToSuperview()
         }
     }
-    private func configureUI(status: TextFieldStatus) {
+    public func configureUI(status: TextFieldStatus) {
         switch status {
         case .pass:
             seperateBar.backgroundColor = status.textColor

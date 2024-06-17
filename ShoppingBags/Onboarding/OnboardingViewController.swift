@@ -77,7 +77,7 @@ public final class OnboardingViewController: UIViewController {
     
     @objc private func startBtnTapped() {
         let vc = ProfileSettingViewController()
-        
+        vc.viewFlow = .onboarding
         navigationController?.pushViewController(
             vc,
             animated: true

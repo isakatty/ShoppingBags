@@ -8,10 +8,12 @@
 import UIKit
 
 public final class ProfileSettingViewController: UIViewController {
+    // 기본값으로 onboarding
+    public var viewFlow: ViewFlow = .onboarding
+    
     private lazy var profileImgStr: String = UserDefaultsManager.shared
         .getValue(forKey: .profileImgTitle) 
     ?? "profile_" + "\(Int.random(in: 0...11))"
-    
     private lazy var profileImg: CircledProfileViewBtn = {
         let profileView = CircledProfileViewBtn()
         profileView.clearButton.addTarget(
@@ -37,8 +39,6 @@ public final class ProfileSettingViewController: UIViewController {
         super.viewDidLoad()
         
         fetchData()
-        configureNaviTitle(title: ViewTitle.profile.rawValue)
-        configureNavigationBar()
         configureHierarchy()
         configureLayout()
         configureUI()
@@ -51,8 +51,27 @@ public final class ProfileSettingViewController: UIViewController {
         configureUI()
     }
     private func configureHierarchy() {
-        [profileImg, cameraView, nameTextField, checkButton]
+        [profileImg, cameraView, nameTextField]
             .forEach { view.addSubview($0) }
+        switch viewFlow {
+        case .onboarding:
+            view.addSubview(checkButton)
+            configureNaviTitle(title: ViewTitle.profile.rawValue)
+        case .setting:
+            print("")
+            configureNaviTitle(title: ViewTitle.editSetting.rawValue)
+            configureNaviBarRightBtn()
+        }
+        configureNavigationBar()
+    }
+    
+    private func configureNaviBarRightBtn() {
+        navigationItem.rightBarButtonItem = UIBarButtonItem(
+            title: "저장",
+            style: .plain,
+            target: self,
+            action: #selector(saveBtnTapped)
+        )
     }
     private func configureLayout() {
         let safeArea = view.safeAreaLayoutGuide
@@ -75,10 +94,16 @@ public final class ProfileSettingViewController: UIViewController {
             make.centerX.equalTo(safeArea)
             make.height.equalTo(nameTextField.snp.width).multipliedBy(0.07)
         }
-        checkButton.snp.makeConstraints { make in
-            make.top.equalTo(nameTextField.snp.bottom).offset(30)
-            make.leading.trailing.equalTo(safeArea).inset(16)
-            make.height.equalTo(40)
+        
+        switch viewFlow {
+        case .onboarding:
+            checkButton.snp.makeConstraints { make in
+                make.top.equalTo(nameTextField.snp.bottom).offset(30)
+                make.leading.trailing.equalTo(safeArea).inset(16)
+                make.height.equalTo(40)
+            }
+        case .setting:
+            print("")
         }
         
     }
@@ -92,6 +117,16 @@ public final class ProfileSettingViewController: UIViewController {
             img: getImage(from: profileImgStr),
             isSelected: true
         )
+        switch viewFlow {
+        case .onboarding:
+            print("")
+        case .setting:
+            let nickname: String? = UserDefaultsManager.shared
+                .getValue(forKey: .nickname)
+            
+            nameTextField.nameTextField.text = nickname
+            nameTextField.configureUI(status: .pass)
+        }
     }
     @objc private func profileImgClicked() {
         let vc = EditingProfileImgViewController()
@@ -112,6 +147,12 @@ public final class ProfileSettingViewController: UIViewController {
                 changeWindow()
             }
         }
+    }
+    @objc private func saveBtnTapped() {
+        // 프로필 이미지, nickname 다시 저장
+        
+        // 화면 전환
+//        navigationController?.popViewController(animated: true)
     }
     
     private func saveData(

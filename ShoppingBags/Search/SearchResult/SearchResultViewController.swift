@@ -50,6 +50,7 @@ public final class SearchResultViewController: UIViewController {
         
         guard let searchedText else { return }
         
+        configureNaviTitle(title: searchedText)
         configureNavigationBar()
         configureHierarchy()
         configureLayout()
@@ -64,18 +65,6 @@ public final class SearchResultViewController: UIViewController {
         super.viewWillAppear(animated)
         
         itemCollectionView.reloadData()
-    }
-    private func configureNavigationBar() {
-        navigationItem.title = searchedText
-        navigationItem.leftBarButtonItem = UIBarButtonItem(
-            image: Constant.SystemImages.leftChevron,
-            style: .plain,
-            target: self,
-            action: #selector(customBackBtnTapped)
-        )
-        navigationController?
-            .interactivePopGestureRecognizer?.delegate = nil
-        navigationController?.navigationBar.tintColor = Constant.Colors.black
     }
     private func configureHierarchy() {
         [totalItemLabel, sortingView, itemCollectionView]
@@ -218,9 +207,6 @@ public final class SearchResultViewController: UIViewController {
         )
         
         return UICollectionViewCompositionalLayout(section: section)
-    }
-    @objc private func customBackBtnTapped() {
-        navigationController?.popViewController(animated: true)
     }
     @objc private func sortingBtnTapped(sender: SortingButton) {
         let btns = [

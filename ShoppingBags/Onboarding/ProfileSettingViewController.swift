@@ -36,21 +36,10 @@ public final class ProfileSettingViewController: UIViewController {
     public override func viewDidLoad() {
         super.viewDidLoad()
         
+        configureNaviTitle(title: ViewTitle.profile.rawValue)
         configureNavigationBar()
         configureHierarchy()
         configureLayout()
-    }
-    private func configureNavigationBar() {
-        navigationItem.leftBarButtonItem = UIBarButtonItem(
-            image: Constant.SystemImages.leftChevron,
-            style: .plain,
-            target: self,
-            action: #selector(backBtnTapped)
-        )
-        navigationItem.title = "PROFILE SETTING"
-        navigationController?.navigationBar.tintColor = Constant.Colors.black
-        navigationController?
-            .interactivePopGestureRecognizer?.delegate = nil
     }
     private func configureHierarchy() {
         [profileImg, cameraView, nameTextField, checkButton]
@@ -83,11 +72,6 @@ public final class ProfileSettingViewController: UIViewController {
             make.height.equalTo(40)
         }
         
-    }
-    @objc private func backBtnTapped() {
-        print(#function)
-        
-        navigationController?.popViewController(animated: true)
     }
     
     @objc private func profileImgClicked() {

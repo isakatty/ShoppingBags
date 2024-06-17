@@ -28,7 +28,7 @@ public final class SettingViewController: UIViewController {
     public override func viewDidLoad() {
         super.viewDidLoad()
         
-        configureNavigationBar()
+        configureNaviTitle(title: ViewTitle.setting.rawValue)
         configureHierarchy()
         configureLayout()
         configureBtn()
@@ -51,10 +51,6 @@ public final class SettingViewController: UIViewController {
             make.top.equalTo(profileView.snp.bottom).offset(8)
             make.bottom.trailing.leading.equalTo(safeArea)
         }
-    }
-    private func configureNavigationBar() {
-        navigationItem.title = "SETTING"
-        navigationController?.navigationBar.tintColor = Constant.Colors.black
     }
     private func resetData() {
         SaveData.allCases

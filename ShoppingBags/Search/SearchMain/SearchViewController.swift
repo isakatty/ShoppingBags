@@ -40,7 +40,11 @@ public final class SearchViewController: UIViewController {
         super.viewDidLoad()
         
         fetchData()
-        configureNavigationBar()
+        configureNaviTitle(title: ViewTitle.main.mainTitle)
+        
+        navigationItem.searchController
+        = searchController
+        navigationItem.hidesSearchBarWhenScrolling = false
         configureBtns()
     }
     public override func viewWillAppear(_ animated: Bool) {
@@ -75,13 +79,6 @@ public final class SearchViewController: UIViewController {
                 make.edges.equalTo(safeArea)
             }
         }
-    }
-    private func configureNavigationBar() {
-        navigationItem.title = "옹골찬 고래밥's MEANING OUT"
-        navigationItem.searchController 
-        = searchController
-        navigationController?.navigationBar.tintColor = Constant.Colors.black
-        navigationItem.hidesSearchBarWhenScrolling = false
     }
     private func configureBtns() {
         searchedView.eraseBtn.addTarget(

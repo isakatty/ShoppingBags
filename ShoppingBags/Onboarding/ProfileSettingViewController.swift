@@ -8,12 +8,9 @@
 import UIKit
 
 public final class ProfileSettingViewController: UIViewController {
+    private var profileImgStr: String = ""
     private lazy var profileImg: CircledProfileViewBtn = {
-        let profileView = CircledProfileViewBtn(
-            img: Constant.ProfileImages
-                .allCases[Int.random(in: 0...11)].profileImg,
-            isSelected: true
-        )
+        let profileView = CircledProfileViewBtn()
         profileView.clearButton.addTarget(
             self,
             action: #selector(profileImgClicked),
@@ -36,10 +33,18 @@ public final class ProfileSettingViewController: UIViewController {
     public override func viewDidLoad() {
         super.viewDidLoad()
         
+        fetchData()
         configureNaviTitle(title: ViewTitle.profile.rawValue)
         configureNavigationBar()
         configureHierarchy()
         configureLayout()
+        configureUI()
+    }
+    
+    public override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        // TODO: UserDefaults fetch -> Img 변경해줘야함.
     }
     private func configureHierarchy() {
         [profileImg, cameraView, nameTextField, checkButton]
@@ -73,9 +78,30 @@ public final class ProfileSettingViewController: UIViewController {
         }
         
     }
-    
+    private func fetchData() {
+        profileImgStr = UserDefaultsManager.shared
+            .getValue(forKey: .profileImgTitle)
+        ?? "profile_" + "\(Int.random(in: 0...11))"
+    }
+    private func configureUI() {
+        profileImg.configureUI(
+            img: getImage(from: profileImgStr),
+            isSelected: true
+        )
+    }
+    func getImage(from string: String) -> UIImage? {
+        guard let profileCase = Constant.ProfileImages.allCases.first(
+            where: { $0.rawValue == string }
+        ) else { return nil }
+        return profileCase.profileImg
+    }
     @objc private func profileImgClicked() {
-        print(#function)
+        let vc = EditingProfileImgViewController()
+        vc.selectedImgName = profileImgStr
+        navigationController?.pushViewController(
+            vc,
+            animated: true
+        )
     }
     @objc private func checkBtnTapped() {
         print(#function)

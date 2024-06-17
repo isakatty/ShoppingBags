@@ -9,7 +9,7 @@ import UIKit
 
 public final class NameTextFieldView: UIView {
     public var textFieldStatus: TextFieldStatus = .includeIcons
-    private lazy var nameTextField: UITextField = {
+    public lazy var nameTextField: UITextField = {
         let textField = UITextField()
         textField.borderStyle = .none
         textField.attributedPlaceholder = NSAttributedString(

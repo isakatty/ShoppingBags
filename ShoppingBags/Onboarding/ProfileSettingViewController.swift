@@ -102,6 +102,22 @@ public final class ProfileSettingViewController: UIViewController {
         )
     }
     @objc private func checkBtnTapped() {
-        print(#function)
+        // TODO: 조건에 따라 버튼 활성화할 수 있는 로직 필요함.
+        if nameTextField.textFieldStatus == .pass {
+            if let text = nameTextField.nameTextField.text {
+                saveData(
+                    imgName: profileImgStr,
+                    nickname: text
+                )
+            }
+        }
+    }
+    
+    private func saveData(
+        imgName: String,
+        nickname: String
+    ) {
+        UserDefaultsManager.shared.saveValue(imgName, forKey: .profileImgTitle)
+        UserDefaultsManager.shared.saveValue(nickname, forKey: .nickname)
     }
 }

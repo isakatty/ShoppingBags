@@ -8,7 +8,7 @@
 import UIKit
 
 public final class CircledProfileViewBtn: UIView {
-    private var profileImg = UIImageView()
+    public var profileImg = UIImageView()
     public var clearButton: UIButton = {
         let btn = UIButton()
         btn.setTitle("", for: .normal)
@@ -16,31 +16,17 @@ public final class CircledProfileViewBtn: UIView {
         return btn
     }()
     
-    public init(
-        img: UIImage?,
-        isSelected: Bool
-    ) {
+    public init() {
         super.init(frame: .zero)
         
-        guard let img else { return }
-        
-        profileImg = configureImgView(img: img)
         configureHierarchy()
         configureLayout()
-        configureView(isSelected: isSelected)
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    private func configureImgView(img: UIImage) -> UIImageView {
-        let imgView = UIImageView()
-        imgView.image = img.withRenderingMode(.alwaysOriginal)
-        imgView.contentMode = .scaleAspectFit
-        imgView.clipsToBounds = true
-        return imgView
-    }
     private func configureHierarchy() {
         [profileImg, clearButton]
             .forEach { addSubview($0) }
@@ -61,6 +47,15 @@ public final class CircledProfileViewBtn: UIView {
         ? Constant.Colors.orange?.cgColor
         : Constant.Colors.lightGray?.cgColor
         layer.opacity = isSelected ? 1 : 0.5
+    }
+    public func configureUI(
+        img: UIImage?,
+        isSelected: Bool
+    ) {
+        profileImg.image = img?.withRenderingMode(.alwaysOriginal)
+        profileImg.contentMode = .scaleAspectFit
+        profileImg.clipsToBounds = true
+        configureView(isSelected: isSelected)
     }
     
     public override func layoutSubviews() {

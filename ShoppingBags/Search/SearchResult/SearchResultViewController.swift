@@ -171,7 +171,11 @@ public final class SearchResultViewController: UIViewController {
         let query = queryParams.map { "\($0.key)=\($0.value)" }
             .joined(separator: "&")
         
-        return baseURLString + query
+        guard let encodedQuery = query
+            .addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)
+        else { return "" }
+        
+        return baseURLString + encodedQuery
     }
     private func makeHeader() -> HTTPHeaders {
         let client_ID = Bundle.main.object(

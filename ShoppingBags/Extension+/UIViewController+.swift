@@ -28,9 +28,9 @@ extension UIViewController {
     }
     
     func getImage(from string: String) -> UIImage? {
-            guard let profileCase = Constant.ProfileImages.allCases.first(
-                where: { $0.rawValue == string }
-            ) else { return nil }
-            return profileCase.profileImg
-        }
+        guard let profileCase = Constant.ProfileImages.allCases.first(
+            where: { $0.rawValue == string }
+        ) else { return nil }
+        return profileCase.profileImg
+    }
 }

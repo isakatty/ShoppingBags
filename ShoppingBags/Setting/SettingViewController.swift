@@ -7,12 +7,19 @@
 
 import UIKit
 
-/*
- TODO: 화면 load될 때 username, profileImg, signUpDate 가져와서 뷰에 띄워줘야함.
- */
-
 public final class SettingViewController: UIViewController {
-    private let profileView = SettingProfileView()
+    private var nickname: String = ""
+    private var profileImgTitle: String = ""
+    private var signupDate: String = ""
+    private lazy var profileView: SettingProfileView = {
+        let view = SettingProfileView()
+        view.clearBtn.addTarget(
+            self,
+            action: #selector(clearBtnTapped),
+            for: .touchUpInside
+        )
+        return view
+    }()
     private lazy var settingTableView: UITableView = {
         let table = UITableView()
         table.delegate = self
@@ -28,10 +35,11 @@ public final class SettingViewController: UIViewController {
     public override func viewDidLoad() {
         super.viewDidLoad()
         
+        fetchData()
         configureNaviTitle(title: ViewTitle.setting.rawValue)
         configureHierarchy()
         configureLayout()
-        configureBtn()
+        configureUI()
     }
     
     private func configureHierarchy() {
@@ -67,13 +75,22 @@ public final class SettingViewController: UIViewController {
         sceneDelegate?.window?.makeKeyAndVisible()
     }
     
-    private func configureBtn() {
-        profileView.clearBtn.addTarget(
-            self,
-            action: #selector(clearBtnTapped),
-            for: .touchUpInside
+    private func configureUI() {
+        profileView.configureUI(
+            img: getImage(from: profileImgTitle),
+            nicknameTitle: nickname,
+            dateTitle: signupDate
         )
     }
+    private func fetchData() {
+        nickname = UserDefaultsManager.shared
+            .getValue(forKey: .nickname) ?? ""
+        signupDate = UserDefaultsManager.shared
+            .getValue(forKey: .signupDate) ?? ""
+        profileImgTitle = UserDefaultsManager.shared
+            .getValue(forKey: .profileImgTitle) ?? ""
+    }
+    
     /// profile 선택시 화면 전환
     @objc private func clearBtnTapped() {
         print(#function)

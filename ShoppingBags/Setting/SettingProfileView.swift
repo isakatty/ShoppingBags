@@ -19,14 +19,12 @@ public final class SettingProfileView: UIView {
         let label = UILabel()
         label.font = Constant.Font.bold17
         label.textColor = Constant.Colors.darkGray
-        label.text = "옹골찬 고래밥"
         return label
     }()
     private let profileDate: UILabel = {
         let label = UILabel()
         label.font = Constant.Font.regular13
         label.textColor = Constant.Colors.lightGray
-        label.text = "2024.06.15 가입" // 데이트 포매터 필요하겠음.
         return label
     }()
     private let rightChevronImg: UIImageView = {
@@ -80,5 +78,18 @@ public final class SettingProfileView: UIView {
             make.edges.equalToSuperview()
         }
         
+    }
+    
+    public func configureUI(
+        img: UIImage?,
+        nicknameTitle: String,
+        dateTitle: String
+    ) {
+        profileImg.configureUI(
+            img: img,
+            isSelected: true
+        )
+        profileName.text = nicknameTitle
+        profileDate.text = dateTitle
     }
 }

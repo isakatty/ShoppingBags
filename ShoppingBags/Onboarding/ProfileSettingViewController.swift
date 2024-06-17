@@ -109,6 +109,7 @@ public final class ProfileSettingViewController: UIViewController {
                     imgName: profileImgStr,
                     nickname: text
                 )
+                changeWindow()
             }
         }
     }
@@ -117,7 +118,32 @@ public final class ProfileSettingViewController: UIViewController {
         imgName: String,
         nickname: String
     ) {
-        UserDefaultsManager.shared.saveValue(imgName, forKey: .profileImgTitle)
-        UserDefaultsManager.shared.saveValue(nickname, forKey: .nickname)
+        let date = Date()
+        let dateFormat = DateFormatter()
+        dateFormat.locale = Locale(identifier: "ko-KR")
+        dateFormat.dateFormat = "yyyy.MM.dd"
+        
+        UserDefaultsManager.shared.saveValue(
+            imgName,
+            forKey: .profileImgTitle
+        )
+        UserDefaultsManager.shared.saveValue(
+            nickname,
+            forKey: .nickname
+        )
+        UserDefaultsManager.shared.saveValue(
+            dateFormat.string(
+                from: date
+            ),
+            forKey: .signupDate
+        )
+    }
+    private func changeWindow() {
+        let windowScene = UIApplication.shared.connectedScenes.first 
+        as? UIWindowScene
+        let sceneDelegate = windowScene?.delegate as? SceneDelegate
+        
+        sceneDelegate?.window?.rootViewController = TabBarController()
+        sceneDelegate?.window?.makeKeyAndVisible()
     }
 }

@@ -70,7 +70,6 @@ public final class ItemDetailWebViewController: UIViewController {
         navigationController?.popViewController(animated: true)
     }
     @objc private func shoppingBagsTapped(sender: UIBarButtonItem) {
-        print("눌림")
         guard let itemInfo else { return }
         if favItems.contains(itemInfo.productId) {
             favItems.removeAll { $0 == itemInfo.productId }

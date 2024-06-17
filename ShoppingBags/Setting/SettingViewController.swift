@@ -46,6 +46,8 @@ public final class SettingViewController: UIViewController {
         super.viewWillAppear(animated)
         
         //  데이터 fetch
+        fetchData()
+        configureUI()
     }
     
     private func configureHierarchy() {
@@ -80,7 +82,6 @@ public final class SettingViewController: UIViewController {
         sceneDelegate?.window?.rootViewController = navigationController
         sceneDelegate?.window?.makeKeyAndVisible()
     }
-    
     private func configureUI() {
         profileView.configureUI(
             img: getImage(from: profileImgTitle),
@@ -96,12 +97,12 @@ public final class SettingViewController: UIViewController {
         profileImgTitle = UserDefaultsManager.shared
             .getValue(forKey: .profileImgTitle) ?? ""
     }
-    
     /// profile 선택시 화면 전환
     @objc private func clearBtnTapped() {
         print(#function)
         let vc = ProfileSettingViewController()
         vc.viewFlow = .setting
+        vc.imageName = profileImgTitle
         navigationController?.pushViewController(
             vc,
             animated: true
@@ -147,8 +148,9 @@ extension SettingViewController: UITableViewDelegate, UITableViewDataSource {
         let alertAction = UIAlertAction(
             title: "확인",
             style: .cancel) { [weak self] _ in
-                // TODO: 데이터 삭제 함수 호출
-                self?.returnOnboarding()
+                guard let self else { return }
+                self.returnOnboarding()
+                self.resetData()
             }
         let cancelAction = UIAlertAction(
             title: "취소",

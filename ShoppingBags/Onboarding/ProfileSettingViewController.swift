@@ -9,8 +9,8 @@ import UIKit
 
 public final class ProfileSettingViewController: UIViewController {
     // 기본값으로 onboarding
+    public var imageName: String?
     public var viewFlow: ViewFlow = .onboarding
-    
     private lazy var profileImgStr: String = UserDefaultsManager.shared
         .getValue(forKey: .profileImgTitle) 
     ?? "profile_" + "\(Int.random(in: 0...11))"
@@ -57,14 +57,21 @@ public final class ProfileSettingViewController: UIViewController {
         case .onboarding:
             view.addSubview(checkButton)
             configureNaviTitle(title: ViewTitle.profile.rawValue)
+            configureNavigationBar()
         case .setting:
-            print("")
             configureNaviTitle(title: ViewTitle.editSetting.rawValue)
             configureNaviBarRightBtn()
+            configureSettingBackBtn()
         }
-        configureNavigationBar()
     }
-    
+    private func configureSettingBackBtn() {
+        navigationItem.leftBarButtonItem = UIBarButtonItem(
+            image: Constant.SystemImages.leftChevron,
+            style: .plain,
+            target: self,
+            action: #selector(settingBackBtnTapped)
+        )
+    }
     private func configureNaviBarRightBtn() {
         navigationItem.rightBarButtonItem = UIBarButtonItem(
             title: "저장",
@@ -103,7 +110,7 @@ public final class ProfileSettingViewController: UIViewController {
                 make.height.equalTo(40)
             }
         case .setting:
-            print("")
+            break
         }
         
     }
@@ -119,7 +126,7 @@ public final class ProfileSettingViewController: UIViewController {
         )
         switch viewFlow {
         case .onboarding:
-            print("")
+            break
         case .setting:
             let nickname: String? = UserDefaultsManager.shared
                 .getValue(forKey: .nickname)
@@ -150,20 +157,26 @@ public final class ProfileSettingViewController: UIViewController {
     }
     @objc private func saveBtnTapped() {
         // 프로필 이미지, nickname 다시 저장
-        
+        saveData(
+            imgName: profileImgStr,
+            nickname: nameTextField.nameTextField.text ?? ""
+        )
         // 화면 전환
-//        navigationController?.popViewController(animated: true)
+        navigationController?.popViewController(animated: true)
     }
-    
+    @objc private func settingBackBtnTapped() {
+        UserDefaultsManager.shared.saveValue(
+            imageName,
+            forKey: .profileImgTitle
+        )
+        navigationController?
+            .interactivePopGestureRecognizer?.delegate = nil
+        navigationController?.popViewController(animated: true)
+    }
     private func saveData(
         imgName: String,
         nickname: String
     ) {
-        let date = Date()
-        let dateFormat = DateFormatter()
-        dateFormat.locale = Locale(identifier: "ko-KR")
-        dateFormat.dateFormat = "yyyy.MM.dd"
-        
         UserDefaultsManager.shared.saveValue(
             imgName,
             forKey: .profileImgTitle
@@ -172,12 +185,22 @@ public final class ProfileSettingViewController: UIViewController {
             nickname,
             forKey: .nickname
         )
-        UserDefaultsManager.shared.saveValue(
-            dateFormat.string(
-                from: date
-            ),
-            forKey: .signupDate
-        )
+        switch viewFlow {
+        case .onboarding:
+            let date = Date()
+            let dateFormat = DateFormatter()
+            dateFormat.locale = Locale(identifier: "ko-KR")
+            dateFormat.dateFormat = "yyyy.MM.dd"
+            
+            UserDefaultsManager.shared.saveValue(
+                dateFormat.string(
+                    from: date
+                ),
+                forKey: .signupDate
+            )
+        case .setting: 
+            break
+        }
     }
     private func changeWindow() {
         let windowScene = UIApplication.shared.connectedScenes.first 

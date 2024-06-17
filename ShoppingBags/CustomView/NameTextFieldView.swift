@@ -8,18 +8,19 @@
 import UIKit
 
 public final class NameTextFieldView: UIView {
-    private var textFieldStatus: TextFieldStatus = .includeIcons
-    private let nameTextField: UITextField = {
+    public var textFieldStatus: TextFieldStatus = .includeIcons
+    private lazy var nameTextField: UITextField = {
         let textField = UITextField()
         textField.borderStyle = .none
         textField.attributedPlaceholder = NSAttributedString(
             string: "닉네임을 입력해주세요 :)",
             attributes: [
-                .foregroundColor: Constant.Colors.lightGray 
+                .foregroundColor: Constant.Colors.lightGray
                 ?? UIColor.lightGray,
                 .font: UIFont.systemFont(ofSize: 16)
             ]
         )
+        textField.delegate = self
         return textField
     }()
     private let seperateBar = UIView()
@@ -35,7 +36,6 @@ public final class NameTextFieldView: UIView {
         
         configureHierarchy()
         configureLayout()
-        configureTextField()
         configureUI(status: textFieldStatus)
     }
     
@@ -68,9 +68,6 @@ public final class NameTextFieldView: UIView {
             make.bottom.greaterThanOrEqualToSuperview()
         }
     }
-    private func configureTextField() {
-        nameTextField.delegate = self
-    }
     private func configureUI(status: TextFieldStatus) {
         switch status {
         case .pass:
@@ -84,18 +81,53 @@ public final class NameTextFieldView: UIView {
             statusLabel.text = status.rawValue
         }
     }
-    
+    private func validateTextField(text: String) -> TextFieldStatus {
+        let specialIcons: [String] = ["@", "#", "$", "%"]
+        
+        if text.contains(where: { $0.isNumber }) {
+            return .includedNumbers
+        } else if text.contains(
+            where: { specialIcons.contains(String($0)) }
+        ) {
+            return .includeIcons
+        } else if text.count < 2 || text.count > 11 {
+            return .failedTextCondition
+        } else {
+            return .pass
+        }
+    }
 }
 
 extension NameTextFieldView: UITextFieldDelegate {
-    // TODO: 텍스트필드가 수정되기 시작할 때부터 유효성 검사를 해야함.
-    public func textFieldDidBeginEditing(_ textField: UITextField) {
-        let specialIcons: [String] = [
-            "@",
-            "#",
-            "$",
-            "%"
-        ]
+    public func textFieldDidEndEditing(_ textField: UITextField) {
+        guard let text = textField.text else { return }
+        textFieldStatus = validateTextField(text: text)
+        configureUI(status: textFieldStatus)
+    }
+    
+    public func textField(
+        _ textField: UITextField,
+        shouldChangeCharactersIn range: NSRange,
+        replacementString string: String
+    ) -> Bool {
+        guard let currentText = textField.text,
+              let stringRange = Range(range, in: currentText)
+        else { return false }
         
+        let updatedText = currentText.replacingCharacters(
+            in: stringRange,
+            with: string
+        )
+        textFieldStatus = validateTextField(text: updatedText)
+        configureUI(status: textFieldStatus)
+        
+        return true
+    }
+    
+    public func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        guard let text = textField.text else { return false }
+        textFieldStatus = validateTextField(text: text)
+        configureUI(status: textFieldStatus)
+        return textFieldStatus == .pass
     }
 }

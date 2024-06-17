@@ -8,18 +8,17 @@
 import UIKit
 
 public final class ProfileSettingViewController: UIViewController {
-    
-    private let imgName: String = "profile_" + String(Int.random(in: 0...11))
-    private lazy var profileImg: CircledProfileView = {
-        let profileView = CircledProfileView(
-            img: UIImage(named: imgName),
+    private lazy var profileImg: CircledProfileViewBtn = {
+        let profileView = CircledProfileViewBtn(
+            img: Constant.ProfileImages
+                .allCases[Int.random(in: 0...11)].profileImg,
             isSelected: true
         )
-//        profileView.clearButton.addTarget(
-//            self,
-//            action: #selector(profileImgClicked),
-//            for: .touchUpInside
-//        )
+        profileView.clearButton.addTarget(
+            self,
+            action: #selector(profileImgClicked),
+            for: .touchUpInside
+        )
         return profileView
     }()
     private let cameraView = CircledCameraView()

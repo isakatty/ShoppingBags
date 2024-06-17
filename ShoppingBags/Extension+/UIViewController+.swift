@@ -26,4 +26,11 @@ extension UIViewController {
     @objc func backBtnTapped() {
         navigationController?.popViewController(animated: true)
     }
+    
+    func getImage(from string: String) -> UIImage? {
+            guard let profileCase = Constant.ProfileImages.allCases.first(
+                where: { $0.rawValue == string }
+            ) else { return nil }
+            return profileCase.profileImg
+        }
 }

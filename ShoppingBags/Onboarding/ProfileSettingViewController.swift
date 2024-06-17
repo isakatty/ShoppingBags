@@ -15,11 +15,11 @@ public final class ProfileSettingViewController: UIViewController {
             img: UIImage(named: imgName),
             isSelected: true
         )
-        profileView.clearButton.addTarget(
-            self,
-            action: #selector(profileImgClicked),
-            for: .touchUpInside
-        )
+//        profileView.clearButton.addTarget(
+//            self,
+//            action: #selector(profileImgClicked),
+//            for: .touchUpInside
+//        )
         return profileView
     }()
     private let cameraView = CircledCameraView()

@@ -7,7 +7,12 @@
 
 import UIKit
 
+/*
+ TODO: 화면 load될 때 username, profileImg, signUpDate 가져와서 뷰에 띄워줘야함.
+ */
+
 public final class SettingViewController: UIViewController {
+    private let profileView = SettingProfileView()
     private lazy var settingTableView: UITableView = {
         let table = UITableView()
         table.delegate = self
@@ -26,17 +31,25 @@ public final class SettingViewController: UIViewController {
         configureNavigationBar()
         configureHierarchy()
         configureLayout()
+        configureBtn()
     }
     
     private func configureHierarchy() {
-        [settingTableView]
+        [profileView, settingTableView]
             .forEach { view.addSubview($0) }
     }
     private func configureLayout() {
         view.backgroundColor = .systemBackground
         let safeArea = view.safeAreaLayoutGuide
+        profileView.snp.makeConstraints { make in
+            make.top.equalTo(safeArea).offset(16)
+            make.leading.trailing.equalTo(safeArea)
+            make.height.equalTo(profileView.snp.width).multipliedBy(0.15)
+        }
+        
         settingTableView.snp.makeConstraints { make in
-            make.edges.equalTo(safeArea)
+            make.top.equalTo(profileView.snp.bottom).offset(8)
+            make.bottom.trailing.leading.equalTo(safeArea)
         }
     }
     private func configureNavigationBar() {
@@ -56,6 +69,18 @@ public final class SettingViewController: UIViewController {
         )
         sceneDelegate?.window?.rootViewController = navigationController
         sceneDelegate?.window?.makeKeyAndVisible()
+    }
+    
+    private func configureBtn() {
+        profileView.clearBtn.addTarget(
+            self,
+            action: #selector(clearBtnTapped),
+            for: .touchUpInside
+        )
+    }
+    /// profile 선택시 화면 전환
+    @objc private func clearBtnTapped() {
+        print(#function)
     }
 }
 

@@ -13,4 +13,26 @@ public enum SaveData: String, CaseIterable {
     case profileImgTitle
     case searchedText
     case shoppingBags
+    
+    var fetchedData: String {
+        switch self {
+        case .signupDate:
+            let date: String = UserDefaultsManager.shared
+                .getValue(forKey: .signupDate) ?? ""
+            return date
+        case .nickname:
+            let nickname: String = UserDefaultsManager.shared
+                .getValue(forKey: .nickname) ?? ""
+            return nickname
+        case .profileImgTitle:
+            let imgName: String = UserDefaultsManager.shared
+                .getValue(forKey: .profileImgTitle)
+            ?? "profile_" + "\(Int.random(in: 0...11))"
+            return imgName
+        case .searchedText:
+            return ""
+        case .shoppingBags:
+            return ""
+        }
+    }
 }

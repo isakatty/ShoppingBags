@@ -17,7 +17,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let scene = (scene as? UIWindowScene) else { return }
         window = UIWindow(windowScene: scene)
         
-        let signedUp: String? = UserDefaultsManager.shared.getValue(forKey: .signupDate)
+        let signedUp: String? = UserDefaultsManager.shared
+            .getValue(forKey: .signupDate)
         
         if signedUp != nil {
             let vc = TabBarController()

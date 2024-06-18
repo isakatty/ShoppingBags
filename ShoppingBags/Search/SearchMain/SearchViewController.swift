@@ -51,6 +51,7 @@ public final class SearchViewController: UIViewController {
         super.viewWillAppear(animated)
         
         fetchData()
+        configureNaviTitle(title: ViewTitle.main.mainTitle)
         navigationItem.hidesSearchBarWhenScrolling = false
     }
     private func configureHierarchy() {

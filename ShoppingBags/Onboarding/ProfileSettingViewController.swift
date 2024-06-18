@@ -115,9 +115,7 @@ public final class ProfileSettingViewController: UIViewController {
         
     }
     private func fetchData() {
-        profileImgStr = UserDefaultsManager.shared
-            .getValue(forKey: .profileImgTitle)
-        ?? "profile_" + "\(Int.random(in: 0...11))"
+        profileImgStr = SaveData.profileImgTitle.fetchedData
     }
     private func configureUI() {
         profileImg.configureUI(
@@ -128,8 +126,7 @@ public final class ProfileSettingViewController: UIViewController {
         case .onboarding:
             break
         case .setting:
-            let nickname: String? = UserDefaultsManager.shared
-                .getValue(forKey: .nickname)
+            let nickname: String? = SaveData.nickname.fetchedData
             
             nameTextField.nameTextField.text = nickname
             nameTextField.configureUI(status: .pass)

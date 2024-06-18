@@ -90,12 +90,9 @@ public final class SettingViewController: UIViewController {
         )
     }
     private func fetchData() {
-        nickname = UserDefaultsManager.shared
-            .getValue(forKey: .nickname) ?? ""
-        signupDate = UserDefaultsManager.shared
-            .getValue(forKey: .signupDate) ?? ""
-        profileImgTitle = UserDefaultsManager.shared
-            .getValue(forKey: .profileImgTitle) ?? ""
+        nickname = SaveData.nickname.fetchedData
+        signupDate = SaveData.signupDate.fetchedData
+        profileImgTitle = SaveData.profileImgTitle.fetchedData
         
         settingTableView.reloadData()
     }

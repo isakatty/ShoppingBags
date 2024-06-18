@@ -125,20 +125,24 @@ public final class SearchResultViewController: UIViewController {
             guard let self else { return }
             switch response.result {
             case .success(let value):
-                if value.start == value.totalPages {
-                    isLastPage = true
-                }
-                
-                if self.page == 1 {
-                    self.searchedResult = value
-                    self.itemCollectionView.scrollsToTop = true
+                if value.total == 0 {
+                    addAlert()
                 } else {
-                    self.searchedResult.items.append(contentsOf: value.items)
+                    if value.start == value.totalPages {
+                        isLastPage = true
+                    }
+                    
+                    if self.page == 1 {
+                        self.searchedResult = value
+                        self.itemCollectionView.scrollsToTop = true
+                    } else {
+                        self.searchedResult.items.append(contentsOf: value.items)
+                    }
+                    
+                    self.totalItemLabel.text =
+                    "\(self.searchedResult.totalItems)개의 검색 결과"
+                    self.itemCollectionView.reloadData()
                 }
-                
-                self.totalItemLabel.text =
-                "\(self.searchedResult.totalItems)개의 검색 결과"
-                self.itemCollectionView.reloadData()
             case .failure(let error):
                 // 재검색 유도
                 print(error)
@@ -247,6 +251,24 @@ public final class SearchResultViewController: UIViewController {
                 item: sender.tag,
                 section: 0
             )]
+        )
+    }
+    private func addAlert() {
+        let alert = UIAlertController(
+            title: "검색한 결과가 없습니다.",
+            message: "입력하신 \(searchedText ?? "")에 관련된 데이터가 없습니다.",
+            preferredStyle: .alert
+        )
+        let action = UIAlertAction(
+            title: "돌아가기",
+            style: .destructive
+        ) { [weak self] _ in
+            self?.navigationController?.popViewController(animated: true)
+        }
+        alert.addAction(action)
+        present(
+            alert,
+            animated: true
         )
     }
 }

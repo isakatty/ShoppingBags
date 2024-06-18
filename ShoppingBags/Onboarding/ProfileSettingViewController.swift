@@ -88,6 +88,13 @@ public final class ProfileSettingViewController: UIViewController {
         )
         navigationItem.rightBarButtonItem?.isEnabled 
         = nameTextField.validatePass
+        let attributes: [NSAttributedString.Key: Any] = [
+            .font: Constant.Font.bold15
+        ]
+        navigationItem.rightBarButtonItem?.setTitleTextAttributes(
+            attributes,
+            for: .normal
+        )
     }
     private func configureLayout() {
         let safeArea = view.safeAreaLayoutGuide

@@ -187,7 +187,7 @@ public final class ProfileSettingViewController: UIViewController {
             let date = Date()
             let dateFormat = DateFormatter()
             dateFormat.locale = Locale(identifier: "ko-KR")
-            dateFormat.dateFormat = "yyyy.MM.dd"
+            dateFormat.dateFormat = "yyyy. MM. dd"
             
             UserDefaultsManager.shared.saveValue(
                 dateFormat.string(

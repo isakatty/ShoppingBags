@@ -78,4 +78,9 @@ public final class RecentSearchTableViewCell: UITableViewCell {
         searchedLabel.text = recentSearched
         xmarkBtn.tag = tag
     }
+    public override func prepareForReuse() {
+        super.prepareForReuse()
+        
+        searchedLabel.text = nil
+    }
 }

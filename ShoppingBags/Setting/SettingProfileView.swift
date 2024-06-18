@@ -90,6 +90,6 @@ public final class SettingProfileView: UIView {
             isSelected: true
         )
         profileName.text = nicknameTitle
-        profileDate.text = dateTitle
+        profileDate.text = "\(dateTitle) 가입"
     }
 }

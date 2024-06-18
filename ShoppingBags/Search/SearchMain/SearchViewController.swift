@@ -42,8 +42,7 @@ public final class SearchViewController: UIViewController {
         fetchData()
         configureNaviTitle(title: ViewTitle.main.mainTitle)
         
-        navigationItem.searchController
-        = searchController
+        navigationItem.searchController = searchController
         navigationItem.hidesSearchBarWhenScrolling = false
         configureBtns()
     }
@@ -88,15 +87,6 @@ public final class SearchViewController: UIViewController {
             for: .touchUpInside
         )
     }
-    @objc private func eraseBtnTapped() {
-        let erasedArray: [String] = []
-        // MARK: remove가 잘 안되는 이유를 찾을 것.
-        UserDefaultsManager.shared.saveValue(
-            erasedArray,
-            forKey: .searchedText
-        )
-        fetchData()
-    }
     private func fetchData() {
         searchedResult = UserDefaultsManager.shared
             .getValue(forKey: .searchedText) ?? []
@@ -105,6 +95,14 @@ public final class SearchViewController: UIViewController {
         emptyView.removeFromSuperview()
         configureHierarchy()
         configureLayout()
+    }
+    @objc private func eraseBtnTapped() {
+        let erasedArray: [String] = []
+        UserDefaultsManager.shared.saveValue(
+            erasedArray,
+            forKey: .searchedText
+        )
+        fetchData()
     }
     @objc private func deleteBtnTapped(sender: UIButton) {
         searchedResult.remove(at: sender.tag)
@@ -119,29 +117,28 @@ public final class SearchViewController: UIViewController {
 extension SearchViewController: UISearchBarDelegate {
     public func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         searchBar.resignFirstResponder()
-        guard let text = searchBar.text?.trimmingCharacters(in: .whitespaces),
-        !text.isEmpty else { return }
-        
-        if findWords(search: text) {
-            searchBar.text = nil
-            let resultVC = SearchResultViewController()
-            resultVC.searchedText = text
-            navigationController?.pushViewController(
-                resultVC,
-                animated: true
-            )
-        }
+        guard var text = searchBar.text?.trimmingCharacters(in: .whitespaces),
+              !text.isEmpty else { return }
+        text = text.split(separator: " ").joined()
+        findWords(search: text)
+        searchBar.text = nil
+        let resultVC = SearchResultViewController()
+        resultVC.searchedText = text
+        navigationController?.pushViewController(
+            resultVC,
+            animated: true
+        )
     }
-    private func findWords(search: String) -> Bool {
-        
-        var checkDuplication = Array(Set(searchedResult))
-        checkDuplication.removeAll { $0 == search}
-        checkDuplication.insert(search, at: 0)
+    private func findWords(search: String) {
+        searchedResult.removeAll { $0 == search}
+        searchedResult.insert(
+            search,
+            at: 0
+        )
         UserDefaultsManager.shared.saveValue(
-            checkDuplication,
+            searchedResult,
             forKey: .searchedText
         )
-        return true
     }
 }
 extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
@@ -184,6 +181,5 @@ extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
             vc,
             animated: true
         )
-        
     }
 }

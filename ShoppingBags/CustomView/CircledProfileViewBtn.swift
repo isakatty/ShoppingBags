@@ -11,7 +11,10 @@ public final class CircledProfileViewBtn: UIView {
     public var profileImg = UIImageView()
     public var clearButton: UIButton = {
         let btn = UIButton()
-        btn.setTitle("", for: .normal)
+        btn.setTitle(
+            "",
+            for: .normal
+        )
         btn.tintColor = .clear
         return btn
     }()

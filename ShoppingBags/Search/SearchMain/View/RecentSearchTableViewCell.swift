@@ -31,7 +31,10 @@ public final class RecentSearchTableViewCell: UITableViewCell {
             for: .normal
         )
         btn.tintColor = Constant.Colors.black
-        btn.setTitle("", for: .normal)
+        btn.setTitle(
+            "",
+            for: .normal
+        )
         return btn
     }()
     
@@ -74,7 +77,10 @@ public final class RecentSearchTableViewCell: UITableViewCell {
             make.centerY.equalToSuperview()
         }
     }
-    public func configureUI(recentSearched: String, tag: Int) {
+    public func configureUI(
+        recentSearched: String,
+        tag: Int
+    ) {
         searchedLabel.text = recentSearched
         xmarkBtn.tag = tag
     }

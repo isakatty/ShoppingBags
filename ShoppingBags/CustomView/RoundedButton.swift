@@ -12,8 +12,14 @@ public final class RoundedButton: UIButton {
     public init(titleForButton: String) {
         super.init(frame: .zero)
         
-        setTitle(titleForButton, for: .normal)
-        setTitleColor(Constant.Colors.white, for: .normal)
+        setTitle(
+            titleForButton,
+            for: .normal
+        )
+        setTitleColor(
+            Constant.Colors.white,
+            for: .normal
+        )
         backgroundColor = Constant.Colors.orange
         layer.cornerRadius = 20
     }

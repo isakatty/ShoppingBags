@@ -116,7 +116,10 @@ extension NameTextFieldView: UITextFieldDelegate {
         replacementString string: String
     ) -> Bool {
         guard let currentText = textField.text,
-              let stringRange = Range(range, in: currentText)
+              let stringRange = Range(
+                range,
+                in: currentText
+              )
         else { return false }
         
         let updatedText = currentText.replacingCharacters(

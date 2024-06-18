@@ -17,7 +17,10 @@ public final class UserDefaultsManager {
         _ value: T,
         forKey key: SaveData
     ) {
-        UserDefaults.standard.setValue(value, forKey: key.rawValue)
+        UserDefaults.standard.setValue(
+            value,
+            forKey: key.rawValue
+        )
     }
     public func getValue<T>(forKey key: SaveData) -> T? {
         return UserDefaults.standard.value(forKey: key.rawValue) as? T

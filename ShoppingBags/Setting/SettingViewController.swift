@@ -20,6 +20,7 @@ public final class SettingViewController: UIViewController {
         )
         return view
     }()
+    private let separateBar = UIView()
     private lazy var settingTableView: UITableView = {
         let table = UITableView()
         table.delegate = self
@@ -29,6 +30,14 @@ public final class SettingViewController: UIViewController {
             SettingTableViewCell.self,
             forCellReuseIdentifier: SettingTableViewCell.identifier
         )
+        table.isScrollEnabled = false
+        table.separatorInset = .init(
+            top: 0,
+            left: 0,
+            bottom: 0,
+            right: 0
+        )
+        table.separatorColor = Constant.Colors.mediumGray
         return table
     }()
     
@@ -51,7 +60,7 @@ public final class SettingViewController: UIViewController {
     }
     
     private func configureHierarchy() {
-        [profileView, settingTableView]
+        [profileView, separateBar, settingTableView]
             .forEach { view.addSubview($0) }
     }
     private func configureLayout() {
@@ -62,9 +71,14 @@ public final class SettingViewController: UIViewController {
             make.leading.trailing.equalTo(safeArea)
             make.height.equalTo(profileView.snp.width).multipliedBy(0.15)
         }
+        separateBar.snp.makeConstraints { make in
+            make.top.equalTo(profileView.snp.bottom).offset(16)
+            make.leading.trailing.equalTo(safeArea)
+            make.height.equalTo(1)
+        }
         
         settingTableView.snp.makeConstraints { make in
-            make.top.equalTo(profileView.snp.bottom).offset(8)
+            make.top.equalTo(separateBar.snp.bottom)
             make.bottom.trailing.leading.equalTo(safeArea)
         }
     }
@@ -83,6 +97,7 @@ public final class SettingViewController: UIViewController {
         sceneDelegate?.window?.makeKeyAndVisible()
     }
     private func configureUI() {
+        separateBar.backgroundColor = Constant.Colors.lightGray
         profileView.configureUI(
             img: getImage(from: profileImgTitle),
             nicknameTitle: nickname,

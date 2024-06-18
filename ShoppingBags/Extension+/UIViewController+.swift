@@ -11,6 +11,14 @@ extension UIViewController {
     func configureNaviTitle(title: String) {
         navigationItem.title = title
         navigationController?.navigationBar.tintColor = Constant.Colors.black
+        
+        let appearance = UINavigationBarAppearance()
+        appearance.configureWithOpaqueBackground()
+        appearance.backgroundColor = Constant.Colors.white
+        appearance.shadowColor = Constant.Colors.mediumGray
+        navigationController?.navigationBar.standardAppearance = appearance
+        navigationController?.navigationBar.scrollEdgeAppearance 
+        = navigationController?.navigationBar.standardAppearance
     }
     
     func configureNavigationBar() {

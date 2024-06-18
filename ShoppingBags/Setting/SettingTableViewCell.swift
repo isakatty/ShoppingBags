@@ -11,12 +11,12 @@ public final class SettingTableViewCell: UITableViewCell {
     private let settingLabel: UILabel = {
         let label = UILabel()
         label.textColor = Constant.Colors.black
-        label.font = Constant.Font.regular15
+        label.font = Constant.Font.regular14
         return label
     }()
     private let shoppingLabel: UILabel = {
         let label = UILabel()
-        label.font = Constant.Font.bold15
+        label.font = Constant.Font.regular15
         label.textColor = Constant.Colors.black
         return label
     }()
@@ -75,11 +75,16 @@ public final class SettingTableViewCell: UITableViewCell {
         }
     }
     public func configureUI(index: Int) {
-        // Enum으로 받을 것.
         if index == 0 {
             shoppingView.isHidden = false
             settingLabel.text = Setting.allCases[index].rawValue
             shoppingLabel.text = Setting.allCases[index].shoppingItem
+            let targetString = shoppingLabel.text?
+                .components(separatedBy: "의").first
+            shoppingLabel.highlightedText(
+                targetString: targetString ?? "",
+                font: Constant.Font.bold15
+            )
         } else {
             shoppingView.isHidden = true
             settingLabel.text = Setting.allCases[index].rawValue

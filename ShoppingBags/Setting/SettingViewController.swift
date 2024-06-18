@@ -98,9 +98,7 @@ public final class SettingViewController: UIViewController {
     }
     /// profile 선택시 화면 전환
     @objc private func clearBtnTapped() {
-        print(#function)
-        let vc = ProfileSettingViewController()
-        vc.viewFlow = .setting
+        let vc = ProfileSettingViewController(viewFlow: .setting)
         vc.imageName = profileImgTitle
         navigationController?.pushViewController(
             vc,

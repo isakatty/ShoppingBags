@@ -9,7 +9,7 @@ import UIKit
 
 public final class EditingProfileImgViewController: UIViewController {
     public var selectedImgName: String?
-    public var viewFlow: ViewFlow = .onboarding
+    public var viewFlow: ViewFlow
     private let cameraView = CircledCameraView()
     private lazy var mainCircledImg = CircledProfileView()
     private lazy var imgCollectionView: UICollectionView = {
@@ -25,6 +25,15 @@ public final class EditingProfileImgViewController: UIViewController {
         )
         return collection
     }()
+    
+    public init(viewFlow: ViewFlow) {
+        self.viewFlow = viewFlow
+        
+        super.init(nibName: nil, bundle: nil)
+    }
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     public override func viewDidLoad() {
         super.viewDidLoad()

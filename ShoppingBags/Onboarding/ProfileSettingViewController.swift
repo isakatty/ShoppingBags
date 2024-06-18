@@ -8,9 +8,8 @@
 import UIKit
 
 public final class ProfileSettingViewController: UIViewController {
-    // 기본값으로 onboarding
     public var imageName: String?
-    public var viewFlow: ViewFlow = .onboarding
+    public var viewFlow: ViewFlow
     private lazy var profileImgStr: String = UserDefaultsManager.shared
         .getValue(forKey: .profileImgTitle) 
     ?? "profile_" + "\(Int.random(in: 0...11))"
@@ -35,6 +34,14 @@ public final class ProfileSettingViewController: UIViewController {
         return btn
     }()
     
+    public init(viewFlow: ViewFlow) {
+        self.viewFlow = viewFlow
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     public override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -144,7 +151,7 @@ public final class ProfileSettingViewController: UIViewController {
         }
     }
     @objc private func profileImgClicked() {
-        let vc = EditingProfileImgViewController()
+        let vc = EditingProfileImgViewController(viewFlow: viewFlow)
         vc.selectedImgName = profileImgStr
         navigationController?.pushViewController(
             vc,

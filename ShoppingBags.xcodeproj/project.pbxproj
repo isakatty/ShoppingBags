@@ -51,6 +51,7 @@
 		C96663362C1B1D53009E48F6 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C96663352C1B1D53009E48F6 /* SceneDelegate.swift */; };
 		C966633D2C1B1D54009E48F6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C966633C2C1B1D54009E48F6 /* Assets.xcassets */; };
 		C96663402C1B1D54009E48F6 /* Base in Resources */ = {isa = PBXBuildFile; fileRef = C966633F2C1B1D54009E48F6 /* Base */; };
+		C9CCACE72C217E88000A6915 /* UILabel+.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9CCACE62C217E88000A6915 /* UILabel+.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -98,6 +99,7 @@
 		C966633C2C1B1D54009E48F6 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		C966633F2C1B1D54009E48F6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		C96663412C1B1D54009E48F6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		C9CCACE62C217E88000A6915 /* UILabel+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -195,6 +197,7 @@
 				C93B76622C1EC2F50059223A /* UICollectionViewCell+.swift */,
 				C93B76642C1EC3130059223A /* ReuseIdentifier.swift */,
 				C93B767B2C2019F40059223A /* UIViewController+.swift */,
+				C9CCACE62C217E88000A6915 /* UILabel+.swift */,
 			);
 			path = "Extension+";
 			sourceTree = "<group>";
@@ -391,6 +394,7 @@
 				C93B76542C1D995B0059223A /* SearchResultViewController.swift in Sources */,
 				C93B76702C1F00630059223A /* SettingTableViewCell.swift in Sources */,
 				C93B76372C1C3DD00059223A /* SearchResultEmptyView.swift in Sources */,
+				C9CCACE72C217E88000A6915 /* UILabel+.swift in Sources */,
 				C93B76172C1BEA000059223A /* RoundedButton.swift in Sources */,
 				C96663342C1B1D53009E48F6 /* AppDelegate.swift in Sources */,
 				C93B76722C1F05210059223A /* Setting.swift in Sources */,

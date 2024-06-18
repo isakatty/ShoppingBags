@@ -22,4 +22,11 @@ public final class RoundedButton: UIButton {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    public func configureBtnUI(with available: Bool) {
+        if available {
+            backgroundColor = Constant.Colors.orange
+        } else {
+            backgroundColor = Constant.Colors.lightGray
+        }
+    }
 }

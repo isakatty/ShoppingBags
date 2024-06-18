@@ -36,6 +36,7 @@ public final class OnboardingViewController: UIViewController {
             action: #selector(startBtnTapped),
             for: .touchUpInside
         )
+        btn.configureBtnUI(with: true)
         return btn
     }()
     

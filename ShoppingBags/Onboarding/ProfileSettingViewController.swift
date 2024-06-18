@@ -79,6 +79,8 @@ public final class ProfileSettingViewController: UIViewController {
             target: self,
             action: #selector(saveBtnTapped)
         )
+        navigationItem.rightBarButtonItem?.isEnabled 
+        = nameTextField.validatePass
     }
     private func configureLayout() {
         let safeArea = view.safeAreaLayoutGuide
@@ -124,12 +126,21 @@ public final class ProfileSettingViewController: UIViewController {
         )
         switch viewFlow {
         case .onboarding:
-            break
+            nameTextField.changedValid = { [weak self] changed in
+                guard let self else { return }
+                
+                self.checkButton.isEnabled = changed
+                self.checkButton.configureBtnUI(with: changed)
+            }
         case .setting:
             let nickname: String? = SaveData.nickname.fetchedData
             
             nameTextField.nameTextField.text = nickname
             nameTextField.configureUI(status: .pass)
+            nameTextField.changedValid = { [weak self] changed in
+                guard let self else { return }
+                self.navigationItem.rightBarButtonItem?.isEnabled = changed
+            }
         }
     }
     @objc private func profileImgClicked() {
@@ -141,7 +152,6 @@ public final class ProfileSettingViewController: UIViewController {
         )
     }
     @objc private func checkBtnTapped() {
-        // TODO: 조건에 따라 버튼 활성화할 수 있는 로직 필요함.
         if nameTextField.textFieldStatus == .pass {
             if let text = nameTextField.nameTextField.text {
                 saveData(
@@ -153,13 +163,13 @@ public final class ProfileSettingViewController: UIViewController {
         }
     }
     @objc private func saveBtnTapped() {
-        // 프로필 이미지, nickname 다시 저장
-        saveData(
-            imgName: profileImgStr,
-            nickname: nameTextField.nameTextField.text ?? ""
-        )
-        // 화면 전환
-        navigationController?.popViewController(animated: true)
+        if nameTextField.validatePass {
+            saveData(
+                imgName: profileImgStr,
+                nickname: nameTextField.nameTextField.text ?? ""
+            )
+            navigationController?.popViewController(animated: true)
+        }
     }
     @objc private func settingBackBtnTapped() {
         UserDefaultsManager.shared.saveValue(

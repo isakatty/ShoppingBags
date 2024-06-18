@@ -8,7 +8,8 @@
 import UIKit
 
 public final class NameTextFieldView: UIView {
-    public var viewFlow: ViewFlow = .onboarding
+    public var changedValid: ((Bool) -> Void)?
+    public var validatePass: Bool = false
     public var textFieldStatus: TextFieldStatus = .includeIcons
     public lazy var nameTextField: UITextField = {
         let textField = UITextField()
@@ -72,26 +73,29 @@ public final class NameTextFieldView: UIView {
     public func configureUI(status: TextFieldStatus) {
         switch status {
         case .pass:
+            validatePass = true
             seperateBar.backgroundColor = status.textColor
             statusLabel.textColor = status.textColor
             statusLabel.text = status.rawValue
-            
         case .failedTextCondition, .includeIcons, .includedNumbers:
+            validatePass = false
             seperateBar.backgroundColor = Constant.Colors.lightGray
             statusLabel.textColor = Constant.Colors.orange
             statusLabel.text = status.rawValue
         }
+        changedValid?(validatePass)
     }
     private func validateTextField(text: String) -> TextFieldStatus {
         let specialIcons: [String] = ["@", "#", "$", "%"]
-        
         if text.contains(where: { $0.isNumber }) {
             return .includedNumbers
         } else if text.contains(
             where: { specialIcons.contains(String($0)) }
         ) {
             return .includeIcons
-        } else if text.count < 2 || text.count > 11 {
+        } else if text.count < 3 {
+            return .failedTextCondition
+        } else if text.count > 10 {
             return .failedTextCondition
         } else {
             return .pass

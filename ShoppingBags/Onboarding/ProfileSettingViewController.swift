@@ -80,13 +80,11 @@ public final class ProfileSettingViewController: UIViewController {
         )
     }
     private func configureNaviBarRightBtn() {
-        navigationItem.rightBarButtonItem = UIBarButtonItem(
-            title: "저장",
-            style: .plain,
-            target: self,
-            action: #selector(saveBtnTapped)
+        configureRightBarBtn(
+            btnTitle: "저장",
+            btnAction: #selector(saveBtnTapped)
         )
-        navigationItem.rightBarButtonItem?.isEnabled 
+        navigationItem.rightBarButtonItem?.isEnabled
         = nameTextField.validatePass
         let attributes: [NSAttributedString.Key: Any] = [
             .font: Constant.Font.bold15

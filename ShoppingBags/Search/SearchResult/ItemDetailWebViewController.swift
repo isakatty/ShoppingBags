@@ -42,21 +42,12 @@ public final class ItemDetailWebViewController: UIViewController {
     }
     private func configureNavigationBar(item: Item?) {
         navigationItem.title = item?.formattedItemName
-        navigationItem.leftBarButtonItem = UIBarButtonItem(
-            image: Constant.SystemImages.leftChevron,
-            style: .plain,
-            target: self,
-            action: #selector(customBackBtnTapped)
-        )
-        navigationItem.rightBarButtonItem = UIBarButtonItem(
-            image: configureBagsUI(item: item)?
+        configureNavigationBar()
+        configureRightBarBtn(
+            btnImg: configureBagsUI(item: item)?
                 .withRenderingMode(.alwaysOriginal),
-            style: .plain,
-            target: self,
-            action: #selector(shoppingBagsTapped)
+            btnAction: #selector(shoppingBagsTapped)
         )
-        navigationController?
-            .interactivePopGestureRecognizer?.delegate = nil
         navigationController?.navigationBar.tintColor = Constant.Colors.black
     }
     private func configureBagsUI(item: Item?) -> UIImage? {
@@ -65,9 +56,6 @@ public final class ItemDetailWebViewController: UIViewController {
         return isContainedItem
         ? Constant.Images.likeSelected
         : Constant.Images.likeUnselected
-    }
-    @objc private func customBackBtnTapped() {
-        navigationController?.popViewController(animated: true)
     }
     @objc private func shoppingBagsTapped(sender: UIBarButtonItem) {
         guard let itemInfo else { return }

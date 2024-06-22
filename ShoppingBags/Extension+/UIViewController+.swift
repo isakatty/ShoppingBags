@@ -70,4 +70,26 @@ extension UIViewController {
             animated: true
         )
     }
+    func configureRightBarBtn(
+        btnTitle: String,
+        btnAction: Selector?
+    ) {
+        navigationItem.rightBarButtonItem = UIBarButtonItem(
+            title: btnTitle,
+            style: .plain,
+            target: self,
+            action: btnAction
+        )
+    }
+    func configureRightBarBtn(
+        btnImg: UIImage?,
+        btnAction: Selector?
+    ) {
+        navigationItem.rightBarButtonItem = UIBarButtonItem(
+            image: btnImg,
+            style: .plain,
+            target: self,
+            action: btnAction
+        )
+    }
 }

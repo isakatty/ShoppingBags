@@ -11,7 +11,7 @@ public final class EditingProfileImgViewController: UIViewController {
     public var selectedImgName: String?
     public var viewFlow: ViewFlow
     private let cameraView = CircledCameraView()
-    private lazy var mainCircledImg = CircledProfileView()
+    private lazy var mainCircledImg = CircledProfileView(hasClearBtn: false)
     private lazy var imgCollectionView: UICollectionView = {
         let collection = UICollectionView(
             frame: .zero,

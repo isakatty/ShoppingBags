@@ -13,8 +13,8 @@ public final class ProfileSettingViewController: UIViewController {
     private lazy var profileImgStr: String = UserDefaultsManager.shared
         .getValue(forKey: .profileImgTitle) 
     ?? "profile_" + "\(Int.random(in: 0...11))"
-    private lazy var profileImg: CircledProfileViewBtn = {
-        let profileView = CircledProfileViewBtn()
+    private lazy var profileImg: CircledProfileView = {
+        let profileView = CircledProfileView(hasClearBtn: true)
         profileView.clearButton.addTarget(
             self,
             action: #selector(profileImgClicked),

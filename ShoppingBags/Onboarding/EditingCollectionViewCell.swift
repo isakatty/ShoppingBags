@@ -8,7 +8,7 @@
 import UIKit
 
 public final class EditingCollectionViewCell: UICollectionViewCell {
-    public let profileImage = CircledProfileViewBtn()
+    public let profileImage = CircledProfileView(hasClearBtn: true)
     
     public override init(frame: CGRect) {
         super.init(frame: .zero)

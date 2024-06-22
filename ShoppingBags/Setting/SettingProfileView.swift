@@ -14,7 +14,7 @@ public final class SettingProfileView: UIView {
         return btn
     }()
     
-    private let profileImg = CircledProfileView()
+    private let profileImg = CircledProfileView(hasClearBtn: false)
     private let profileName: UILabel = {
         let label = UILabel()
         label.font = Constant.Font.bold17

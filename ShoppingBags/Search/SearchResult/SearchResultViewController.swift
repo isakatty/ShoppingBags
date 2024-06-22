@@ -7,8 +7,6 @@
 
 import UIKit
 
-import Alamofire
-
 public final class SearchResultViewController: UIViewController {
     public var searchedText: String?
     private var isLastPage: Bool = false
@@ -55,7 +53,7 @@ public final class SearchResultViewController: UIViewController {
         configureHierarchy()
         configureLayout()
         configureBtn()
-        callRequest(
+        fetchData(
             searchText: searchedText,
             startPage: page,
             sorting: sorting
@@ -103,85 +101,36 @@ public final class SearchResultViewController: UIViewController {
                 )
             }
     }
-    
-    private func callRequest(
-        searchText: String,
+    private func fetchData(
+        searchText: String?,
         startPage: Int,
         sorting: SortedItem
     ) {
-        let url = makeURL(
-            with: searchText,
-            with: startPage,
-            sorting: sorting
-        )
-        let header = makeHeader()
-        
-        AF.request(
-            url,
-            headers: header
-        )
-        .validate(statusCode: 200..<300)
-        .responseDecodable(of: Search.self) { [weak self] response in
-            guard let self else { return }
-            switch response.result {
-            case .success(let value):
-                if value.total == 0 {
+        NetworkManager.shared.callRequest(
+            searchText: searchText,
+            startPage: startPage,
+            sorting: sorting) { [weak self] search in
+                guard let self = self else { return }
+                if search.total == 0 {
                     addAlert()
                 } else {
-                    if value.start == value.totalPages {
+                    if search.start == search.totalPages {
                         isLastPage = true
                     }
-                    
                     if self.page == 1 {
-                        self.searchedResult = value
+                        self.searchedResult = search
                         self.itemCollectionView.scrollsToTop = true
                     } else {
-                        self.searchedResult.items.append(contentsOf: value.items)
+                        self.searchedResult.items.append(
+                            contentsOf: search.items
+                        )
                     }
                     
                     self.totalItemLabel.text =
                     "\(self.searchedResult.totalItems)개의 검색 결과"
                     self.itemCollectionView.reloadData()
                 }
-            case .failure(let error):
-                // 재검색 유도
-                print(error)
             }
-        }
-    }
-    private func makeURL(
-        with searchText: String,
-        with startPage: Int,
-        sorting: SortedItem
-    ) -> String {
-        let baseURLString = Constant.Endpoint.baseURL
-        let queryParams: [String: String] = [
-            "query" : searchText,
-            "display" : String(30),
-            "start" : String(startPage),
-            "sort" : sorting.query
-        ]
-        let query = queryParams.map { "\($0.key)=\($0.value)" }
-            .joined(separator: "&")
-        
-        guard let encodedQuery = query
-            .addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)
-        else { return "" }
-        
-        return baseURLString + encodedQuery
-    }
-    private func makeHeader() -> HTTPHeaders {
-        let client_ID = Bundle.main.object(
-            forInfoDictionaryKey: "NAVER_SEARCH_API_CLIENT_ID"
-        ) as? String ?? ""
-        let client_Secret = Bundle.main.object(
-            forInfoDictionaryKey: "NAVER_SEARCH_API_CLIENT_SECRET"
-        ) as? String ?? ""
-        let header: HTTPHeaders = [
-            "X-Naver-Client-Id": client_ID,
-            "X-Naver-Client-Secret": client_Secret
-        ]
-        return header
     }
     private func collectionViewLayout() -> UICollectionViewLayout {
         let itemSize = NSCollectionLayoutSize(
@@ -224,7 +173,7 @@ public final class SearchResultViewController: UIViewController {
         sender.configureUISelected()
         
         guard let searchedText else { return }
-        callRequest(
+        fetchData(
             searchText: searchedText,
             startPage: 1,
             sorting: sender.sortCondition
@@ -310,9 +259,9 @@ extension SearchResultViewController
         for path in indexPaths {
             if searchedResult.items.count - 10 == path.item 
                 && isLastPage == false {
-                page += 1
+                page += 30
                 guard let searchedText else { return }
-                callRequest(
+                fetchData(
                     searchText: searchedText,
                     startPage: page,
                     sorting: sorting

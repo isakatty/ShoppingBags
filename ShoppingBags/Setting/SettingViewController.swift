@@ -152,27 +152,15 @@ extension SettingViewController: UITableViewDelegate, UITableViewDataSource {
         _ tableView: UITableView,
         didSelectRowAt indexPath: IndexPath
     ) {
-        let alert = UIAlertController(
+        tableView.reloadRows(at: [indexPath], with: .none)
+        showAlert(
             title: "탈퇴하기",
-            message: "탈퇴를 하면 데이터가 모두 초기화 됩니다. 탈퇴하시겠습니까?",
-            preferredStyle: .alert
-        )
-        let alertAction = UIAlertAction(
-            title: "확인",
-            style: .cancel) { [weak self] _ in
-                guard let self else { return }
-                self.returnOnboarding()
-                self.resetData()
-            }
-        let cancelAction = UIAlertAction(
-            title: "취소",
-            style: .destructive
-        )
-        alert.addAction(alertAction)
-        alert.addAction(cancelAction)
-        present(
-            alert,
-            animated: true
-        )
+            body: "탈퇴하면 모든 데이터가 초기화 됩니다. 탈퇴하시겠습니까?",
+            fineTitle: "확인"
+        ) { [weak self] _ in
+            guard let self else { return }
+            self.returnOnboarding()
+            self.resetData()
+        }
     }
 }

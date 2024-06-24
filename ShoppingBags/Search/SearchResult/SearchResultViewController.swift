@@ -112,7 +112,14 @@ public final class SearchResultViewController: UIViewController {
             sorting: sorting) { [weak self] search in
                 guard let self = self else { return }
                 if search.total == 0 {
-                    addAlert()
+                    showAlert(
+                        title: "검색하신 결과가 없습니다.",
+                        body: "입력하신 \(searchedText ?? "")에 관련된 정보가 없습니다.",
+                        fineTitle: "돌아가기"
+                    ) { [weak self] _ in
+                        guard let self else { return }
+                        navigationController?.popViewController(animated: true)
+                    }
                 } else {
                     if search.start == search.totalPages {
                         isLastPage = true
@@ -200,24 +207,6 @@ public final class SearchResultViewController: UIViewController {
                 item: sender.tag,
                 section: 0
             )]
-        )
-    }
-    private func addAlert() {
-        let alert = UIAlertController(
-            title: "검색한 결과가 없습니다.",
-            message: "입력하신 \(searchedText ?? "")에 관련된 데이터가 없습니다.",
-            preferredStyle: .alert
-        )
-        let action = UIAlertAction(
-            title: "돌아가기",
-            style: .destructive
-        ) { [weak self] _ in
-            self?.navigationController?.popViewController(animated: true)
-        }
-        alert.addAction(action)
-        present(
-            alert,
-            animated: true
         )
     }
 }

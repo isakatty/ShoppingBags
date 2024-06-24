@@ -20,7 +20,6 @@ extension UIViewController {
         navigationController?.navigationBar.scrollEdgeAppearance 
         = navigationController?.navigationBar.standardAppearance
     }
-    
     func configureNavigationBar() {
         navigationItem.leftBarButtonItem = UIBarButtonItem(
             image: Constant.SystemImages.leftChevron,
@@ -34,11 +33,41 @@ extension UIViewController {
     @objc func backBtnTapped() {
         navigationController?.popViewController(animated: true)
     }
-    
     func getImage(from string: String) -> UIImage? {
         guard let profileCase = Constant.ProfileImages.allCases.first(
             where: { $0.rawValue == string }
         ) else { return nil }
         return profileCase.profileImg
+    }
+    func showAlert(
+        title: String,
+        body: String,
+        fineTitle: String,
+        completionHandler: @escaping (UIAlertAction) -> Void
+    ) {
+        let alert = UIAlertController(
+            title: title,
+            message: body,
+            preferredStyle: .alert
+        )
+        
+        let cancel = UIAlertAction(
+            title: "취소",
+            style: .cancel
+        )
+        let check = UIAlertAction(
+            title: fineTitle,
+            style: .destructive
+        ) { action in
+            completionHandler(action)
+        }
+        
+        [cancel, check]
+            .forEach { alert.addAction($0) }
+        
+        present(
+            alert,
+            animated: true
+        )
     }
 }

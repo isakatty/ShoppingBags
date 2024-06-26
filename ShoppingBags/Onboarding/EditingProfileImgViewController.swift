@@ -26,8 +26,12 @@ public final class EditingProfileImgViewController: UIViewController {
         return collection
     }()
     
-    public init(viewFlow: ViewFlow) {
+    public init(
+        viewFlow: ViewFlow,
+        selectedName: String
+    ) {
         self.viewFlow = viewFlow
+        self.selectedImgName = selectedName
         
         super.init(nibName: nil, bundle: nil)
     }
@@ -82,7 +86,10 @@ public final class EditingProfileImgViewController: UIViewController {
         configureNavigationBar()
     }
     private func configureUI(img: UIImage?) {
-        mainCircledImg.configureUI(img: img, isSelected: true)
+        mainCircledImg.configureUI(
+            img: img,
+            isSelected: true
+        )
     }
     private func collectionViewLayout() -> UICollectionViewLayout {
         let itemSize = NSCollectionLayoutSize(

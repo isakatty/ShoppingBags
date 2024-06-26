@@ -156,8 +156,10 @@ public final class ProfileSettingViewController: UIViewController {
         }
     }
     @objc private func profileImgClicked() {
-        let vc = EditingProfileImgViewController(viewFlow: viewFlow)
-        vc.selectedImgName = profileImgStr
+        let vc = EditingProfileImgViewController(
+            viewFlow: viewFlow,
+            selectedName: profileImgStr
+        )
         navigationController?.pushViewController(
             vc,
             animated: true

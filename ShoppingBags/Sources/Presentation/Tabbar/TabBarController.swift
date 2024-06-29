@@ -17,43 +17,29 @@ final class TabBarController: UITabBarController {
         tabBar.tintColor = Constant.Colors.orange
         tabBar.unselectedItemTintColor = Constant.Colors.lightGray
         
-        let searchVC = SearchViewController()
-        let settingVC = SettingViewController()
-        
-        let firstTab = makeNavigationController(
-            with: searchVC,
-            title: "검색",
-            tabBarImg: Constant.SystemImages.glass,
-            tag: 0
-        )
-        let secondTab = makeNavigationController(
-            with: settingVC,
-            title: "설정",
-            tabBarImg: Constant.SystemImages.person,
-            tag: 1
-        )
+        let viewControllers = [
+            SearchViewController(),
+            SettingViewController()
+        ]
         
         setViewControllers(
-            [
-                firstTab,
-                secondTab
-            ],
+            configureTabs(vcGroup: viewControllers),
             animated: true
         )
     }
     
-    private func makeNavigationController(
-        with vc: UIViewController,
-        title: String,
-        tabBarImg: UIImage?,
-        tag: Int
-    ) -> UINavigationController {
-        let nav = UINavigationController(rootViewController: vc)
-        nav.tabBarItem = UITabBarItem(
-            title: title,
-            image: tabBarImg,
-            tag: tag
-        )
-        return nav
+    private func configureTabs(vcGroup: [UIViewController]) 
+    -> [UINavigationController] {
+        return vcGroup.enumerated().compactMap { (index, vc) in
+            let tabbarCase = Tabbar(rawValue: index)
+            let tab = UITabBarItem(
+                title: tabbarCase?.tabbarName,
+                image: tabbarCase?.tabBarImage,
+                tag: index
+            )
+            let navController = UINavigationController(rootViewController: vc)
+            navController.tabBarItem = tab
+            return navController
+        }
     }
 }

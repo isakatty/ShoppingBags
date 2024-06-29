@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		C901E2792C1B494B00F1FD44 /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = C901E2782C1B494B00F1FD44 /* .swiftlint.yml */; };
+		C9105C222C2FFCE200EEDD06 /* Tabbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9105C212C2FFCE200EEDD06 /* Tabbar.swift */; };
 		C93170D12C26CEDF003ECD8E /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C93170D02C26CEDF003ECD8E /* NetworkManager.swift */; };
 		C93B76102C1BE13C0059223A /* Constant.swift in Sources */ = {isa = PBXBuildFile; fileRef = C93B760F2C1BE13C0059223A /* Constant.swift */; };
 		C93B76152C1BE7730059223A /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C93B76142C1BE7730059223A /* OnboardingViewController.swift */; };
@@ -56,6 +57,7 @@
 
 /* Begin PBXFileReference section */
 		C901E2782C1B494B00F1FD44 /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
+		C9105C212C2FFCE200EEDD06 /* Tabbar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tabbar.swift; sourceTree = "<group>"; };
 		C93170D02C26CEDF003ECD8E /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		C93B760F2C1BE13C0059223A /* Constant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constant.swift; sourceTree = "<group>"; };
 		C93B76142C1BE7730059223A /* OnboardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewController.swift; sourceTree = "<group>"; };
@@ -234,6 +236,7 @@
 				C93B76712C1F05210059223A /* Setting.swift */,
 				C93B767D2C201A090059223A /* ViewTitle.swift */,
 				C93B76832C205D240059223A /* ViewFlow.swift */,
+				C9105C212C2FFCE200EEDD06 /* Tabbar.swift */,
 			);
 			path = Entity;
 			sourceTree = "<group>";
@@ -458,6 +461,7 @@
 				C93B76652C1EC3130059223A /* ReuseIdentifier.swift in Sources */,
 				C93B767A2C1FFE0B0059223A /* SettingProfileView.swift in Sources */,
 				C93B764E2C1D8B990059223A /* UserDefaultsManager.swift in Sources */,
+				C9105C222C2FFCE200EEDD06 /* Tabbar.swift in Sources */,
 				C93B763C2C1D4B840059223A /* SettingViewController.swift in Sources */,
 				C93170D12C26CEDF003ECD8E /* NetworkManager.swift in Sources */,
 				C93B76472C1D59A00059223A /* UITableViewCell+.swift in Sources */,

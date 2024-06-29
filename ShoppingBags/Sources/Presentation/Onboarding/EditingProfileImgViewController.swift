@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class EditingProfileImgViewController: UIViewController {
+final class EditingProfileImgViewController: BaseViewController {
     var selectedImgName: String?
     var viewFlow: ViewFlow
     private let cameraView = CircledCameraView()
@@ -35,9 +35,6 @@ final class EditingProfileImgViewController: UIViewController {
         
         super.init(nibName: nil, bundle: nil)
     }
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -55,7 +52,6 @@ final class EditingProfileImgViewController: UIViewController {
             .forEach { view.addSubview($0) }
     }
     private func configureLayout() {
-        view.backgroundColor = .systemBackground
         let safeArea = view.safeAreaLayoutGuide
         
         mainCircledImg.snp.makeConstraints { make in

@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class SearchViewController: UIViewController {
+final class SearchViewController: BaseViewController {
     private var isRecentSearched: Bool = false
     private var searchedResult: [String] = [] {
         didSet {
@@ -45,6 +45,8 @@ final class SearchViewController: UIViewController {
         navigationItem.searchController = searchController
         navigationItem.hidesSearchBarWhenScrolling = false
         configureBtns()
+        configureHierarchy()
+        configureLayout()
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -54,30 +56,21 @@ final class SearchViewController: UIViewController {
         navigationItem.hidesSearchBarWhenScrolling = false
     }
     private func configureHierarchy() {
-        if isRecentSearched {
-            [searchedView, searchedTableView]
-                .forEach { view.addSubview($0) }
-        } else {
-            [emptyView]
-                .forEach { view.addSubview($0) }
-        }
+        [searchedView, searchedTableView, emptyView]
+            .forEach { view.addSubview($0) }
     }
     private func configureLayout() {
         let safeArea = view.safeAreaLayoutGuide
-        view.backgroundColor = .systemBackground
-        if isRecentSearched {
-            searchedView.snp.makeConstraints { make in
-                make.top.leading.trailing.equalTo(safeArea)
-                make.height.equalTo(40)
-            }
-            searchedTableView.snp.makeConstraints { make in
-                make.top.equalTo(searchedView.snp.bottom)
-                make.leading.trailing.bottom.equalTo(safeArea)
-            }
-        } else {
-            emptyView.snp.makeConstraints { make in
-                make.edges.equalTo(safeArea)
-            }
+        searchedView.snp.makeConstraints { make in
+            make.top.leading.trailing.equalTo(safeArea)
+            make.height.equalTo(40)
+        }
+        searchedTableView.snp.makeConstraints { make in
+            make.top.equalTo(searchedView.snp.bottom)
+            make.leading.trailing.bottom.equalTo(safeArea)
+        }
+        emptyView.snp.makeConstraints { make in
+            make.edges.equalTo(safeArea)
         }
     }
     private func configureBtns() {
@@ -90,16 +83,22 @@ final class SearchViewController: UIViewController {
     private func fetchData() {
         searchedResult = UserDefaultsManager.shared
             .getValue(forKey: .searchedText) ?? []
+        print(searchedResult, #function)
         isRecentSearched = !searchedResult.isEmpty ? true : false
-        searchedView.removeFromSuperview()
-        emptyView.removeFromSuperview()
-        configureHierarchy()
-        configureLayout()
+        if isRecentSearched {
+            emptyView.isHidden = true
+            [searchedView, searchedTableView]
+                .forEach { $0.isHidden = false }
+        } else {
+            emptyView.isHidden = false
+            [searchedView, searchedTableView]
+                .forEach { $0.isHidden = true }
+        }
     }
     @objc private func eraseBtnTapped() {
-        let erasedArray: [String] = []
+        searchedResult.removeAll()
         UserDefaultsManager.shared.saveValue(
-            erasedArray,
+            searchedResult,
             forKey: .searchedText
         )
         fetchData()
@@ -110,6 +109,7 @@ final class SearchViewController: UIViewController {
             searchedResult,
             forKey: .searchedText
         )
+        print("=======")
         fetchData()
     }
 }

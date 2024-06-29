@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class SearchResultSortingView: UIView {
+final class SearchResultSortingView: BaseView {
     lazy var accuracyBtn = SortingButton(
         titleForButton: SortedItem.accuracy,
         tag: 0
@@ -29,10 +29,6 @@ final class SearchResultSortingView: UIView {
         super.init(frame: .zero)
         configureHierarchy()
         configureLayout()
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
     }
     
     private func configureHierarchy() {

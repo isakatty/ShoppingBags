@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class SettingViewController: UIViewController {
+final class SettingViewController: BaseViewController {
     private var nickname: String = ""
     private var profileImgTitle: String = ""
     private var signupDate: String = ""
@@ -64,7 +64,6 @@ final class SettingViewController: UIViewController {
             .forEach { view.addSubview($0) }
     }
     private func configureLayout() {
-        view.backgroundColor = .systemBackground
         let safeArea = view.safeAreaLayoutGuide
         profileView.snp.makeConstraints { make in
             make.top.equalTo(safeArea).offset(16)
@@ -149,8 +148,8 @@ extension SettingViewController: UITableViewDelegate, UITableViewDataSource {
             fineTitle: "확인"
         ) { [weak self] _ in
             guard let self else { return }
-            changeWindows(to: OnboardingViewController())
             self.resetData()
+            changeWindows(to: OnboardingViewController())
         }
     }
 }

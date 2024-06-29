@@ -9,7 +9,7 @@ import UIKit
 
 import SnapKit
 
-final class OnboardingViewController: UIViewController {
+final class OnboardingViewController: BaseViewController {
     
     private let titleLabel: UILabel = {
         let label = UILabel()
@@ -56,7 +56,6 @@ final class OnboardingViewController: UIViewController {
             .forEach { view.addSubview($0) }
     }
     private func configureLayout() {
-        view.backgroundColor = .systemBackground
         let safeArea = view.safeAreaLayoutGuide
         
         titleLabel.snp.makeConstraints { make in

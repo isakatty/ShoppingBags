@@ -9,6 +9,9 @@
 /* Begin PBXBuildFile section */
 		C901E2792C1B494B00F1FD44 /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = C901E2782C1B494B00F1FD44 /* .swiftlint.yml */; };
 		C9105C222C2FFCE200EEDD06 /* Tabbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9105C212C2FFCE200EEDD06 /* Tabbar.swift */; };
+		C9105C252C30217E00EEDD06 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9105C242C30217E00EEDD06 /* BaseViewController.swift */; };
+		C9105C272C30231700EEDD06 /* BaseTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9105C262C30231700EEDD06 /* BaseTableViewCell.swift */; };
+		C9105C292C30235400EEDD06 /* BaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9105C282C30235400EEDD06 /* BaseView.swift */; };
 		C93170D12C26CEDF003ECD8E /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C93170D02C26CEDF003ECD8E /* NetworkManager.swift */; };
 		C93B76102C1BE13C0059223A /* Constant.swift in Sources */ = {isa = PBXBuildFile; fileRef = C93B760F2C1BE13C0059223A /* Constant.swift */; };
 		C93B76152C1BE7730059223A /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C93B76142C1BE7730059223A /* OnboardingViewController.swift */; };
@@ -58,6 +61,9 @@
 /* Begin PBXFileReference section */
 		C901E2782C1B494B00F1FD44 /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
 		C9105C212C2FFCE200EEDD06 /* Tabbar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tabbar.swift; sourceTree = "<group>"; };
+		C9105C242C30217E00EEDD06 /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
+		C9105C262C30231700EEDD06 /* BaseTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTableViewCell.swift; sourceTree = "<group>"; };
+		C9105C282C30235400EEDD06 /* BaseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseView.swift; sourceTree = "<group>"; };
 		C93170D02C26CEDF003ECD8E /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		C93B760F2C1BE13C0059223A /* Constant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constant.swift; sourceTree = "<group>"; };
 		C93B76142C1BE7730059223A /* OnboardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewController.swift; sourceTree = "<group>"; };
@@ -158,6 +164,7 @@
 		C9105C1E2C2FEEE400EEDD06 /* Presentation */ = {
 			isa = PBXGroup;
 			children = (
+				C9105C232C30217700EEDD06 /* Base */,
 				C93B761F2C1BF70F0059223A /* CustomView */,
 				C93B763D2C1D4BB10059223A /* Tabbar */,
 				C93B76132C1BE6C00059223A /* Search */,
@@ -184,6 +191,16 @@
 				C93170D02C26CEDF003ECD8E /* NetworkManager.swift */,
 			);
 			path = Network;
+			sourceTree = "<group>";
+		};
+		C9105C232C30217700EEDD06 /* Base */ = {
+			isa = PBXGroup;
+			children = (
+				C9105C242C30217E00EEDD06 /* BaseViewController.swift */,
+				C9105C262C30231700EEDD06 /* BaseTableViewCell.swift */,
+				C9105C282C30235400EEDD06 /* BaseView.swift */,
+			);
+			path = Base;
 			sourceTree = "<group>";
 		};
 		C93B76112C1BE1490059223A /* Constant */ = {
@@ -454,11 +471,13 @@
 				C93B76702C1F00630059223A /* SettingTableViewCell.swift in Sources */,
 				C93B76372C1C3DD00059223A /* SearchResultEmptyView.swift in Sources */,
 				C9CCACE72C217E88000A6915 /* UILabel+.swift in Sources */,
+				C9105C272C30231700EEDD06 /* BaseTableViewCell.swift in Sources */,
 				C93B76172C1BEA000059223A /* RoundedButton.swift in Sources */,
 				C96663342C1B1D53009E48F6 /* AppDelegate.swift in Sources */,
 				C93B76722C1F05210059223A /* Setting.swift in Sources */,
 				C93B76152C1BE7730059223A /* OnboardingViewController.swift in Sources */,
 				C93B76652C1EC3130059223A /* ReuseIdentifier.swift in Sources */,
+				C9105C252C30217E00EEDD06 /* BaseViewController.swift in Sources */,
 				C93B767A2C1FFE0B0059223A /* SettingProfileView.swift in Sources */,
 				C93B764E2C1D8B990059223A /* UserDefaultsManager.swift in Sources */,
 				C9105C222C2FFCE200EEDD06 /* Tabbar.swift in Sources */,
@@ -480,6 +499,7 @@
 				C93B76582C1DBC3E0059223A /* Search.swift in Sources */,
 				C93B76392C1D4B170059223A /* SearchViewController.swift in Sources */,
 				C93B76502C1D8CB30059223A /* SaveData.swift in Sources */,
+				C9105C292C30235400EEDD06 /* BaseView.swift in Sources */,
 				C93B76672C1ECC080059223A /* SortingButton.swift in Sources */,
 				C93B76102C1BE13C0059223A /* Constant.swift in Sources */,
 				C93B765C2C1E866D0059223A /* SearchedItemCollectionViewCell.swift in Sources */,

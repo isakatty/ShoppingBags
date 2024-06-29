@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class CircledProfileView: UIView {
+final class CircledProfileView: BaseView {
     var profileImg = UIImageView()
     var clearButton: UIButton = {
         let btn = UIButton()
@@ -24,10 +24,6 @@ final class CircledProfileView: UIView {
         
         configureHierarchy(with: hasClearBtn)
         configureLayout(with: hasClearBtn)
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
     }
     
     private func configureHierarchy(with clearBtn: Bool) {
@@ -48,7 +44,6 @@ final class CircledProfileView: UIView {
         }
     }
     private func configureView(isSelected: Bool) {
-        backgroundColor = .white
         clipsToBounds = true
         layer.borderWidth = isSelected ? 3 : 1
         layer.borderColor = isSelected

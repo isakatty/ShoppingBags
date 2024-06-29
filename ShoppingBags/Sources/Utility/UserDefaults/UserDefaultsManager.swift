@@ -30,3 +30,58 @@ final class UserDefaultsManager {
         UserDefaults.standard.removeObject(forKey: key.rawValue)
     }
 }
+/*
+@propertyWrapper
+struct UserDefault<T> {
+    let key: SaveData
+    let defaultValue: T
+    
+    var wrappedValue: T {
+        get {
+            UserDefaultsManager.shared
+                .getValue(forKey: key) ?? self.defaultValue
+        }
+        set {
+            UserDefaultsManager.shared.saveValue(
+                newValue,
+                forKey: key
+            )
+        }
+    }
+}
+
+final class UserManager {
+    static let shared = UserManager()
+    
+    private init() { }
+    
+    @UserDefault(
+        key: SaveData.signupDate,
+        defaultValue: nil
+    )
+    var signUpDate: String?
+    
+    @UserDefault(
+        key: SaveData.nickname,
+        defaultValue: ""
+    )
+    var nickname: String
+    
+    @UserDefault(
+        key: SaveData.profileImgTitle,
+        defaultValue: "profile_" + "\(Int.random(in: 0...11))"
+    )
+    var profileImgName: String
+    
+    @UserDefault(key: SaveData.searchedText, defaultValue: [""])
+    var searchedText: [String]
+    
+    @UserDefault(key: SaveData.shoppingBags, defaultValue: [""])
+    var shoppingBags: [String]
+    
+    
+    func removeAllData() {
+        
+    }
+}
+*/

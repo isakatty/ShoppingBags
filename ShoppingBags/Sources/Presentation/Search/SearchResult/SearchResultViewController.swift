@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class SearchResultViewController: UIViewController {
+final class SearchResultViewController: BaseViewController {
     var searchedText: String?
     private var isLastPage: Bool = false
     private var page: Int = 1
@@ -69,7 +69,6 @@ final class SearchResultViewController: UIViewController {
             .forEach { view.addSubview($0) }
     }
     private func configureLayout() {
-        view.backgroundColor = .systemBackground
         let safeArea = view.safeAreaLayoutGuide
         totalItemLabel.snp.makeConstraints { make in
             make.top.trailing.equalTo(safeArea)
@@ -155,7 +154,9 @@ final class SearchResultViewController: UIViewController {
             subitem: item,
             count: 2
         )
-        group.interItemSpacing = .fixed(Constant.CollectionCell.spacing.rawValue)
+        group.interItemSpacing = .fixed(
+            Constant.CollectionCell.spacing.rawValue
+        )
         
         let section = NSCollectionLayoutSection(group: group)
         section.interGroupSpacing = Constant.CollectionCell.spacing.rawValue

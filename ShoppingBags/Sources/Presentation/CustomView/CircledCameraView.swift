@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class CircledCameraView: UIView {
+final class CircledCameraView: BaseView {
     private let cameraImg: UIImageView = {
         let imageView = UIImageView()
         imageView.clipsToBounds = true
@@ -23,9 +23,6 @@ final class CircledCameraView: UIView {
         
         configureHierarchy()
         configureLayout()
-    }
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
     }
     
     private func configureHierarchy() {

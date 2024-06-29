@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class NameTextFieldView: UIView {
+final class NameTextFieldView: BaseView {
     var changedValid: ((Bool) -> Void)?
     var validatePass: Bool = false
     var textFieldStatus: TextFieldStatus = .includeIcons
@@ -39,10 +39,6 @@ final class NameTextFieldView: UIView {
         configureHierarchy()
         configureLayout()
         configureUI(status: textFieldStatus)
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
     }
     
     private func configureHierarchy() {

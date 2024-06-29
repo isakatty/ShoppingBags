@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class SettingProfileView: UIView {
+final class SettingProfileView: BaseView {
     let clearBtn: UIButton = {
         let btn = UIButton()
         btn.setTitle("", for: .normal)
@@ -43,17 +43,11 @@ final class SettingProfileView: UIView {
         configureLayout()
     }
     
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
     private func configureHierarchy() {
         [profileImg, profileName, profileDate, rightChevronImg, clearBtn]
             .forEach { addSubview($0) }
     }
     private func configureLayout() {
-        backgroundColor = .systemBackground
-        
         profileImg.snp.makeConstraints { make in
             make.top.bottom.equalToSuperview()
             make.leading.equalToSuperview().inset(16)

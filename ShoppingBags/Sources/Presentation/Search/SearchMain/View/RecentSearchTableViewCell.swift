@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class RecentSearchTableViewCell: UITableViewCell {
+final class RecentSearchTableViewCell: BaseTableViewCell {
     private let timeImg: UIImageView = {
         let img = UIImageView()
         img.image = Constant.SystemImages.clock?
@@ -48,9 +48,6 @@ final class RecentSearchTableViewCell: UITableViewCell {
         )
         configureHierarchy()
         configureLayout()
-    }
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
     }
     
     private func configureHierarchy() {

@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class SettingTableViewCell: UITableViewCell {
+final class SettingTableViewCell: BaseTableViewCell {
     private let settingLabel: UILabel = {
         let label = UILabel()
         label.textColor = Constant.Colors.black
@@ -42,9 +42,6 @@ final class SettingTableViewCell: UITableViewCell {
         
         configureHierarchy()
         configureLayout()
-    }
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
     }
     
     private func configureHierarchy() {

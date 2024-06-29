@@ -122,7 +122,7 @@ final class SearchedItemCollectionViewCell: UICollectionViewCell {
     }
     
     private func fetchFavItems(itemID: String) {
-        var favItems: [String] = UserDefaultsManager.shared
+        let favItems: [String] = UserDefaultsManager.shared
             .getValue(forKey: .shoppingBags) ?? []
         configureBtnUI(isContained: favItems.contains(itemID))
     }

@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class SearchResultEmptyView: UIView {
+final class SearchResultEmptyView: BaseView {
     private lazy var emptyImageView: UIImageView = {
         let view = UIImageView()
         view.image = Constant.Images.empty
@@ -31,9 +31,6 @@ final class SearchResultEmptyView: UIView {
         configureLayout()
     }
     
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
     private func configureHierarchy() {
         [emptyImageView, emptyLabel]
             .forEach { addSubview($0) }

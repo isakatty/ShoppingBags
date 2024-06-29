@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class RecentSearchedView: UIView {
+final class RecentSearchedView: BaseView {
     private let recentLabel: UILabel = {
         let label = UILabel()
         label.font = Constant.Font.bold15
@@ -35,10 +35,6 @@ final class RecentSearchedView: UIView {
         configureHierarchy()
         configureLayout()
         configureRecentView()
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
     }
     
     private func configureHierarchy() {

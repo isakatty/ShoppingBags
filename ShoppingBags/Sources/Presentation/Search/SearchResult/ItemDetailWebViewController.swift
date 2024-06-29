@@ -8,7 +8,7 @@
 import UIKit
 import WebKit
 
-final class ItemDetailWebViewController: UIViewController {
+final class ItemDetailWebViewController: BaseViewController {
     var itemInfo: Item?
     private var isContainedItem: Bool?
     private let webView = WKWebView()
@@ -28,7 +28,6 @@ final class ItemDetailWebViewController: UIViewController {
         view.addSubview(webView)
     }
     private func configureLayout() {
-        view.backgroundColor = .systemBackground
         let safeArea = view.safeAreaLayoutGuide
         webView.snp.makeConstraints { make in
             make.edges.equalTo(safeArea)

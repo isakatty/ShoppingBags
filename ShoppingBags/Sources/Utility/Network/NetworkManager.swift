@@ -9,72 +9,39 @@ import Foundation
 
 import Alamofire
 
+enum NetworkError: Error {
+    case invalidURL
+    case invalidData
+}
+
 final class NetworkManager {
     static let shared = NetworkManager()
     
     private init() { }
     
-    func callRequest(
-        searchText: String?,
-        startPage: Int,
-        sorting: SortedItem,
-        completion: @escaping (ShoppingSearch) -> Void
+    func requestShopping<T: Decodable>(
+        endpoint: ShoppingRequest,
+        type: T.Type,
+        completionHandler: @escaping (T?, String?) -> Void
     ) {
-        let url = makeURL(
-            with: searchText ?? "",
-            with: startPage,
-            sorting: sorting
-        )
-        let header = makeHeader()
+        guard let url = URL(string: endpoint.toURLString) else {
+            print(NetworkError.invalidURL)
+            return
+        }
         
         AF.request(
             url,
-            headers: header
+            method: HTTPMethod(rawValue: endpoint.method),
+            headers: HTTPHeaders(endpoint.header)
         )
         .validate(statusCode: 200..<300)
-        .responseDecodable(of: ShoppingSearch.self) { response in
+        .responseDecodable(of: type.self) { response in
             switch response.result {
             case .success(let value):
-                completion(value)
-            case .failure(let error):
-                // 재검색 유도
-                print(error)
+                completionHandler(value, nil)
+            case .failure(_):
+                completionHandler(nil, NetworkError.invalidData.localizedDescription)
             }
         }
-    }
-    private func makeURL(
-        with searchText: String,
-        with startPage: Int,
-        sorting: SortedItem
-    ) -> String {
-        let baseURLString = Constant.Endpoint.baseURL
-        let queryParams: [String: String] = [
-            "query": searchText,
-            "display": String(30),
-            "start": String(startPage),
-            "sort": sorting.query
-        ]
-        let query = queryParams.map { "\($0.key)=\($0.value)" }
-            .joined(separator: "&")
-        
-        guard let encodedQuery = query
-            .addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)
-        else { return "" }
-        
-        return baseURLString + encodedQuery
-    }
-    
-    private func makeHeader() -> HTTPHeaders {
-        let client_ID = Bundle.main.object(
-            forInfoDictionaryKey: "NAVER_SEARCH_API_CLIENT_ID"
-        ) as? String ?? ""
-        let client_Secret = Bundle.main.object(
-            forInfoDictionaryKey: "NAVER_SEARCH_API_CLIENT_SECRET"
-        ) as? String ?? ""
-        let header: HTTPHeaders = [
-            "X-Naver-Client-Id": client_ID,
-            "X-Naver-Client-Secret": client_Secret
-        ]
-        return header
     }
 }

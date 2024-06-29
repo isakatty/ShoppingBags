@@ -105,38 +105,53 @@ final class SearchResultViewController: BaseViewController {
         startPage: Int,
         sorting: SortedItem
     ) {
-        NetworkManager.shared.callRequest(
-            searchText: searchText,
-            startPage: startPage,
-            sorting: sorting) { [weak self] search in
-                guard let self = self else { return }
-                if search.total == 0 {
+        guard let searchText else {
+            print(#function, "searchText 없음")
+            return
+        }
+        NetworkManager.shared.requestShopping(
+            endpoint: .naverShopping(
+                searchText: searchText,
+                startPage: startPage,
+                sort: sorting
+            ),
+            type: ShoppingSearch.self
+        ) { [weak self] shopping, error in
+            if let error {
+                print(#function, error)
+            } else {
+                guard let self else { return }
+                guard let shopping else {
+                    print(#function, "- shoppingData 없음")
+                    return
+                }
+                if shopping.total == 0 {
                     showAlert(
                         title: "검색하신 결과가 없습니다.",
-                        body: "입력하신 \(searchedText ?? "")에 관련된 정보가 없습니다.",
+                        body: "입력하신 \(searchText)에 관련된 정보가 없습니다.",
                         fineTitle: "돌아가기"
                     ) { [weak self] _ in
                         guard let self else { return }
                         navigationController?.popViewController(animated: true)
                     }
                 } else {
-                    if search.start == search.totalPages {
+                    if shopping.start == shopping.totalPages {
                         isLastPage = true
                     }
                     if self.page == 1 {
-                        self.searchedResult = search
+                        self.searchedResult = shopping
                         self.itemCollectionView.scrollsToTop = true
                     } else {
                         self.searchedResult.items.append(
-                            contentsOf: search.items
+                            contentsOf: shopping.items
                         )
                     }
-                    
                     self.totalItemLabel.text =
                     "\(self.searchedResult.totalItems)개의 검색 결과"
                     self.itemCollectionView.reloadData()
                 }
             }
+        }
     }
     private func collectionViewLayout() -> UICollectionViewLayout {
         let itemSize = NSCollectionLayoutSize(
@@ -253,7 +268,7 @@ extension SearchResultViewController
         prefetchItemsAt indexPaths: [IndexPath]
     ) {
         for path in indexPaths {
-            if searchedResult.items.count - 10 == path.item 
+            if searchedResult.items.count - 10 == path.item
                 && isLastPage == false {
                 page += 30
                 guard let searchedText else { return }

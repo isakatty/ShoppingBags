@@ -116,6 +116,74 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		C9105C1A2C2FEE2400EEDD06 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				C966633C2C1B1D54009E48F6 /* Assets.xcassets */,
+				C966633E2C1B1D54009E48F6 /* LaunchScreen.storyboard */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		C9105C1B2C2FEE2C00EEDD06 /* Sources */ = {
+			isa = PBXGroup;
+			children = (
+				C9105C1C2C2FEED300EEDD06 /* App */,
+				C9105C1D2C2FEEDE00EEDD06 /* Model */,
+				C9105C1E2C2FEEE400EEDD06 /* Presentation */,
+				C9105C1F2C2FEEEA00EEDD06 /* Utility */,
+			);
+			path = Sources;
+			sourceTree = "<group>";
+		};
+		C9105C1C2C2FEED300EEDD06 /* App */ = {
+			isa = PBXGroup;
+			children = (
+				C96663332C1B1D53009E48F6 /* AppDelegate.swift */,
+				C96663352C1B1D53009E48F6 /* SceneDelegate.swift */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		C9105C1D2C2FEEDE00EEDD06 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				C93B76332C1C326E0059223A /* Entity */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		C9105C1E2C2FEEE400EEDD06 /* Presentation */ = {
+			isa = PBXGroup;
+			children = (
+				C93B761F2C1BF70F0059223A /* CustomView */,
+				C93B763D2C1D4BB10059223A /* Tabbar */,
+				C93B76132C1BE6C00059223A /* Search */,
+				C93B763A2C1D4B770059223A /* Setting */,
+				C93B76122C1BE6B40059223A /* Onboarding */,
+			);
+			path = Presentation;
+			sourceTree = "<group>";
+		};
+		C9105C1F2C2FEEEA00EEDD06 /* Utility */ = {
+			isa = PBXGroup;
+			children = (
+				C93B76852C207FE90059223A /* UserDefaults */,
+				C9105C202C2FF12600EEDD06 /* Network */,
+				C93B764B2C1D81830059223A /* Extension+ */,
+				C93B76112C1BE1490059223A /* Constant */,
+			);
+			path = Utility;
+			sourceTree = "<group>";
+		};
+		C9105C202C2FF12600EEDD06 /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				C93170D02C26CEDF003ECD8E /* NetworkManager.swift */,
+			);
+			path = Network;
+			sourceTree = "<group>";
+		};
 		C93B76112C1BE1490059223A /* Constant */ = {
 			isa = PBXGroup;
 			children = (
@@ -267,20 +335,8 @@
 		C96663322C1B1D53009E48F6 /* ShoppingBags */ = {
 			isa = PBXGroup;
 			children = (
-				C93170D02C26CEDF003ECD8E /* NetworkManager.swift */,
-				C93B76852C207FE90059223A /* UserDefaults */,
-				C93B764B2C1D81830059223A /* Extension+ */,
-				C93B76112C1BE1490059223A /* Constant */,
-				C93B763D2C1D4BB10059223A /* Tabbar */,
-				C93B76132C1BE6C00059223A /* Search */,
-				C93B763A2C1D4B770059223A /* Setting */,
-				C93B76332C1C326E0059223A /* Entity */,
-				C93B761F2C1BF70F0059223A /* CustomView */,
-				C93B76122C1BE6B40059223A /* Onboarding */,
-				C96663332C1B1D53009E48F6 /* AppDelegate.swift */,
-				C96663352C1B1D53009E48F6 /* SceneDelegate.swift */,
-				C966633C2C1B1D54009E48F6 /* Assets.xcassets */,
-				C966633E2C1B1D54009E48F6 /* LaunchScreen.storyboard */,
+				C9105C1A2C2FEE2400EEDD06 /* Resources */,
+				C9105C1B2C2FEE2C00EEDD06 /* Sources */,
 				C96663412C1B1D54009E48F6 /* Info.plist */,
 				C93B764C2C1D81C70059223A /* Config.xcconfig */,
 			);

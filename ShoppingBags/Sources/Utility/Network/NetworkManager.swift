@@ -32,8 +32,7 @@ public final class NetworkManager {
             headers: header
         )
         .validate(statusCode: 200..<300)
-        .responseDecodable(of: Search.self) { [weak self] response in
-            guard let self else { return }
+        .responseDecodable(of: Search.self) { response in
             switch response.result {
             case .success(let value):
                 completion(value)

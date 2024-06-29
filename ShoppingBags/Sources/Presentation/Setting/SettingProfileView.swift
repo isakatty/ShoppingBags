@@ -7,8 +7,8 @@
 
 import UIKit
 
-public final class SettingProfileView: UIView {
-    public let clearBtn: UIButton = {
+final class SettingProfileView: UIView {
+    let clearBtn: UIButton = {
         let btn = UIButton()
         btn.setTitle("", for: .normal)
         return btn
@@ -36,7 +36,7 @@ public final class SettingProfileView: UIView {
         return image
     }()
     
-    public override init(frame: CGRect) {
+    override init(frame: CGRect) {
         super.init(frame: .zero)
         
         configureHierarchy()
@@ -80,7 +80,7 @@ public final class SettingProfileView: UIView {
         
     }
     
-    public func configureUI(
+    func configureUI(
         img: UIImage?,
         nicknameTitle: String,
         dateTitle: String

@@ -7,11 +7,11 @@
 
 import UIKit
 
-public final class NameTextFieldView: UIView {
-    public var changedValid: ((Bool) -> Void)?
-    public var validatePass: Bool = false
-    public var textFieldStatus: TextFieldStatus = .includeIcons
-    public lazy var nameTextField: UITextField = {
+final class NameTextFieldView: UIView {
+    var changedValid: ((Bool) -> Void)?
+    var validatePass: Bool = false
+    var textFieldStatus: TextFieldStatus = .includeIcons
+    lazy var nameTextField: UITextField = {
         let textField = UITextField()
         textField.borderStyle = .none
         textField.attributedPlaceholder = NSAttributedString(
@@ -33,7 +33,7 @@ public final class NameTextFieldView: UIView {
         return label
     }()
     
-    public override init(frame: CGRect) {
+    override init(frame: CGRect) {
         super.init(frame: .zero)
         
         configureHierarchy()
@@ -70,7 +70,7 @@ public final class NameTextFieldView: UIView {
             make.bottom.greaterThanOrEqualToSuperview()
         }
     }
-    public func configureUI(status: TextFieldStatus) {
+    func configureUI(status: TextFieldStatus) {
         switch status {
         case .pass:
             validatePass = true
@@ -104,13 +104,13 @@ public final class NameTextFieldView: UIView {
 }
 
 extension NameTextFieldView: UITextFieldDelegate {
-    public func textFieldDidEndEditing(_ textField: UITextField) {
+    func textFieldDidEndEditing(_ textField: UITextField) {
         guard let text = textField.text else { return }
         textFieldStatus = validateTextField(text: text)
         configureUI(status: textFieldStatus)
     }
     
-    public func textField(
+    func textField(
         _ textField: UITextField,
         shouldChangeCharactersIn range: NSRange,
         replacementString string: String
@@ -132,7 +132,7 @@ extension NameTextFieldView: UITextFieldDelegate {
         return true
     }
     
-    public func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         guard let text = textField.text else { return false }
         textFieldStatus = validateTextField(text: text)
         configureUI(status: textFieldStatus)

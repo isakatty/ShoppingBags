@@ -7,7 +7,7 @@
 
 import Foundation
 
-public enum ViewTitle: String {
+enum ViewTitle: String {
     case profile = "PROFILE SETTING"
     case setting = "SETTING"
     case editSetting = "EDIT PROFILE"

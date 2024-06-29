@@ -9,7 +9,7 @@ import UIKit
 
 import Kingfisher
 
-public final class SearchedItemCollectionViewCell: UICollectionViewCell {
+final class SearchedItemCollectionViewCell: UICollectionViewCell {
     private let itemImgView: UIImageView = {
         let img = UIImageView()
         img.clipsToBounds = true
@@ -33,7 +33,7 @@ public final class SearchedItemCollectionViewCell: UICollectionViewCell {
         color: Constant.Colors.black,
         lines: 1
     )
-    public lazy var shoppingBtn: UIButton = {
+    lazy var shoppingBtn: UIButton = {
         var config = UIButton.Configuration.plain()
         config.image = Constant.Images.likeUnselected
         config.contentInsets = NSDirectionalEdgeInsets(
@@ -52,7 +52,7 @@ public final class SearchedItemCollectionViewCell: UICollectionViewCell {
         return btn
     }()
     
-    public override init(frame: CGRect) {
+    override init(frame: CGRect) {
         super.init(frame: frame)
         
         configureHierarchy()
@@ -110,7 +110,7 @@ public final class SearchedItemCollectionViewCell: UICollectionViewCell {
         label.numberOfLines = lines
         return label
     }
-    public func configureUI(item: Item, tag: Int) {
+    func configureUI(item: Item, tag: Int) {
         shoppingBtn.tag = tag
         fetchFavItems(itemID: item.productId)
         mallNameLabel.text = item.mallName
@@ -127,7 +127,7 @@ public final class SearchedItemCollectionViewCell: UICollectionViewCell {
         configureBtnUI(isContained: favItems.contains(itemID))
     }
     /// Btn UI
-    public func configureBtnUI(isContained: Bool) {
+    func configureBtnUI(isContained: Bool) {
         var config = UIButton.Configuration.plain()
         config.image = isContained
         ? Constant.Images.likeSelected
@@ -138,7 +138,7 @@ public final class SearchedItemCollectionViewCell: UICollectionViewCell {
         : Constant.Colors.lightGray
         shoppingBtn.layer.opacity = isContained ? 1.0 : 0.5
     }
-    public override func prepareForReuse() {
+    override func prepareForReuse() {
         super.prepareForReuse()
         
         itemImgView.image = nil

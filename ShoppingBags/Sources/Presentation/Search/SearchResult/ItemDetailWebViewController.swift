@@ -8,14 +8,14 @@
 import UIKit
 import WebKit
 
-public final class ItemDetailWebViewController: UIViewController {
-    public var itemInfo: Item?
+final class ItemDetailWebViewController: UIViewController {
+    var itemInfo: Item?
     private var isContainedItem: Bool?
     private let webView = WKWebView()
     private var favItems: [String] = UserDefaultsManager.shared
         .getValue(forKey: .shoppingBags) ?? []
     
-    public override func viewDidLoad() {
+    override func viewDidLoad() {
         super.viewDidLoad()
         
         configureNavigationBar(item: itemInfo)

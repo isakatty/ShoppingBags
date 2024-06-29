@@ -7,13 +7,13 @@
 
 import UIKit
 
-public final class UserDefaultsManager {
-    public static let shared = UserDefaultsManager()
+final class UserDefaultsManager {
+    static let shared = UserDefaultsManager()
 
     private init() {
         
     }
-    public func saveValue<T>(
+    func saveValue<T>(
         _ value: T,
         forKey key: SaveData
     ) {
@@ -22,11 +22,11 @@ public final class UserDefaultsManager {
             forKey: key.rawValue
         )
     }
-    public func getValue<T>(forKey key: SaveData) -> T? {
+    func getValue<T>(forKey key: SaveData) -> T? {
         return UserDefaults.standard.value(forKey: key.rawValue) as? T
     }
 
-    public func removeValue(forKey key: SaveData) {
+    func removeValue(forKey key: SaveData) {
         UserDefaults.standard.removeObject(forKey: key.rawValue)
     }
 }

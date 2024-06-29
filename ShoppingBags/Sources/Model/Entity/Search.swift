@@ -7,7 +7,7 @@
 
 import Foundation
 
-public struct Search: Codable {
+struct Search: Codable {
     let total: Int
     var start: Int
     let display: Int
@@ -27,7 +27,7 @@ public struct Search: Codable {
     }
 }
 
-public struct Item: Codable {
+struct Item: Codable {
     let itemName: String
     let itemImage: String
     let storeLink: String

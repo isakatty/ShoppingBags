@@ -9,7 +9,7 @@ import UIKit
 
 import SnapKit
 
-public final class OnboardingViewController: UIViewController {
+final class OnboardingViewController: UIViewController {
     
     private let titleLabel: UILabel = {
         let label = UILabel()
@@ -40,7 +40,7 @@ public final class OnboardingViewController: UIViewController {
         return btn
     }()
     
-    public override func viewDidLoad() {
+    override func viewDidLoad() {
         super.viewDidLoad()
         
         configureHierarchy()

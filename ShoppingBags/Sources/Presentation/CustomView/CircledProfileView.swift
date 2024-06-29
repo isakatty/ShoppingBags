@@ -7,9 +7,9 @@
 
 import UIKit
 
-public final class CircledProfileView: UIView {
-    public var profileImg = UIImageView()
-    public var clearButton: UIButton = {
+final class CircledProfileView: UIView {
+    var profileImg = UIImageView()
+    var clearButton: UIButton = {
         let btn = UIButton()
         btn.setTitle(
             "",
@@ -19,7 +19,7 @@ public final class CircledProfileView: UIView {
         return btn
     }()
     
-    public init(hasClearBtn: Bool) {
+    init(hasClearBtn: Bool) {
         super.init(frame: .zero)
         
         configureHierarchy(with: hasClearBtn)
@@ -56,7 +56,7 @@ public final class CircledProfileView: UIView {
         : Constant.Colors.lightGray?.cgColor
         layer.opacity = isSelected ? 1 : 0.5
     }
-    public func configureUI(
+    func configureUI(
         img: UIImage?,
         isSelected: Bool
     ) {
@@ -66,7 +66,7 @@ public final class CircledProfileView: UIView {
         configureView(isSelected: isSelected)
     }
     
-    public override func layoutSubviews() {
+    override func layoutSubviews() {
         super.layoutSubviews()
         
         layer.cornerRadius = bounds.width / 2

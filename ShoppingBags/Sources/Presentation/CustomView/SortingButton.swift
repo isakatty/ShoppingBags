@@ -7,11 +7,11 @@
 
 import UIKit
 
-public final class SortingButton: UIButton {
+final class SortingButton: UIButton {
     
-    public var sortCondition: SortedItem = .accuracy
+    var sortCondition: SortedItem = .accuracy
     
-    public init(
+    init(
         titleForButton: SortedItem,
         tag: Int
     ) {
@@ -51,7 +51,7 @@ public final class SortingButton: UIButton {
         layer.borderWidth = 1
     }
     
-    public func configureUI() {
+    func configureUI() {
         setTitleColor(
             Constant.Colors.black,
             for: .normal
@@ -60,7 +60,7 @@ public final class SortingButton: UIButton {
         self.titleLabel?.textColor = Constant.Colors.black
         
     }
-    public func configureUISelected() {
+    func configureUISelected() {
         setTitleColor(
             Constant.Colors.white,
             for: .normal
@@ -69,7 +69,7 @@ public final class SortingButton: UIButton {
         
     }
     
-    public override func layoutSubviews() {
+    override func layoutSubviews() {
         super.layoutSubviews()
         
         layer.cornerRadius = bounds.height / 2

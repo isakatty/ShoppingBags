@@ -7,7 +7,7 @@
 
 import UIKit
 
-public final class SettingViewController: UIViewController {
+final class SettingViewController: UIViewController {
     private var nickname: String = ""
     private var profileImgTitle: String = ""
     private var signupDate: String = ""
@@ -41,7 +41,7 @@ public final class SettingViewController: UIViewController {
         return table
     }()
     
-    public override func viewDidLoad() {
+    override func viewDidLoad() {
         super.viewDidLoad()
         
         fetchData()
@@ -51,7 +51,7 @@ public final class SettingViewController: UIViewController {
         configureUI()
     }
     
-    public override func viewWillAppear(_ animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
         //  데이터 fetch
@@ -123,14 +123,14 @@ public final class SettingViewController: UIViewController {
 }
 
 extension SettingViewController: UITableViewDelegate, UITableViewDataSource {
-    public func tableView(
+    func tableView(
         _ tableView: UITableView,
         numberOfRowsInSection section: Int
     ) -> Int {
         return Setting.allCases.count
     }
     
-    public func tableView(
+    func tableView(
         _ tableView: UITableView,
         cellForRowAt indexPath: IndexPath
     ) -> UITableViewCell {
@@ -142,13 +142,13 @@ extension SettingViewController: UITableViewDelegate, UITableViewDataSource {
         return cell
     }
     /// select 여부를 return 값으로 제어함. true 가능 / false 불가능
-    public func tableView(
+    func tableView(
         _ tableView: UITableView,
         shouldHighlightRowAt indexPath: IndexPath
     ) -> Bool {
         return indexPath.row == Setting.allCases.endIndex - 1
     }
-    public func tableView(
+    func tableView(
         _ tableView: UITableView,
         didSelectRowAt indexPath: IndexPath
     ) {

@@ -7,7 +7,7 @@
 
 import UIKit
 
-public final class SettingTableViewCell: UITableViewCell {
+final class SettingTableViewCell: UITableViewCell {
     private let settingLabel: UILabel = {
         let label = UILabel()
         label.textColor = Constant.Colors.black
@@ -31,7 +31,7 @@ public final class SettingTableViewCell: UITableViewCell {
     }()
     private let shoppingView = UIView()
     
-    public override init(
+    override init(
         style: UITableViewCell.CellStyle,
         reuseIdentifier: String?
     ) {
@@ -74,7 +74,7 @@ public final class SettingTableViewCell: UITableViewCell {
             make.leading.equalTo(shoppingBagImage.snp.trailing)
         }
     }
-    public func configureUI(index: Int) {
+    func configureUI(index: Int) {
         if index == 0 {
             shoppingView.isHidden = false
             settingLabel.text = Setting.allCases[index].rawValue

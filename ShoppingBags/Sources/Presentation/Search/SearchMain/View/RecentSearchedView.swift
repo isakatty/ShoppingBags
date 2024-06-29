@@ -7,7 +7,7 @@
 
 import UIKit
 
-public final class RecentSearchedView: UIView {
+final class RecentSearchedView: UIView {
     private let recentLabel: UILabel = {
         let label = UILabel()
         label.font = Constant.Font.bold15
@@ -15,7 +15,7 @@ public final class RecentSearchedView: UIView {
         label.text = "최근 검색"
         return label
     }()
-    public let eraseBtn: UIButton = {
+    let eraseBtn: UIButton = {
         let btn = UIButton()
         btn.setTitle(
             "전체 삭제",
@@ -30,7 +30,7 @@ public final class RecentSearchedView: UIView {
     }()
     private let recentView = UIView()
     
-    public override init(frame: CGRect) {
+    override init(frame: CGRect) {
         super.init(frame: .zero)
         configureHierarchy()
         configureLayout()

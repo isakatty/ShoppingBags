@@ -7,8 +7,8 @@
 
 import UIKit
 
-public final class SearchResultViewController: UIViewController {
-    public var searchedText: String?
+final class SearchResultViewController: UIViewController {
+    var searchedText: String?
     private var isLastPage: Bool = false
     private var page: Int = 1
     private var favItems: [String] = UserDefaultsManager.shared
@@ -43,7 +43,7 @@ public final class SearchResultViewController: UIViewController {
     }()
     private let sortingView = SearchResultSortingView()
     
-    public override func viewDidLoad() {
+    override func viewDidLoad() {
         super.viewDidLoad()
         
         guard let searchedText else { return }
@@ -59,7 +59,7 @@ public final class SearchResultViewController: UIViewController {
             sorting: sorting
         )
     }
-    public override func viewWillAppear(_ animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
         itemCollectionView.reloadData()
@@ -215,13 +215,13 @@ extension SearchResultViewController
 : UICollectionViewDelegate, UICollectionViewDataSource
 , UICollectionViewDataSourcePrefetching {
     
-    public func collectionView(
+    func collectionView(
         _ collectionView: UICollectionView,
         numberOfItemsInSection section: Int
     ) -> Int {
         return searchedResult.items.count
     }
-    public func collectionView(
+    func collectionView(
         _ collectionView: UICollectionView,
         cellForItemAt indexPath: IndexPath
     ) -> UICollectionViewCell {
@@ -241,7 +241,7 @@ extension SearchResultViewController
         )
         return cell
     }
-    public func collectionView(
+    func collectionView(
         _ collectionView: UICollectionView,
         prefetchItemsAt indexPaths: [IndexPath]
     ) {
@@ -259,7 +259,7 @@ extension SearchResultViewController
             }
         }
     }
-    public func collectionView(
+    func collectionView(
         _ collectionView: UICollectionView,
         didSelectItemAt indexPath: IndexPath
     ) {

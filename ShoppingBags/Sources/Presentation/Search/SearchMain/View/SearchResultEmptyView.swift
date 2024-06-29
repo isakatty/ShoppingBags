@@ -7,7 +7,7 @@
 
 import UIKit
 
-public final class SearchResultEmptyView: UIView {
+final class SearchResultEmptyView: UIView {
     private lazy var emptyImageView: UIImageView = {
         let view = UIImageView()
         view.image = Constant.Images.empty
@@ -24,7 +24,7 @@ public final class SearchResultEmptyView: UIView {
         return label
     }()
     
-    public override init(frame: CGRect) {
+    override init(frame: CGRect) {
         super.init(frame: .zero)
         
         configureHierarchy()

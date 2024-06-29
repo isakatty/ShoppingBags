@@ -9,12 +9,12 @@ import Foundation
 
 import Alamofire
 
-public final class NetworkManager {
+final class NetworkManager {
     static let shared = NetworkManager()
     
     private init() { }
     
-    public func callRequest(
+    func callRequest(
         searchText: String?,
         startPage: Int,
         sorting: SortedItem,

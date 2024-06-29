@@ -7,9 +7,9 @@
 
 import UIKit
 
-public final class ProfileSettingViewController: UIViewController {
-    public var imageName: String?
-    public var viewFlow: ViewFlow
+final class ProfileSettingViewController: UIViewController {
+    var imageName: String?
+    var viewFlow: ViewFlow
     private lazy var profileImgStr: String = UserDefaultsManager.shared
         .getValue(forKey: .profileImgTitle) 
     ?? "profile_" + "\(Int.random(in: 0...11))"
@@ -34,7 +34,7 @@ public final class ProfileSettingViewController: UIViewController {
         return btn
     }()
     
-    public init(viewFlow: ViewFlow) {
+    init(viewFlow: ViewFlow) {
         self.viewFlow = viewFlow
         super.init(nibName: nil, bundle: nil)
     }
@@ -42,7 +42,7 @@ public final class ProfileSettingViewController: UIViewController {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    public override func viewDidLoad() {
+    override func viewDidLoad() {
         super.viewDidLoad()
         
         fetchData()
@@ -51,7 +51,7 @@ public final class ProfileSettingViewController: UIViewController {
         configureUI()
     }
     
-    public override func viewWillAppear(_ animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
         fetchData()

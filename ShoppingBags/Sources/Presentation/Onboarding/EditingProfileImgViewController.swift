@@ -7,9 +7,9 @@
 
 import UIKit
 
-public final class EditingProfileImgViewController: UIViewController {
-    public var selectedImgName: String?
-    public var viewFlow: ViewFlow
+final class EditingProfileImgViewController: UIViewController {
+    var selectedImgName: String?
+    var viewFlow: ViewFlow
     private let cameraView = CircledCameraView()
     private lazy var mainCircledImg = CircledProfileView(hasClearBtn: false)
     private lazy var imgCollectionView: UICollectionView = {
@@ -26,7 +26,7 @@ public final class EditingProfileImgViewController: UIViewController {
         return collection
     }()
     
-    public init(
+    init(
         viewFlow: ViewFlow,
         selectedName: String
     ) {
@@ -39,7 +39,7 @@ public final class EditingProfileImgViewController: UIViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
-    public override func viewDidLoad() {
+    override func viewDidLoad() {
         super.viewDidLoad()
         
         configureNavigation()
@@ -136,7 +136,7 @@ public final class EditingProfileImgViewController: UIViewController {
 
 extension EditingProfileImgViewController
 : UICollectionViewDelegate, UICollectionViewDataSource {
-    public func collectionView(
+    func collectionView(
         _ collectionView: UICollectionView,
         numberOfItemsInSection section: Int
     ) -> Int {
@@ -144,7 +144,7 @@ extension EditingProfileImgViewController
         return Constant.ProfileImages.allCases.count
     }
     
-    public func collectionView(
+    func collectionView(
         _ collectionView: UICollectionView,
         cellForItemAt indexPath: IndexPath
     ) -> UICollectionViewCell {

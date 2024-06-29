@@ -7,10 +7,10 @@
 
 import UIKit
 
-public final class EditingCollectionViewCell: UICollectionViewCell {
-    public let profileImage = CircledProfileView(hasClearBtn: true)
+final class EditingCollectionViewCell: UICollectionViewCell {
+    let profileImage = CircledProfileView(hasClearBtn: true)
     
-    public override init(frame: CGRect) {
+    override init(frame: CGRect) {
         super.init(frame: .zero)
         
         configureHierarchy()
@@ -28,7 +28,7 @@ public final class EditingCollectionViewCell: UICollectionViewCell {
             make.edges.equalToSuperview()
         }
     }
-    public func configureUI(
+    func configureUI(
         img: UIImage?,
         isSelected: Bool
     ) {

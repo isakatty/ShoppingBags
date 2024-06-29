@@ -7,7 +7,7 @@
 
 import Foundation
 
-public enum Setting: String, CaseIterable {
+enum Setting: String, CaseIterable {
     case shoppingList = "나의 장바구니 목록"
     case question = "자주 묻는 질문"
     case inquiry = "1:1 문의"

@@ -7,7 +7,7 @@
 
 import UIKit
 
-public final class CircledCameraView: UIView {
+final class CircledCameraView: UIView {
     private let cameraImg: UIImageView = {
         let imageView = UIImageView()
         imageView.clipsToBounds = true
@@ -18,7 +18,7 @@ public final class CircledCameraView: UIView {
         return imageView
     }()
     
-    public override init(frame: CGRect) {
+    override init(frame: CGRect) {
         super.init(frame: .zero)
         
         configureHierarchy()
@@ -40,7 +40,7 @@ public final class CircledCameraView: UIView {
         }
     }
     
-    public override func layoutSubviews() {
+    override func layoutSubviews() {
         super.layoutSubviews()
         
         layer.cornerRadius = bounds.width / 2

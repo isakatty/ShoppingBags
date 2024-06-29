@@ -7,7 +7,7 @@
 
 import UIKit
 
-public final class RecentSearchTableViewCell: UITableViewCell {
+final class RecentSearchTableViewCell: UITableViewCell {
     private let timeImg: UIImageView = {
         let img = UIImageView()
         img.image = Constant.SystemImages.clock?
@@ -24,7 +24,7 @@ public final class RecentSearchTableViewCell: UITableViewCell {
         label.textColor = Constant.Colors.black
         return label
     }()
-    public var xmarkBtn: UIButton = {
+    var xmarkBtn: UIButton = {
         let btn = UIButton()
         btn.setImage(
             Constant.SystemImages.xmark,
@@ -38,7 +38,7 @@ public final class RecentSearchTableViewCell: UITableViewCell {
         return btn
     }()
     
-    public override init(
+    override init(
         style: UITableViewCell.CellStyle,
         reuseIdentifier: String?
     ) {
@@ -77,14 +77,14 @@ public final class RecentSearchTableViewCell: UITableViewCell {
             make.centerY.equalToSuperview()
         }
     }
-    public func configureUI(
+    func configureUI(
         recentSearched: String,
         tag: Int
     ) {
         searchedLabel.text = recentSearched
         xmarkBtn.tag = tag
     }
-    public override func prepareForReuse() {
+    override func prepareForReuse() {
         super.prepareForReuse()
         
         searchedLabel.text = nil

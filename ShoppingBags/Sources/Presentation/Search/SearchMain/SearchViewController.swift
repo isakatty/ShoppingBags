@@ -7,7 +7,7 @@
 
 import UIKit
 
-public final class SearchViewController: UIViewController {
+final class SearchViewController: UIViewController {
     private var isRecentSearched: Bool = false
     private var searchedResult: [String] = [] {
         didSet {
@@ -36,7 +36,7 @@ public final class SearchViewController: UIViewController {
         return table
     }()
     
-    public override func viewDidLoad() {
+    override func viewDidLoad() {
         super.viewDidLoad()
         
         fetchData()
@@ -46,7 +46,7 @@ public final class SearchViewController: UIViewController {
         navigationItem.hidesSearchBarWhenScrolling = false
         configureBtns()
     }
-    public override func viewWillAppear(_ animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
         fetchData()
@@ -115,7 +115,7 @@ public final class SearchViewController: UIViewController {
 }
 
 extension SearchViewController: UISearchBarDelegate {
-    public func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         searchBar.resignFirstResponder()
         guard var text = searchBar.text?.trimmingCharacters(in: .whitespaces),
               !text.isEmpty else { return }
@@ -142,14 +142,14 @@ extension SearchViewController: UISearchBarDelegate {
     }
 }
 extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
-    public func tableView(
+    func tableView(
         _ tableView: UITableView,
         numberOfRowsInSection section: Int
     ) -> Int {
         return searchedResult.count
     }
     
-    public func tableView(
+    func tableView(
         _ tableView: UITableView,
         cellForRowAt indexPath: IndexPath
     ) -> UITableViewCell {
@@ -169,7 +169,7 @@ extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
         )
         return cell
     }
-    public func tableView(
+    func tableView(
         _ tableView: UITableView,
         didSelectRowAt indexPath: IndexPath
     ) {

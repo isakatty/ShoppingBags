@@ -7,25 +7,25 @@
 
 import UIKit
 
-public final class SearchResultSortingView: UIView {
-    public lazy var accuracyBtn = SortingButton(
+final class SearchResultSortingView: UIView {
+    lazy var accuracyBtn = SortingButton(
         titleForButton: SortedItem.accuracy,
         tag: 0
     )
-    public lazy var latestBtn = SortingButton(
+    lazy var latestBtn = SortingButton(
         titleForButton: SortedItem.latestDate,
         tag: 1
     )
-    public lazy var highestBtn = SortingButton(
+    lazy var highestBtn = SortingButton(
         titleForButton: SortedItem.highestPrice,
         tag: 2
     )
-    public lazy var lowestBtn = SortingButton(
+    lazy var lowestBtn = SortingButton(
         titleForButton: SortedItem.lowestPrice,
         tag: 3
     )
     
-    public override init(frame: CGRect) {
+    override init(frame: CGRect) {
         super.init(frame: .zero)
         configureHierarchy()
         configureLayout()

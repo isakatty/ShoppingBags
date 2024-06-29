@@ -172,7 +172,7 @@ final class ProfileSettingViewController: UIViewController {
                     imgName: profileImgStr,
                     nickname: text
                 )
-                changeWindow()
+                changeWindows(to: TabBarController())
             }
         }
     }
@@ -222,13 +222,5 @@ final class ProfileSettingViewController: UIViewController {
         case .setting: 
             break
         }
-    }
-    private func changeWindow() {
-        let windowScene = UIApplication.shared.connectedScenes.first 
-        as? UIWindowScene
-        let sceneDelegate = windowScene?.delegate as? SceneDelegate
-        
-        sceneDelegate?.window?.rootViewController = TabBarController()
-        sceneDelegate?.window?.makeKeyAndVisible()
     }
 }

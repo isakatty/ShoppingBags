@@ -86,16 +86,6 @@ final class SettingViewController: UIViewController {
         SaveData.allCases
             .forEach { UserDefaultsManager.shared.removeValue(forKey: $0) }
     }
-    private func returnOnboarding() {
-        let windowScene = UIApplication.shared.connectedScenes.first 
-        as? UIWindowScene
-        let sceneDelegate = windowScene?.delegate as? SceneDelegate
-        let navigationController = UINavigationController(
-            rootViewController: OnboardingViewController()
-        )
-        sceneDelegate?.window?.rootViewController = navigationController
-        sceneDelegate?.window?.makeKeyAndVisible()
-    }
     private func configureUI() {
         separateBar.backgroundColor = Constant.Colors.lightGray
         profileView.configureUI(
@@ -159,7 +149,7 @@ extension SettingViewController: UITableViewDelegate, UITableViewDataSource {
             fineTitle: "확인"
         ) { [weak self] _ in
             guard let self else { return }
-            self.returnOnboarding()
+            changeWindows(to: OnboardingViewController())
             self.resetData()
         }
     }

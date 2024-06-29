@@ -92,4 +92,17 @@ extension UIViewController {
             action: btnAction
         )
     }
+    func changeWindows(to viewController: UIViewController) {
+        let windowScene = UIApplication.shared.connectedScenes.first 
+        as? UIWindowScene
+        let sceneDelegate = windowScene?.delegate as? SceneDelegate
+
+        if viewController is TabBarController {
+            sceneDelegate?.window?.rootViewController = viewController
+        } else {
+            let nav = UINavigationController(rootViewController: viewController)
+            sceneDelegate?.window?.rootViewController = nav
+        }
+        sceneDelegate?.window?.makeKeyAndVisible()
+    }
 }

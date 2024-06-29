@@ -12,9 +12,9 @@ opt_in_rules:
 included: # 린트 검사에 포함할 파일 경로
     - ShoppingBags
 excluded: # 린트 과정에서 무시할 파일 경로. `included`보다 우선순위 높음
-    - ShoppingBags/AppDelegate.swift
-    - ShoppingBags/SceneDelegate.swift
-    - ShoppingBags/NetworkManager.swift
+    - ShoppingBags/Sources/App/AppDelegate.swift
+    - ShoppingBags/Sources/App/SceneDelegate.swift
+    - ShoppingBags/Sources/Utility/Network/NetworkManager.swift
     
 identifier_name:
     min_length:

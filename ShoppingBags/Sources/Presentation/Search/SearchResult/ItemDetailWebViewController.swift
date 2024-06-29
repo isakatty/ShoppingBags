@@ -9,7 +9,7 @@ import UIKit
 import WebKit
 
 final class ItemDetailWebViewController: BaseViewController {
-    var itemInfo: Item?
+    var itemInfo: SearchResultItem?
     private var isContainedItem: Bool?
     private let webView = WKWebView()
     private var favItems: [String] = UserDefaultsManager.shared
@@ -39,7 +39,7 @@ final class ItemDetailWebViewController: BaseViewController {
         
         webView.load(URLRequest(url: url))
     }
-    private func configureNavigationBar(item: Item?) {
+    private func configureNavigationBar(item: SearchResultItem?) {
         navigationItem.title = item?.formattedItemName
         configureNavigationBar()
         configureRightBarBtn(
@@ -49,7 +49,7 @@ final class ItemDetailWebViewController: BaseViewController {
         )
         navigationController?.navigationBar.tintColor = Constant.Colors.black
     }
-    private func configureBagsUI(item: Item?) -> UIImage? {
+    private func configureBagsUI(item: SearchResultItem?) -> UIImage? {
         isContainedItem = favItems.contains(item?.productId ?? "")
         guard let isContainedItem else { return Constant.Images.likeUnselected }
         return isContainedItem

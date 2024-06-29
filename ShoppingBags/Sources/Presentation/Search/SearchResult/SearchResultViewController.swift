@@ -14,7 +14,7 @@ final class SearchResultViewController: BaseViewController {
     private var favItems: [String] = UserDefaultsManager.shared
         .getValue(forKey: .shoppingBags) ?? []
     private var sorting: SortedItem = .accuracy
-    private var searchedResult: Search = Search(
+    private var searchedResult: ShoppingSearch = ShoppingSearch(
         total: 0,
         start: 0,
         display: 0,
@@ -185,6 +185,12 @@ final class SearchResultViewController: BaseViewController {
             searchText: searchedText,
             startPage: 1,
             sorting: sender.sortCondition
+        )
+        let indexPath = IndexPath(item: 0, section: 0)
+        itemCollectionView.scrollToItem(
+            at: indexPath,
+            at: .top,
+            animated: true
         )
     }
     @objc private func shoppingBagBtnTapped(sender: UIButton) {

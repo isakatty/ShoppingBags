@@ -18,7 +18,7 @@ final class NetworkManager {
         searchText: String?,
         startPage: Int,
         sorting: SortedItem,
-        completion: @escaping (Search) -> Void
+        completion: @escaping (ShoppingSearch) -> Void
     ) {
         let url = makeURL(
             with: searchText ?? "",
@@ -32,7 +32,7 @@ final class NetworkManager {
             headers: header
         )
         .validate(statusCode: 200..<300)
-        .responseDecodable(of: Search.self) { response in
+        .responseDecodable(of: ShoppingSearch.self) { response in
             switch response.result {
             case .success(let value):
                 completion(value)

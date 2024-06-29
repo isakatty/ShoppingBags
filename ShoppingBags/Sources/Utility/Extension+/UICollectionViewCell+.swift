@@ -9,6 +9,6 @@ import UIKit
 
 extension UICollectionViewCell: ReuseIdentifier {
     static var identifier: String {
-        return String(describing: self)
+        return self.description()
     }
 }

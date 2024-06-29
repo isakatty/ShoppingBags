@@ -110,7 +110,7 @@ final class SearchedItemCollectionViewCell: UICollectionViewCell {
         label.numberOfLines = lines
         return label
     }
-    func configureUI(item: Item, tag: Int) {
+    func configureUI(item: SearchResultItem, tag: Int) {
         shoppingBtn.tag = tag
         fetchFavItems(itemID: item.productId)
         mallNameLabel.text = item.mallName

@@ -46,6 +46,11 @@ final class OnboardingViewController: BaseViewController {
         configureHierarchy()
         configureLayout()
     }
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        navigationController?.setNavigationBarHidden(true, animated: animated)
+    }
     
     private func configureHierarchy() {
         [
@@ -76,6 +81,8 @@ final class OnboardingViewController: BaseViewController {
     }
     
     @objc private func startBtnTapped() {
+        navigationController?.setNavigationBarHidden(false, animated: false)
+        
         let vc = ProfileSettingViewController(viewFlow: .onboarding)
         navigationController?.pushViewController(
             vc,

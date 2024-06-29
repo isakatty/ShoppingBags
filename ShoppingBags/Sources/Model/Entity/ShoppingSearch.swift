@@ -1,5 +1,5 @@
 //
-//  Search.swift
+//  ShoppingSearch.swift
 //  ShoppingBags
 //
 //  Created by Jisoo Ham on 6/15/24.
@@ -7,11 +7,11 @@
 
 import Foundation
 
-struct Search: Codable {
+struct ShoppingSearch: Decodable {
     let total: Int
     var start: Int
     let display: Int
-    var items: [Item]
+    var items: [SearchResultItem]
     
     var totalItems: String {
         return total.formatted(.number)
@@ -27,7 +27,7 @@ struct Search: Codable {
     }
 }
 
-struct Item: Codable {
+struct SearchResultItem: Decodable {
     let itemName: String
     let itemImage: String
     let storeLink: String

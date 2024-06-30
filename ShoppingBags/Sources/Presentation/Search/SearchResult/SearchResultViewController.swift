@@ -117,41 +117,42 @@ final class SearchResultViewController: BaseViewController {
             ),
             type: ShoppingSearch.self
         ) { [weak self] shopping, error in
-            if let error {
-                print(#function, error)
+            guard let self else { return }
+            guard error == nil else {
+                print("에러", #function)
+                return
+            }
+            guard let result = shopping else {
+                print("데이터 없음", #function)
+                return
+            }
+            if result.total == 0 {
+                showAlert(
+                    title: "검색하신 결과가 없습니다.",
+                    body: "입력하신 \(searchText)에 관련된 정보가 없습니다.",
+                    fineTitle: "돌아가기"
+                ) { [weak self] _ in
+                    guard let self else { return }
+                    navigationController?.popViewController(animated: true)
+                }
             } else {
-                guard let self else { return }
-                guard let shopping else {
-                    print(#function, "- shoppingData 없음")
-                    return
+                if result.start == result.totalPages {
+                    isLastPage = true
                 }
-                if shopping.total == 0 {
-                    showAlert(
-                        title: "검색하신 결과가 없습니다.",
-                        body: "입력하신 \(searchText)에 관련된 정보가 없습니다.",
-                        fineTitle: "돌아가기"
-                    ) { [weak self] _ in
-                        guard let self else { return }
-                        navigationController?.popViewController(animated: true)
-                    }
+                if self.page == 1 {
+                    self.searchedResult = result
+                    self.itemCollectionView.scrollsToTop = true
                 } else {
-                    if shopping.start == shopping.totalPages {
-                        isLastPage = true
-                    }
-                    if self.page == 1 {
-                        self.searchedResult = shopping
-                        self.itemCollectionView.scrollsToTop = true
-                    } else {
-                        self.searchedResult.items.append(
-                            contentsOf: shopping.items
-                        )
-                    }
-                    self.totalItemLabel.text =
-                    "\(self.searchedResult.totalItems)개의 검색 결과"
-                    self.itemCollectionView.reloadData()
+                    self.searchedResult.items.append(
+                        contentsOf: result.items
+                    )
                 }
+                self.totalItemLabel.text =
+                "\(self.searchedResult.totalItems)개의 검색 결과"
+                self.itemCollectionView.reloadData()
             }
         }
+        
     }
     private func collectionViewLayout() -> UICollectionViewLayout {
         let itemSize = NSCollectionLayoutSize(

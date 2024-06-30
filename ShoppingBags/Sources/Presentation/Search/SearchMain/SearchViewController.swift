@@ -101,6 +101,7 @@ final class SearchViewController: BaseViewController {
             searchedResult,
             forKey: .searchedText
         )
+        print(#function)
         fetchData()
     }
     @objc private func deleteBtnTapped(sender: UIButton) {

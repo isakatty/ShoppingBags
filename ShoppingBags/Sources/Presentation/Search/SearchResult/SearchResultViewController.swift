@@ -105,6 +105,7 @@ final class SearchResultViewController: BaseViewController {
         startPage: Int,
         sorting: SortedItem
     ) {
+        print("데이터 fetch 불림")
         guard let searchText else {
             print(#function, "searchText 없음")
             return
@@ -197,17 +198,22 @@ final class SearchResultViewController: BaseViewController {
         sender.configureUISelected()
         
         guard let searchedText else { return }
-        fetchData(
-            searchText: searchedText,
-            startPage: 1,
-            sorting: sender.sortCondition
-        )
-        let indexPath = IndexPath(item: 0, section: 0)
-        itemCollectionView.scrollToItem(
-            at: indexPath,
-            at: .top,
-            animated: true
-        )
+        print(sorting, sender.sortCondition, #function)
+        if sorting != sender.sortCondition {
+            print(sorting, sender.sortCondition, "다른 버튼 선택")
+            fetchData(
+                searchText: searchedText,
+                startPage: 1,
+                sorting: sender.sortCondition
+            )
+            let indexPath = IndexPath(item: 0, section: 0)
+            itemCollectionView.scrollToItem(
+                at: indexPath,
+                at: .top,
+                animated: true
+            )
+            sorting = sender.sortCondition
+        }
     }
     @objc private func shoppingBagBtnTapped(sender: UIButton) {
         if favItems.contains(searchedResult.items[sender.tag].productId) {

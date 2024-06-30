@@ -7,7 +7,7 @@
 
 import Foundation
 
-import Alamofire
+//import Alamofire
 
 enum NetworkError: Error {
     case invalidURL
@@ -58,14 +58,9 @@ final class NetworkManager {
             print(NetworkError.invalidURL.localizedDescription.description)
             return
         }
-        guard let request = try? URLRequest(
-            url: url,
-            method: HTTPMethod(rawValue: endpoint.method),
-            headers: HTTPHeaders(endpoint.header)
-        ) else {
-            completionHandler(nil, .invalidRequest)
-            return
-        }
+        var request = URLRequest(url: url)
+        request.httpMethod = endpoint.method
+        request.allHTTPHeaderFields = endpoint.header
         URLSession.shared.dataTask(with: request) { data, response, error in
             DispatchQueue.main.async {
                 guard error == nil else {

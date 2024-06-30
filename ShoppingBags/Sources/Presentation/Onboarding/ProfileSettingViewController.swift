@@ -143,7 +143,7 @@ final class ProfileSettingViewController: BaseViewController {
             let nickname: String? = SaveData.nickname.fetchedData
             
             nameTextField.nameTextField.text = nickname
-            nameTextField.configureUI(status: .pass)
+            nameTextField.configureUI(text: nickname ?? "")
             nameTextField.changedValid = { [weak self] changed in
                 guard let self else { return }
                 self.navigationItem.rightBarButtonItem?.isEnabled = changed
@@ -161,7 +161,7 @@ final class ProfileSettingViewController: BaseViewController {
         )
     }
     @objc private func checkBtnTapped() {
-        if nameTextField.textFieldStatus == .pass {
+        if nameTextField.validatePass {
             if let text = nameTextField.nameTextField.text {
                 saveData(
                     imgName: profileImgStr,

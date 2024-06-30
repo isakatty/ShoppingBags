@@ -10,7 +10,6 @@ import UIKit
 final class NameTextFieldView: BaseView {
     var changedValid: ((Bool) -> Void)?
     var validatePass: Bool = false
-    var textFieldStatus: TextFieldStatus = .includeIcons
     lazy var nameTextField: UITextField = {
         let textField = UITextField()
         textField.borderStyle = .none
@@ -38,7 +37,7 @@ final class NameTextFieldView: BaseView {
         
         configureHierarchy()
         configureLayout()
-        configureUI(status: textFieldStatus)
+        configureUI(text: nameTextField.text!)
     }
     
     private func configureHierarchy() {
@@ -66,44 +65,67 @@ final class NameTextFieldView: BaseView {
             make.bottom.greaterThanOrEqualToSuperview()
         }
     }
-    func configureUI(status: TextFieldStatus) {
-        switch status {
-        case .pass:
-            validatePass = true
-            seperateBar.backgroundColor = status.textColor
-            statusLabel.textColor = status.textColor
-            statusLabel.text = status.rawValue
-        case .failedTextCondition, .includeIcons, .includedNumbers:
-            validatePass = false
-            seperateBar.backgroundColor = Constant.Colors.lightGray
-            statusLabel.textColor = Constant.Colors.orange
-            statusLabel.text = status.rawValue
+    func configureUI(text: String) {
+        do {
+            let state = try validateTextField(text: text)
+            if state {
+                configurLabel(
+                    text: "사용 가능한 닉네임입니다.",
+                    color: Constant.Colors.darkGray
+                )
+            }
+        } catch {
+            configurLabel(
+                text: error.localizedDescription,
+                color: Constant.Colors.orange
+            )
         }
-        changedValid?(validatePass)
     }
-    private func validateTextField(text: String) -> TextFieldStatus {
+    private func configurLabel(text: String, color: UIColor?) {
+        seperateBar.backgroundColor = color
+        statusLabel.textColor = color
+        statusLabel.text = text
+    }
+    
+    private func validateTextField(text: String) throws -> Bool {
         let specialIcons: [String] = ["@", "#", "$", "%"]
-        if text.contains(where: { $0.isNumber }) {
-            return .includedNumbers
-        } else if text.contains(
-            where: { specialIcons.contains(String($0)) }
-        ) {
-            return .includeIcons
-        } else if text.count < 3 {
-            return .failedTextCondition
-        } else if text.count > 10 {
-            return .failedTextCondition
-        } else {
-            return .pass
+        
+        let textWithoutSpacing = text.trimmingCharacters(in: .whitespaces)
+        
+        guard textWithoutSpacing.count >= 2
+                && textWithoutSpacing.count < 10
+        else {
+            print("2,10 조건 에러")
+            validatePass = false
+            changedValid?(validatePass)
+            throw NicknameError.failedTextCondition
         }
+        
+        guard !textWithoutSpacing.contains(where: {
+            specialIcons.contains(String($0)) }
+        ) else {
+            print("아이콘")
+            validatePass = false
+            changedValid?(validatePass)
+            throw NicknameError.includeIcons
+        }
+        guard !textWithoutSpacing.contains(where: { $0.isNumber }) else {
+            print("숫자포함")
+            validatePass = false
+            changedValid?(validatePass)
+            throw NicknameError.includeNumbers
+        }
+        
+        validatePass = true
+        changedValid?(validatePass)
+        return validatePass
     }
 }
 
 extension NameTextFieldView: UITextFieldDelegate {
     func textFieldDidEndEditing(_ textField: UITextField) {
         guard let text = textField.text else { return }
-        textFieldStatus = validateTextField(text: text)
-        configureUI(status: textFieldStatus)
+        configureUI(text: text)
     }
     
     func textField(
@@ -122,16 +144,14 @@ extension NameTextFieldView: UITextFieldDelegate {
             in: stringRange,
             with: string
         )
-        textFieldStatus = validateTextField(text: updatedText)
-        configureUI(status: textFieldStatus)
-        
+        configureUI(text: updatedText)
         return true
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         guard let text = textField.text else { return false }
-        textFieldStatus = validateTextField(text: text)
-        configureUI(status: textFieldStatus)
-        return textFieldStatus == .pass
+        configureUI(text: text)
+        self.endEditing(true)
+        return true
     }
 }

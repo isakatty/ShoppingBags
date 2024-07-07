@@ -55,6 +55,7 @@ enum Constant {
         static let camera = UIImage(systemName: "camera.fill")
         static let person = UIImage(systemName: "person")
         static let glass = UIImage(systemName: "magnifyingglass")
+        static let heart = UIImage(systemName: "heart")
     }
     
     enum Font {

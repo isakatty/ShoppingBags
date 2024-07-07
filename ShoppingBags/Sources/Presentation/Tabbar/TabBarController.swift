@@ -19,6 +19,7 @@ final class TabBarController: UITabBarController {
         
         let viewControllers = [
             SearchViewController(),
+            FavoriteViewController(),
             SettingViewController()
         ]
         

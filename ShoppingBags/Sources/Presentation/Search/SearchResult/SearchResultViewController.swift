@@ -20,6 +20,7 @@ final class SearchResultViewController: BaseViewController {
         display: 0,
         items: []
     )
+    private var repository = RealmRepository()
     private let totalItemLabel: UILabel = {
         let label = UILabel()
         label.font = Constant.Font.bold15
@@ -216,6 +217,8 @@ final class SearchResultViewController: BaseViewController {
         }
     }
     @objc private func shoppingBagBtnTapped(sender: UIButton) {
+        let item = searchedResult.items[sender.tag]
+        /// 기존 fav list에 추가 되어있는지 여부를 확인하는 조건문
         if favItems.contains(searchedResult.items[sender.tag].productId) {
             favItems.removeAll {
                 $0 == searchedResult.items[sender.tag].productId
@@ -224,12 +227,29 @@ final class SearchResultViewController: BaseViewController {
                 favItems,
                 forKey: .shoppingBags
             )
+            do {
+                try repository?.deleteFavorite(item.productId)
+            } catch {
+                print("삭제 실패")
+            }
         } else {
             favItems.append(searchedResult.items[sender.tag].productId)
             UserDefaultsManager.shared.saveValue(
                 favItems,
                 forKey: .shoppingBags
             )
+            let favorite = Favorite(
+                productId: item.productId,
+                storeLink: item.storeLink,
+                itemName: item.formattedItemName,
+                itemImage: item.itemImage,
+                itemPrice: item.formattedPrice
+            )
+            do {
+                try repository?.createFavorite(favorite)
+            } catch {
+                print("저장 실패")
+            }
         }
         itemCollectionView.reloadItems(
             at: [IndexPath(

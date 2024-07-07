@@ -15,6 +15,7 @@ excluded: # 린트 과정에서 무시할 파일 경로. `included`보다 우선
     - ShoppingBags/Sources/App/AppDelegate.swift
     - ShoppingBags/Sources/App/SceneDelegate.swift
     - ShoppingBags/Sources/Utility/Network/NetworkManager.swift
+    - ShoppingBags/Sources/Model/RealmModel/Favorite.swift
     
 identifier_name:
     min_length:

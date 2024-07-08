@@ -244,17 +244,18 @@ final class SearchResultViewController: BaseViewController {
             )
         }
         // Realm DB 저장
-        if let folder = repository?.checkFolder(with: searchedText ?? "").first {
+        if let folder = repository.checkFolder(with: searchedText ?? "")
+            .first {
             if folder.favs.contains(where: { $0.productId == item.productId }) {
                 // delete
                 do {
-                    try repository?.deleteFavorite(item.productId)
+                    try repository.deleteFavorite(item.productId)
                 } catch {
                     print("delete 실패")
                 }
             } else {
                 // create - 저장이 잘 되긴 했는데, folder이랑 연결이 안됨
-                repository?.createFav(favorite, folder: folder)
+                repository.createFav(favorite, folder: folder)
             }
         }
         

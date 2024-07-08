@@ -146,7 +146,7 @@ extension FavoriteViewController
             withReuseIdentifier: SearchedItemCollectionViewCell.identifier,
             for: indexPath ) as? SearchedItemCollectionViewCell
         else { return UICollectionViewCell() }
-        
+        // TODO: cell의 Action을 정의하고 UD delete 및 Realm에서 지워야함.
         let fav = favItems[indexPath.item]
         let searched = SearchResultItem(
             itemName: fav.itemName,

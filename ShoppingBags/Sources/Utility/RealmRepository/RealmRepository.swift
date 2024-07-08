@@ -22,6 +22,54 @@ final class RealmRepository {
             return nil
         }
     }
+    
+    // TODO: 검색어를 기준으로 folder가 있는지 없는지 확인하고, 없을시 folder 생성 및 folder에 data 추가
+    func checkFolder(with text: String, fav: Favorite) {
+        var folders = checkingFolder(with: text)
+        let newFolder = Folder(folderName: text)
+        if folders.isEmpty {
+            createFolder(newFolder)
+            folders = checkingFolder(with: text)
+        }
+        
+        if let folder = folders.first {
+            createFav(fav, folder: folder)
+        }
+    }
+    
+    /// 검색어를 기준으로 folder의 유무 확인하여 반환
+    func checkingFolder(with text: String) -> [Folder] {
+        let folders = realm.objects(Folder.self)
+            .where {
+                $0.folderName == text
+            }
+        
+        return Array(folders)
+    }
+    /// folder 생성
+    func createFolder(_ folder: Folder) {
+        do {
+            try realm.write {
+                realm.add(folder)
+            }
+        } catch {
+            print("Folder 생성 실패")
+        }
+    }
+    
+    /// favorite 저장
+    func createFav(_ favItem: Favorite, folder: Folder) {
+        do {
+            try realm.write {
+                folder.favs.append(favItem)
+            }
+        } catch {
+            print("데이터 append 실패")
+        }
+    }
+    
+    // ---------------------------------------
+    
     func fetchFavorite() throws -> [Favorite] {
         let favItems = realm.objects(Favorite.self)
         

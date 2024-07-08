@@ -16,6 +16,8 @@ final class Favorite: Object {
     @Persisted var itemImage: String
     @Persisted var itemPrice: String
     
+    @Persisted(originProperty: "favs") var main: LinkingObjects<Folder>
+    
     convenience init(
         productId: String,
         storeLink: String,

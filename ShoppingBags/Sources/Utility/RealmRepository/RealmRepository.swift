@@ -17,14 +17,15 @@ final class RealmRepository {
     init?() {
         do {
             self.realm = try Realm()
+            print(realm.configuration.fileURL)
         } catch {
             print("realm 생성 실패")
             return nil
         }
     }
     
-    // TODO: 검색어를 기준으로 folder가 있는지 없는지 확인하고, 없을시 folder 생성 및 folder에 data 추가
-    func checkFolder(with text: String, fav: Favorite) {
+    // TODO: 검색어를 기준으로 folder가 있는지 없는지 확인하고, 없을시 folder 생성 및 folder 반환
+    func checkFolder(with text: String) -> [Folder] {
         var folders = checkingFolder(with: text)
         let newFolder = Folder(folderName: text)
         if folders.isEmpty {
@@ -32,13 +33,11 @@ final class RealmRepository {
             folders = checkingFolder(with: text)
         }
         
-        if let folder = folders.first {
-            createFav(fav, folder: folder)
-        }
+        return folders
     }
     
     /// 검색어를 기준으로 folder의 유무 확인하여 반환
-    func checkingFolder(with text: String) -> [Folder] {
+    private func checkingFolder(with text: String) -> [Folder] {
         let folders = realm.objects(Folder.self)
             .where {
                 $0.folderName == text
@@ -47,7 +46,7 @@ final class RealmRepository {
         return Array(folders)
     }
     /// folder 생성
-    func createFolder(_ folder: Folder) {
+    private func createFolder(_ folder: Folder) {
         do {
             try realm.write {
                 realm.add(folder)
@@ -68,6 +67,18 @@ final class RealmRepository {
         }
     }
     
+    func deleteFav(_ productId: String, folder: Folder) {
+        do {
+            try realm.write {
+                if let fav = folder.favs.first(where: { $0.productId == productId }) {
+                    realm.delete(fav)
+                }
+            }
+        } catch {
+            print("fav 삭제 실패")
+        }
+    }
+
     // ---------------------------------------
     
     func fetchFavorite() throws -> [Favorite] {

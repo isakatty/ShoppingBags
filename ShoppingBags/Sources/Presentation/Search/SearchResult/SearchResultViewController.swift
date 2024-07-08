@@ -218,6 +218,15 @@ final class SearchResultViewController: BaseViewController {
     }
     @objc private func shoppingBagBtnTapped(sender: UIButton) {
         let item = searchedResult.items[sender.tag]
+        
+        let favorite = Favorite(
+            productId: item.productId,
+            storeLink: item.storeLink,
+            itemName: item.formattedItemName,
+            itemImage: item.itemImage,
+            itemPrice: item.formattedPrice
+        )
+        
         /// 기존 fav list에 추가 되어있는지 여부를 확인하는 조건문
         if favItems.contains(searchedResult.items[sender.tag].productId) {
             favItems.removeAll {
@@ -227,30 +236,28 @@ final class SearchResultViewController: BaseViewController {
                 favItems,
                 forKey: .shoppingBags
             )
-            do {
-                try repository?.deleteFavorite(item.productId)
-            } catch {
-                print("삭제 실패")
-            }
         } else {
             favItems.append(searchedResult.items[sender.tag].productId)
             UserDefaultsManager.shared.saveValue(
                 favItems,
                 forKey: .shoppingBags
             )
-            let favorite = Favorite(
-                productId: item.productId,
-                storeLink: item.storeLink,
-                itemName: item.formattedItemName,
-                itemImage: item.itemImage,
-                itemPrice: item.formattedPrice
-            )
-            do {
-                try repository?.createFavorite(favorite)
-            } catch {
-                print("저장 실패")
+        }
+        // Realm DB 저장
+        if let folder = repository?.checkFolder(with: searchedText ?? "").first {
+            if folder.favs.contains(where: { $0.productId == item.productId }) {
+                // delete
+                do {
+                    try repository?.deleteFavorite(item.productId)
+                } catch {
+                    print("delete 실패")
+                }
+            } else {
+                // create - 저장이 잘 되긴 했는데, folder이랑 연결이 안됨
+                repository?.createFav(favorite, folder: folder)
             }
         }
+        
         itemCollectionView.reloadItems(
             at: [IndexPath(
                 item: sender.tag,

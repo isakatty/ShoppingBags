@@ -13,6 +13,13 @@ final class RealmRepository {
     
     private let realm = try! Realm()
     
+    func sorting(by text: String) -> Folder? {
+        let result = realm.objects(Folder.self)
+            .where { $0.folderName == text }
+            .first
+        return result
+    }
+    
     func fetchFolder() -> [Folder] {
         return Array(realm.objects(Folder.self))
     }

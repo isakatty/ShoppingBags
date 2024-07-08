@@ -56,6 +56,7 @@ final class FavoriteViewController: BaseViewController {
         super.viewWillAppear(animated)
         
         fetchData()
+        folders = repository.fetchFolder()
     }
     
     private func configureHierarchy() {
@@ -102,19 +103,9 @@ final class FavoriteViewController: BaseViewController {
             subitem: item,
             count: 4
         )
-        group.interItemSpacing = .fixed(
-            Constant.CollectionCell.spacing.rawValue
-        )
+        group.interItemSpacing = .fixed(5)
         
         let section = NSCollectionLayoutSection(group: group)
-        section.interGroupSpacing = Constant.CollectionCell.spacing.rawValue
-        section.contentInsets = NSDirectionalEdgeInsets(
-            top: 0,
-            leading: Constant.CollectionCell.spacing.rawValue,
-            bottom: 0,
-            trailing: Constant.CollectionCell.spacing.rawValue
-        )
-        
         section.orthogonalScrollingBehavior = .groupPagingCentered
         
         return section
@@ -259,9 +250,24 @@ extension FavoriteViewController
         
         switch section {
         case 0:
-            print("0번")
+            let folderName = folders[indexPath.item].folderName
+            if let folder = repository.sorting(by: folderName) {
+                favItems = Array(folder.favs)
+            }
+            collectionView.reloadSections(IndexSet(integer: 1))
         case 1:
-            print("1번")
+            let favItem = favItems[indexPath.item]
+            let vc = ItemDetailWebViewController()
+            let itemChanged = SearchResultItem(
+                itemName: favItem.itemName,
+                itemImage: favItem.itemImage,
+                storeLink: favItem.storeLink,
+                mallName: "",
+                productId: favItem.productId,
+                lprice: favItem.itemPrice
+            )
+            vc.itemInfo = itemChanged
+            navigationController?.pushViewController(vc, animated: true)
         default:
             print("Err")
         }

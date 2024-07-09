@@ -16,6 +16,7 @@ final class FavoriteViewController: BaseViewController {
         itemImage: "",
         itemPrice: ""
     )]
+    private var savedItems: [String]?
     private let repository = RealmRepository()
     private lazy var favCollectionView: UICollectionView = {
         let collectionView = UICollectionView(
@@ -26,7 +27,7 @@ final class FavoriteViewController: BaseViewController {
         collectionView.dataSource = self
         collectionView.register(
             SearchedItemCollectionViewCell.self,
-            forCellWithReuseIdentifier: 
+            forCellWithReuseIdentifier:
                 SearchedItemCollectionViewCell.identifier
         )
         collectionView.register(
@@ -41,6 +42,14 @@ final class FavoriteViewController: BaseViewController {
         search.delegate = self
         search.placeholder = "검색"
         return search
+    }()
+    private let emptyView: UIImageView = {
+        let view = UIImageView()
+        view.image = Constant.Images.empty
+        view.backgroundColor = .yellow
+        view.clipsToBounds = true
+        view.contentMode = .scaleAspectFit
+        return view
     }()
     
     override func viewDidLoad() {
@@ -57,10 +66,11 @@ final class FavoriteViewController: BaseViewController {
         
         fetchData()
         folders = repository.fetchFolder()
+        savedItems = UserDefaultsManager.shared
+            .getValue(forKey: .shoppingBags) ?? []
     }
     
     private func configureHierarchy() {
-        view.addSubview(favCollectionView)
         [searchBar, favCollectionView]
             .forEach { view.addSubview($0) }
     }
@@ -144,7 +154,8 @@ final class FavoriteViewController: BaseViewController {
     
     private func makeCollectionView() -> UICollectionViewCompositionalLayout {
         let layout =
-        UICollectionViewCompositionalLayout { (sectionIndex, _ ) -> NSCollectionLayoutSection? in
+        UICollectionViewCompositionalLayout { (sectionIndex, _ )
+            -> NSCollectionLayoutSection? in
             return self.createSection(for: sectionIndex)
         }
         return layout
@@ -160,21 +171,39 @@ final class FavoriteViewController: BaseViewController {
             verticalScrollSection()
         }
     }
+    @objc private func bagsTapped(_ sender: UIButton) {
+        print(#function, sender.tag)
+        print(savedItems)
+        // UserDefaults에서 아이템 삭제
+        savedItems?.removeAll(where: { item in
+            item == favItems[sender.tag].productId
+        })
+        UserDefaultsManager.shared.saveValue(
+            savedItems,
+            forKey: .shoppingBags
+        )
+        
+        print("여기 !")
+        if let folder = repository.findFolder(favItem: favItems[sender.tag]) {
+            repository.deleteFav(
+                favItems[sender.tag].productId,
+                folder: folder
+            )
+            if folder.favs.isEmpty {
+                print("==?")
+                repository.deleteFolder(folder: folder)
+            }
+        }
+        favCollectionView.reloadData()
+    }
 }
 extension FavoriteViewController: UISearchBarDelegate {
     func searchBar(
         _ searchBar: UISearchBar,
         textDidChange searchText: String
     ) {
-        favItems = RealmRepository().filterFav(searchText) ?? [Favorite(
-            productId: "",
-            storeLink: "",
-            itemName: "",
-            itemImage: "",
-            itemPrice: ""
-        )]
+        favItems = repository.filterFav(searchText)
         favCollectionView.reloadData()
-        
     }
 }
 
@@ -206,10 +235,10 @@ extension FavoriteViewController
         switch section {
         case 0:
             guard let cell = collectionView.dequeueReusableCell(
-                withReuseIdentifier: 
+                withReuseIdentifier:
                     FavoriteFolderCollectionViewCell.identifier,
                 for: indexPath
-            ) as? FavoriteFolderCollectionViewCell 
+            ) as? FavoriteFolderCollectionViewCell
             else { return UICollectionViewCell() }
             cell.configureUI(folderName: folders[indexPath.item].folderName)
             return cell
@@ -228,11 +257,18 @@ extension FavoriteViewController
                 productId: fav.productId,
                 lprice: fav.itemPrice
             )
+            cell.shoppingBtn.addTarget(
+                self,
+                action: #selector(
+                    bagsTapped
+                ),
+                for: .touchUpInside
+            )
             cell.configureUI(item: searched, tag: indexPath.item)
             return cell
         default:
             guard let cell = collectionView.dequeueReusableCell(
-                withReuseIdentifier: 
+                withReuseIdentifier:
                     FavoriteFolderCollectionViewCell.identifier,
                 for: indexPath
             ) as? FavoriteFolderCollectionViewCell

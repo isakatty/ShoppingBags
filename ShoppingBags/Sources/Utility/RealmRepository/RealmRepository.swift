@@ -66,20 +66,51 @@ final class RealmRepository {
         }
     }
     
+    // RealmStorage -> 이걸 Fav, Folder Repository에서 불러서 쓰면되는 형태.
+    func update<T: Object>(value: T, _ block: @escaping (T) -> Void) throws {
+        try realm.write {
+            block(value)
+        }
+    }
     func deleteFav(_ productId: String, folder: Folder) {
         do {
             try realm.write {
-                if let fav = folder.favs.first(where: {
+                if let favIndex = folder.favs.firstIndex(where: {
                     $0.productId == productId
                 }) {
-                    realm.delete(fav)
+                    folder.favs.remove(at: favIndex)
                 }
             }
         } catch {
             print("fav 삭제 실패")
         }
     }
+    
+    func deleteFolder(folder: Folder) {
+        do {
+            try realm.write {
+                realm.delete(folder)
+            }
+        } catch {
+            print("folder 삭제 실패")
+        }
+    }
+    
+    func findFolder(favItem: Favorite) -> Folder? {
+        let result = realm.objects(Folder.self)
+            .where { $0.favs == favItem }
+            .first
+        return result
+    }
 
+    func validateFav(_ favorite: Favorite) -> Bool {
+        let item = realm.object(
+            ofType: Favorite.self,
+            forPrimaryKey: favorite.productId
+        )
+        return item != nil
+    }
+    
     // ---------------------------------------
     
     func fetchFavorite() throws -> [Favorite] {

@@ -248,13 +248,11 @@ final class SearchResultViewController: BaseViewController {
             .first {
             if folder.favs.contains(where: { $0.productId == item.productId }) {
                 // delete
-                do {
-                    try repository.deleteFavorite(item.productId)
-                } catch {
-                    print("delete 실패")
+                repository.deleteFav(item.productId, folder: folder)
+                if folder.favs.isEmpty {
+                    repository.deleteFolder(folder: folder)
                 }
             } else {
-                // create - 저장이 잘 되긴 했는데, folder이랑 연결이 안됨
                 repository.createFav(favorite, folder: folder)
             }
         }
